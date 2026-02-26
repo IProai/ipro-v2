@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Engine Registry Marketplace | Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3B82F6", // Vibrant tech blue
+              "background-light": "#F8FAFC",
+              "background-dark": "#0F172A",
+              "card-light": "#FFFFFF",
+              "card-dark": "#1E293B",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "12px",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass { backdrop-filter: blur(8px); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300" id="main-body">
+<aside class="fixed left-0 top-0 h-full w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 z-50 hidden lg:flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg shadow-primary/30">
+<span class="material-icons-outlined">settings_input_component</span>
+</div>
+<div>
+<h1 class="font-bold text-lg leading-none">Intellect</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">ProActive</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1 custom-scrollbar overflow-y-auto">
+<p class="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Core System</p>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg group" href="#">
+<span class="material-icons-outlined text-xl">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary font-medium rounded-lg" href="#">
+<span class="material-icons-outlined text-xl text-primary">extension</span> Engine Registry
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg group" href="#">
+<span class="material-icons-outlined text-xl">hub</span> Multi-Tenant
+            </a>
+<div class="pt-6">
+<p class="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Modules</p>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-icons-outlined text-xl">calendar_today</span> Calendar
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-icons-outlined text-xl">psychology</span> AI Engine
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-icons-outlined text-xl">draw</span> eSign Engine
+                </a>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full flex items-center justify-between px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg" onclick="document.documentElement.classList.toggle('dark')">
+<span class="text-sm font-medium">Appearance</span>
+<span class="material-icons-outlined text-lg">dark_mode</span>
+</button>
+</div>
+</aside>
+<main class="lg:ml-64 p-4 lg:p-8 min-h-screen">
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<h2 class="text-2xl font-bold tracking-tight">Engine Registry</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Manage and configure your ecosystem plugins and modules.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<span class="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm w-full md:w-64 focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="Search engines..." type="text"/>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 transition-all">
+<span class="material-icons-outlined text-lg">add</span> Add New
+                </button>
+</div>
+</header>
+<div class="flex items-center border-b border-slate-200 dark:border-slate-800 mb-8 overflow-x-auto">
+<button class="px-6 py-3 text-sm font-medium border-b-2 border-primary text-primary whitespace-nowrap">Installed Modules</button>
+<button class="px-6 py-3 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 whitespace-nowrap">Marketplace</button>
+<button class="px-6 py-3 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 whitespace-nowrap">API Keys</button>
+<button class="px-6 py-3 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 whitespace-nowrap">Webhooks</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+<span class="material-icons-outlined text-2xl">psychology</span>
+</div>
+<div class="flex gap-2">
+<span class="px-2.5 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase rounded-full">Active</span>
+<span class="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase rounded-full">v2.4.1</span>
+</div>
+</div>
+<h3 class="font-bold text-lg mb-1">AI Logic Engine</h3>
+<p class="text-slate-500 dark:text-slate-400 text-xs mb-6 line-clamp-2 leading-relaxed">Advanced NLP and machine learning integration for automated tenant processing and data extraction.</p>
+<div class="grid grid-cols-2 gap-4 mb-6 pt-6 border-t border-slate-50 dark:border-slate-800">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Health Status</p>
+<p class="text-sm font-semibold flex items-center gap-1.5 text-green-600">
+<span class="w-1.5 h-1.5 bg-green-600 rounded-full"></span> 99.9% Uptime
+                        </p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">API Load</p>
+<p class="text-sm font-semibold">124k req/hr</p>
+</div>
+</div>
+<button class="w-full py-2.5 bg-slate-50 dark:bg-slate-800 hover:bg-primary hover:text-white dark:hover:bg-primary transition-all rounded-xl text-sm font-semibold flex items-center justify-center gap-2" onclick="toggleDrawer()">
+<span class="material-icons-outlined text-sm">settings</span> Configure Engine
+                </button>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-icons-outlined text-2xl">calendar_today</span>
+</div>
+<div class="flex gap-2">
+<span class="px-2.5 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase rounded-full">Active</span>
+<span class="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase rounded-full">v1.0.8</span>
+</div>
+</div>
+<h3 class="font-bold text-lg mb-1">Global Calendar</h3>
+<p class="text-slate-500 dark:text-slate-400 text-xs mb-6 line-clamp-2 leading-relaxed">Unified scheduling and booking module with bi-directional sync for all organizational tenants.</p>
+<div class="grid grid-cols-2 gap-4 mb-6 pt-6 border-t border-slate-50 dark:border-slate-800">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Health Status</p>
+<p class="text-sm font-semibold flex items-center gap-1.5 text-green-600">
+<span class="w-1.5 h-1.5 bg-green-600 rounded-full"></span> Healthy
+                        </p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Storage</p>
+<p class="text-sm font-semibold">12.4 GB</p>
+</div>
+</div>
+<button class="w-full py-2.5 bg-slate-50 dark:bg-slate-800 hover:bg-primary hover:text-white dark:hover:bg-primary transition-all rounded-xl text-sm font-semibold flex items-center justify-center gap-2" onclick="toggleDrawer()">
+<span class="material-icons-outlined text-sm">settings</span> Configure Engine
+                </button>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-icons-outlined text-2xl">account_balance_wallet</span>
+</div>
+<div class="flex gap-2">
+<span class="px-2.5 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold uppercase rounded-full">Maintenance</span>
+<span class="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase rounded-full">v4.2.0</span>
+</div>
+</div>
+<h3 class="font-bold text-lg mb-1">Billing &amp; Invoices</h3>
+<p class="text-slate-500 dark:text-slate-400 text-xs mb-6 line-clamp-2 leading-relaxed">Enterprise billing management, multi-currency support, and automated invoicing pipeline.</p>
+<div class="grid grid-cols-2 gap-4 mb-6 pt-6 border-t border-slate-50 dark:border-slate-800">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Health Status</p>
+<p class="text-sm font-semibold flex items-center gap-1.5 text-amber-500">
+<span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span> Sync Lag
+                        </p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Revenue Managed</p>
+<p class="text-sm font-semibold">$2.4M / mo</p>
+</div>
+</div>
+<button class="w-full py-2.5 bg-slate-50 dark:bg-slate-800 hover:bg-primary hover:text-white dark:hover:bg-primary transition-all rounded-xl text-sm font-semibold flex items-center justify-center gap-2" onclick="toggleDrawer()">
+<span class="material-icons-outlined text-sm">settings</span> Configure Engine
+                </button>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400">
+<span class="material-icons-outlined text-2xl">draw</span>
+</div>
+<div class="flex gap-2">
+<span class="px-2.5 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-[10px] font-bold uppercase rounded-full">Disabled</span>
+<span class="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase rounded-full">v0.9.5</span>
+</div>
+</div>
+<h3 class="font-bold text-lg mb-1">eSign Engine</h3>
+<p class="text-slate-500 dark:text-slate-400 text-xs mb-6 line-clamp-2 leading-relaxed">Secure document signing and digital verification workflows for compliance-heavy environments.</p>
+<div class="grid grid-cols-2 gap-4 mb-6 pt-6 border-t border-slate-50 dark:border-slate-800">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Health Status</p>
+<p class="text-sm font-semibold flex items-center gap-1.5 text-slate-400">
+<span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span> Offline
+                        </p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Last Sync</p>
+<p class="text-sm font-semibold">2d ago</p>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-white transition-all rounded-xl text-sm font-semibold flex items-center justify-center gap-2">
+<span class="material-icons-outlined text-sm">bolt</span> Enable Module
+                </button>
+</div>
+<div class="border-2 border-dashed border-slate-200 dark:border-slate-800 p-8 rounded-2xl flex flex-col items-center justify-center text-center group cursor-pointer hover:border-primary/50 transition-colors">
+<div class="w-16 h-16 bg-slate-50 dark:bg-slate-800/50 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-icons-outlined text-slate-400 group-hover:text-primary">storefront</span>
+</div>
+<h3 class="font-bold text-slate-700 dark:text-slate-300">Browse Marketplace</h3>
+<p class="text-slate-400 text-sm max-w-[200px]">Find and install 20+ more engines in our registry.</p>
+</div>
+</div>
+</main>
+<div class="fixed inset-0 bg-slate-900/40 glass z-[60] opacity-0 pointer-events-none transition-opacity duration-300" id="overlay" onclick="toggleDrawer()"></div>
+<aside class="fixed right-0 top-0 h-full w-full max-w-lg bg-white dark:bg-slate-900 shadow-2xl z-[70] translate-x-full transition-transform duration-300 ease-in-out border-l border-slate-200 dark:border-slate-800 flex flex-col" id="drawer">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+<span class="material-icons-outlined">psychology</span>
+</div>
+<div>
+<h2 class="font-bold text-lg">AI Logic Engine</h2>
+<p class="text-xs text-slate-400 font-medium tracking-tight">Configuration &amp; API Access</p>
+</div>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 transition-colors" onclick="toggleDrawer()">
+<span class="material-icons-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-8">
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Webhooks</h3>
+<button class="text-primary text-xs font-bold hover:underline">Add Endpoint</button>
+</div>
+<div class="space-y-3">
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between mb-2">
+<span class="text-xs font-bold text-slate-500">Event Hook #1</span>
+<span class="text-[10px] px-1.5 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-bold rounded">SUCCESS</span>
+</div>
+<code class="text-xs text-indigo-600 dark:text-indigo-300 break-all font-mono">https://api.tenant-alpha.com/v1/hooks/ai-proc</code>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">API Access Keys</h3>
+<button class="text-primary text-xs font-bold hover:underline">Roll Keys</button>
+</div>
+<div class="space-y-3">
+<div class="relative">
+<p class="text-[10px] font-bold text-slate-400 mb-1 ml-1">PRODUCTION KEY</p>
+<div class="flex items-center gap-2 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800 font-mono text-xs">
+<input class="bg-transparent border-none flex-1 focus:ring-0 p-0 text-slate-600 dark:text-slate-300" readonly="" type="password" value="sk_live_92834092834092834092834"/>
+<span class="material-icons-outlined text-sm cursor-pointer hover:text-primary">content_copy</span>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">Instance Parameters</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-semibold">Recursive Processing</p>
+<p class="text-xs text-slate-400">Allow deep NLP scanning on child documents</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-semibold">Priority Queuing</p>
+<p class="text-xs text-slate-400">Handle billing tenants before guest users</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+</div>
+<div class="p-6 border-t border-slate-100 dark:border-slate-800 flex gap-3">
+<button class="flex-1 py-3 bg-primary text-white font-bold rounded-xl text-sm shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all">Save Configuration</button>
+<button class="px-5 py-3 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-bold rounded-xl text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Export Logs</button>
+</div>
+</aside>
+<script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+            const isOpen = drawer.classList.contains('translate-x-0');
+            if (isOpen) {
+                drawer.classList.remove('translate-x-0');
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                drawer.classList.remove('translate-x-full');
+                drawer.classList.add('translate-x-0');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
+    </script>
+
+</body></html>

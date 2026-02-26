@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intellect ProActive - Command Desk</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ad2bee",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#1c1022",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #ad2bee33; border-radius: 10px; }
+        .glow-red { box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+        .glow-amber { box-shadow: 0 0 8px rgba(245, 158, 11, 0.4); }
+        .glow-green { box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-hidden h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="h-16 border-b border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6 flex items-center justify-between shrink-0 z-50">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="p-2 bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined text-2xl">monitoring</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-extrabold tracking-tight">Intellect <span class="text-primary">ProActive</span></h2>
+</div>
+<nav class="hidden lg:flex items-center gap-1">
+<a class="px-4 py-2 text-sm font-semibold text-primary bg-primary/10 rounded-lg" href="#">Command Desk</a>
+<a class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Analytics</a>
+<a class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Playbooks</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-slate-100 dark:bg-white/5 border-none rounded-lg pl-10 pr-4 py-2 text-sm w-64 focus:ring-2 focus:ring-primary/20" placeholder="Search interactions..." type="text"/>
+</div>
+<div class="flex items-center gap-2 border-l border-slate-200 dark:border-white/10 ml-2 pl-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<div class="h-8 w-8 rounded-full bg-gradient-to-tr from-primary to-purple-400 p-0.5">
+<img alt="Agent profile picture" class="rounded-full border-2 border-white dark:border-background-dark object-cover w-full h-full" data-alt="Professional profile headshot of a service agent" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV-syN3qyUA8Oziuw9Eq7VWLwHgICTWwf-v6oi8AcXQoaA-gMWj0WEQGgGvBijO6h-7jRD_66G1iy3_dJzgJvAofYKVBb-e8NdNRzJ3dr73FBI8DSwkPcfc4KmnNVVbEQJCpr5_frQQR_1WrdnNZJo0kkLD0Pj8uaNAd1BiWWcaOnpEeHwdb9-whjyh8XqseLnZndvKEO-DoJ2zVNEOJkHmRtE5Ej3PPEIzJm1mnyiwj_-z3v_7MHnQ8S-eNvnJf5KNq55VD9phYE"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex overflow-hidden">
+<!-- Sidebar: Ticket Queues (Left) -->
+<aside class="w-72 border-r border-slate-200 dark:border-white/10 bg-white/50 dark:bg-background-dark/50 flex flex-col shrink-0">
+<div class="p-4 border-b border-slate-200 dark:border-white/10 space-y-4">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-2.5 rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+                    New Ticket
+                </button>
+<div class="grid grid-cols-3 gap-2">
+<button class="flex flex-col items-center p-2 rounded-lg bg-primary/10 text-primary">
+<span class="text-xl font-bold">12</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Open</span>
+</button>
+<button class="flex flex-col items-center p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+<span class="text-xl font-bold">4</span>
+<span class="text-[10px] font-medium text-slate-500 uppercase tracking-wider">Pending</span>
+</button>
+<button class="flex flex-col items-center p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+<span class="text-xl font-bold">89</span>
+<span class="text-[10px] font-medium text-slate-500 uppercase tracking-wider">Done</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-2">
+<div class="px-3 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active Conversations</div>
+<!-- Ticket Item Active -->
+<div class="p-3 bg-white dark:bg-white/5 rounded-xl border-l-4 border-primary shadow-sm mb-2 cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="text-xs font-bold text-slate-900 dark:text-white">#8291 Jad-Connectors</span>
+<span class="text-[10px] text-slate-400 font-medium">2m</span>
+</div>
+<p class="text-xs text-slate-500 line-clamp-1 mb-2">Requesting API integration docs for Dubai node...</p>
+<div class="flex items-center justify-between">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-[16px] text-[#25D366]">chat</span>
+<span class="text-[10px] font-semibold text-slate-400">WhatsApp</span>
+</div>
+<div class="h-2 w-2 rounded-full bg-red-500 glow-red"></div>
+</div>
+</div>
+<!-- Ticket Item -->
+<div class="p-3 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl transition-colors mb-2 cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-300">#8288 Global Logistics</span>
+<span class="text-[10px] text-slate-400 font-medium">14m</span>
+</div>
+<p class="text-xs text-slate-500 line-clamp-1 mb-2">Issue with regional provisioning latency.</p>
+<div class="flex items-center justify-between">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-[16px] text-slate-400">mail</span>
+<span class="text-[10px] font-semibold text-slate-400">Email</span>
+</div>
+<div class="h-2 w-2 rounded-full bg-amber-500 glow-amber"></div>
+</div>
+</div>
+<!-- Ticket Item -->
+<div class="p-3 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl transition-colors mb-2 cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-300">#8285 TechFlow AI</span>
+<span class="text-[10px] text-slate-400 font-medium">1h</span>
+</div>
+<p class="text-xs text-slate-500 line-clamp-1 mb-2">Cloud billing inquiry - Q3 projections.</p>
+<div class="flex items-center justify-between">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-[16px] text-blue-400">language</span>
+<span class="text-[10px] font-semibold text-slate-400">Web-Chat</span>
+</div>
+<div class="h-2 w-2 rounded-full bg-green-500 glow-green"></div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Center: Omni-Channel Thread -->
+<section class="flex-1 flex flex-col bg-slate-50 dark:bg-background-dark shadow-inner">
+<!-- Header for Interaction -->
+<div class="bg-white dark:bg-background-dark/50 p-4 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500">hub</span>
+</div>
+<div>
+<h3 class="text-base font-bold text-slate-900 dark:text-white leading-tight">Jad-Connectors Thread</h3>
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-bold text-primary px-1.5 py-0.5 bg-primary/10 rounded uppercase tracking-wider">SLA: Critical</span>
+<span class="text-[10px] font-medium text-slate-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span>
+                                22m Elapsed
+                            </span>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-700 dark:text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm">move_item</span>
+                        Transfer Ticket
+                    </button>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-xs font-bold transition-all">
+                        Resolve Case
+                    </button>
+</div>
+</div>
+<!-- Message Feed -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+<!-- System Divider -->
+<div class="flex items-center gap-4">
+<div class="flex-1 h-px bg-slate-200 dark:bg-white/5"></div>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Chat started 09:42 AM</span>
+<div class="flex-1 h-px bg-slate-200 dark:bg-white/5"></div>
+</div>
+<!-- Client Message -->
+<div class="flex gap-3 max-w-[80%]">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex-shrink-0 flex items-center justify-center overflow-hidden">
+<img alt="Client avatar" class="w-full h-full object-cover" data-alt="Abstract modern avatar for client contact" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUnWMaV8tJTJn4QGV1IAidOimW1UEiLv0Pjhm57hsoNLq39J-UAdFHreOZ3lJq9Vp_-lTaExRfjOywg6Gh8vJlZQASGHIp2p4hT2noA6MI5OuirRqa2EZQMLD-qMLUnncy_pnOpVDlyt6q1ptuPQ4G0KAq_ULm_c4FejJ5vKlScJ4AchnNXWRgCExXtJCQvL1GiRdk2muIcGVOh5KzBjc3no8Eecg60lYphvwlTkLLS-M52kotNcjsc7D8MIYEioKy7ksB2hV-HGs"/>
+</div>
+<div>
+<div class="bg-white dark:bg-white/5 p-4 rounded-tr-2xl rounded-br-2xl rounded-bl-2xl shadow-sm border border-slate-200 dark:border-white/5">
+<p class="text-sm leading-relaxed text-slate-700 dark:text-slate-200">Hello, we're having issues connecting to the Dubai data node from our enterprise portal. Error code 403. Can you check the provisioned engine status?</p>
+</div>
+<span class="text-[10px] font-medium text-slate-400 mt-1 block">Sent via WhatsApp • 09:45 AM</span>
+</div>
+</div>
+<!-- Agent Message -->
+<div class="flex gap-3 max-w-[80%] ml-auto flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center overflow-hidden">
+<img alt="Agent avatar" class="w-full h-full object-cover" data-alt="Agent profile headshot for the reply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArgZr4yr_sjeQc7GUvI0Q8iZRXgWDTgeloLjFbqu762DPnCHN2BXquEfBifLToQDJS_RHhZ58CWgahKC7EL8ZqysQWW4_bgQ2RLRMFqJTQJ1Zxle3oWxarI0f6jSdJNMpHj8kCTiz7MkF2KCSwQQsO6jXn5DSQArllWitm-2sD7LH1iITw9FR-irM_RQHwRmXqPELhqfrle_dIiRkgSdRf1EJ2ye62QeGcg_KGUQ-ZGhmKseYxEFVc2vgpAPuOrDXQ2DgPbxMMMj0"/>
+</div>
+<div class="flex flex-col items-end">
+<div class="bg-primary text-white p-4 rounded-tl-2xl rounded-br-2xl rounded-bl-2xl shadow-md">
+<p class="text-sm leading-relaxed">Hi there! Investigating this now. I'm checking the Jad-Connectors heartbeat for the Middle East region. Give me just a moment.</p>
+</div>
+<span class="text-[10px] font-medium text-slate-400 mt-1 block">Sent • 09:47 AM</span>
+</div>
+</div>
+<!-- AI Typing Indicator Suggestion -->
+<div class="flex gap-3 max-w-[80%]">
+<div class="w-8 h-8 rounded-full bg-purple-100 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">auto_awesome</span>
+</div>
+<div class="w-full">
+<div class="bg-gradient-to-br from-primary/5 to-purple-500/5 p-4 rounded-tr-2xl rounded-br-2xl rounded-bl-2xl border border-primary/20 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-20">
+<span class="material-symbols-outlined text-4xl">neurology</span>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">IPR-O AI Suggestion</span>
+<div class="h-1 flex-1 bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+</div>
+<p class="text-sm text-slate-700 dark:text-slate-200 italic font-medium leading-relaxed">"I've confirmed that the Dubai node (DXB-04) had a momentary handshake failure. I've re-initialized the provisioning engine for your tier. Can you try reconnecting now?"</p>
+<div class="flex gap-2 mt-3">
+<button class="bg-primary text-white px-3 py-1.5 rounded text-[10px] font-bold">Use this reply</button>
+<button class="bg-white dark:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white px-3 py-1.5 rounded text-[10px] font-bold">Edit</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-4 bg-white dark:bg-background-dark/80 border-t border-slate-200 dark:border-white/10 shrink-0">
+<div class="flex items-end gap-3 bg-slate-50 dark:bg-white/5 rounded-2xl p-2 border border-slate-200 dark:border-white/10">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 text-sm resize-none py-2 min-h-[44px] max-h-32 custom-scrollbar" placeholder="Type your response... (Type '/' for playbooks)"></textarea>
+<button class="bg-primary text-white h-10 w-10 rounded-xl flex items-center justify-center hover:bg-primary/90 transition-all shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<div class="flex gap-4 mt-2 px-2">
+<span class="text-[10px] font-bold text-slate-400 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">bolt</span> Quick Playbook</span>
+<span class="text-[10px] font-bold text-slate-400 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">translate</span> Translate</span>
+</div>
+</div>
+</section>
+<!-- Right Sidebar: Client Context -->
+<aside class="w-80 border-l border-slate-200 dark:border-white/10 bg-white dark:bg-background-dark/50 flex flex-col shrink-0 overflow-y-auto custom-scrollbar">
+<div class="p-6">
+<!-- Client Header Card -->
+<div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-5 text-white shadow-xl relative overflow-hidden mb-6">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-8xl">verified</span>
+</div>
+<div class="relative z-10">
+<span class="text-[10px] font-extrabold uppercase tracking-widest text-primary mb-1 block">Client Profile</span>
+<h4 class="text-lg font-bold">Jad-Connectors</h4>
+<div class="flex items-center gap-2 mt-3">
+<span class="px-2 py-0.5 bg-primary/20 text-primary border border-primary/30 rounded text-[10px] font-bold uppercase">Tier 1 Enterprise</span>
+<span class="px-2 py-0.5 bg-green-500/20 text-green-400 border border-green-500/30 rounded text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+</div>
+</div>
+<!-- Provisioned Engines -->
+<div class="space-y-4 mb-8">
+<h5 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest border-b border-slate-200 dark:border-white/10 pb-2">Provisioned Engines</h5>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-white/5 rounded-xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">memory</span>
+<span class="text-xs font-bold">Compute Engine DXB</span>
+</div>
+<div class="h-2 w-2 rounded-full bg-green-500 glow-green"></div>
+</div>
+<div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-white/5 rounded-xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">database</span>
+<span class="text-xs font-bold">Global Data-Sync</span>
+</div>
+<div class="h-2 w-2 rounded-full bg-green-500 glow-green"></div>
+</div>
+<div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-white/5 rounded-xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">shield</span>
+<span class="text-xs font-bold">WAF Advanced Edge</span>
+</div>
+<div class="h-2 w-2 rounded-full bg-amber-500 glow-amber"></div>
+</div>
+</div>
+</div>
+<!-- Active Playbooks -->
+<div class="space-y-4">
+<h5 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest border-b border-slate-200 dark:border-white/10 pb-2">Active Playbooks</h5>
+<div class="space-y-2">
+<div class="p-3 border border-slate-200 dark:border-white/10 rounded-xl hover:border-primary/40 transition-colors cursor-pointer group">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm text-slate-400 group-hover:text-primary">receipt_long</span>
+<span class="text-xs font-bold">Latency Verification</span>
+</div>
+<p class="text-[10px] text-slate-500">Automated check for Middle East regional node health.</p>
+</div>
+<div class="p-3 border border-slate-200 dark:border-white/10 rounded-xl hover:border-primary/40 transition-colors cursor-pointer group">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm text-slate-400 group-hover:text-primary">key</span>
+<span class="text-xs font-bold">Credential Rotation</span>
+</div>
+<p class="text-[10px] text-slate-500">Rotate API keys for secure connector handshakes.</p>
+</div>
+</div>
+</div>
+<!-- Regional Context Map Preview -->
+<div class="mt-8">
+<h5 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest border-b border-slate-200 dark:border-white/10 pb-2 mb-4">Regional Status</h5>
+<div class="aspect-video bg-slate-200 dark:bg-white/5 rounded-xl overflow-hidden relative group cursor-crosshair">
+<img alt="Regional server map" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" data-alt="Technical map showing server nodes in Dubai region" data-location="Dubai" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuFAGfY7Kvpzxfi4s4jpyM03wiwelXGtVQzM-EiTBXAvR6iASL87eXiefdoZfnGgwfb-mcUe_u_F-VCjP_L5B9IswhgE07NJQHy9AUquMiK_amBWXqUi4CBhjYnr0dInlZQqotOr0bDMuQpv-6gD9Rt55zXYyGMscvDPyKLTjaZ9t_BSeHUJOpPmi8QOKvz-wJD5XfyLgrxIT6GbhhxDYZNvXCG6z4YhUXiqHLLgFCmGrGHUsZivDFwoFr-fc4DxqUnk1ym3945Ss"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-3">
+<div class="flex items-center gap-2">
+<div class="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse"></div>
+<span class="text-[10px] font-bold text-white">DXB-04 Online</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer Stats -->
+<footer class="h-8 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-white/10 px-6 flex items-center justify-between shrink-0">
+<div class="flex gap-4">
+<span class="text-[9px] font-bold text-slate-400 uppercase flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                System Operational
+            </span>
+<span class="text-[9px] font-bold text-slate-400 uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]">timer</span>
+                Avg Response: 1m 24s
+            </span>
+</div>
+<div class="text-[9px] font-bold text-slate-400 uppercase">
+            Intellect ProActive • Command v2.4.0-Stable
+        </div>
+</footer>
+</body></html>

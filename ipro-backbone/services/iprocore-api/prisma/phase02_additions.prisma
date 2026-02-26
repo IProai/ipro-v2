@@ -1,0 +1,62 @@
+// ─── PHASE 02 ADDITIONS ───────────────────────────────────────────────────────
+// Appended to schema.prisma after Phase 01 models.
+
+// ─── ONBOARDING ───────────────────────────────────────────────────────────────
+
+model OnboardingStep {
+  id          String    @id @default(uuid())
+  tenantId    String
+  key         String    // unique step identifier e.g. "setup_profile"
+  titleEn     String
+  titleAr     String
+  descEn      String?
+  descAr      String?
+  order       Int       @default(0)
+  isRequired  Boolean   @default(true)
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@unique([tenantId, key])
+  @@index([tenantId])
+}
+
+// ─── HELP & SUPPORT ───────────────────────────────────────────────────────────
+
+model HelpTicket {
+  id         String   @id @default(uuid())
+  tenantId   String
+  userId     String
+  subject    String
+  body       String
+  status     String   @default("open") // open | in_progress | closed
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  user   User   @relation("UserHelpTickets", fields: [userId], references: [id])
+
+  @@index([tenantId])
+  @@index([userId])
+}
+
+// ─── KNOWLEDGE BASE ───────────────────────────────────────────────────────────
+
+model KBArticle {
+  id          String   @id @default(uuid())
+  tenantId    String?  // null = global article visible to all tenants
+  titleEn     String
+  titleAr     String
+  bodyEn      String
+  bodyAr      String
+  category    String   @default("general")
+  published   Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([published])
+}

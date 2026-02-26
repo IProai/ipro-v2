@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IPR-O Unified UI Kit Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(19, 91, 236, 0.1);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(19, 91, 236, 0.3);
+        }
+        .gradient-primary {
+            background: linear-gradient(135deg, #135bec 0%, #4c83ff 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-white/80 backdrop-blur-md dark:bg-background-dark/80 px-6 lg:px-12 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between gap-8">
+<div class="flex items-center gap-3">
+<div class="size-10 gradient-primary rounded-lg flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined">shield_with_heart</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-lg font-extrabold tracking-tight leading-none">IPR-O</h1>
+<span class="text-[10px] uppercase tracking-widest font-bold text-primary">Unified UI Kit</span>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Components</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Styles</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Guidelines</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Documentation</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/50 w-64 transition-all" placeholder="Search components..." type="text"/>
+</div>
+<button class="gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-base">download</span>
+                    Download Kit
+                </button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 lg:px-12 py-10 flex flex-col lg:flex-row gap-12">
+<!-- Sidebar Navigation -->
+<aside class="w-full lg:w-64 flex-shrink-0">
+<div class="sticky top-28 space-y-2">
+<div class="mb-6">
+<p class="text-[11px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-4">Library Menu</p>
+<div class="flex items-center gap-3 p-3 bg-primary/10 text-primary rounded-xl font-bold">
+<span class="material-symbols-outlined">grid_view</span>
+<span>Overview</span>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-400 transition-all group" href="#buttons">
+<span class="material-symbols-outlined group-hover:text-primary">smart_button</span>
+<span class="text-sm font-medium">Buttons / أزرار</span>
+</a>
+<a class="flex items-center gap-3 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-400 transition-all group" href="#forms">
+<span class="material-symbols-outlined group-hover:text-primary">edit_square</span>
+<span class="text-sm font-medium">Form Elements / نماذج</span>
+</a>
+<a class="flex items-center gap-3 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-400 transition-all group" href="#status">
+<span class="material-symbols-outlined group-hover:text-primary">notifications_active</span>
+<span class="text-sm font-medium">Status &amp; Feedback / حالة</span>
+</a>
+<a class="flex items-center gap-3 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-400 transition-all group" href="#navigation">
+<span class="material-symbols-outlined group-hover:text-primary">explore</span>
+<span class="text-sm font-medium">Navigation / التنقل</span>
+</a>
+<a class="flex items-center gap-3 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-400 transition-all group" href="#cards">
+<span class="material-symbols-outlined group-hover:text-primary">layers</span>
+<span class="text-sm font-medium">Cards &amp; Containers</span>
+</a>
+</nav>
+<div class="mt-10 pt-10 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full flex items-center justify-between p-4 glass-card rounded-xl border border-primary/20 text-primary hover:bg-primary/5 transition-all">
+<span class="text-sm font-bold">Switch to Arabic</span>
+<span class="material-symbols-outlined">language</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Content Area -->
+<div class="flex-1 space-y-16">
+<!-- Hero Section -->
+<section class="space-y-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide uppercase">
+                    Dubai Luxury v1.0.4
+                </div>
+<h2 class="text-5xl font-black tracking-tight text-slate-900 dark:text-white">Design Philosophy</h2>
+<p class="text-xl text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed">
+                    Intellect ProActive high-end glassmorphic UI system with precision engineering. A library built for clarity, speed, and luxury aesthetics.
+                </p>
+</section>
+<!-- 1. Buttons -->
+<section class="space-y-8" id="buttons">
+<div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+<h3 class="text-2xl font-bold">1. Buttons / الأزرار</h3>
+<p class="text-slate-500 text-sm mt-1">High-precision interactive controls with Arabic/English localization.</p>
+</div>
+<div class="glass-card p-8 rounded-xl grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="space-y-6">
+<p class="text-xs font-bold uppercase tracking-widest text-slate-400">English Variants</p>
+<div class="flex flex-wrap gap-4">
+<button class="gradient-primary text-white px-6 py-3 rounded-xl font-bold shadow-lg neon-glow-primary hover:scale-[1.02] transition-transform">Primary Action</button>
+<button class="border-2 border-primary/30 text-primary px-6 py-3 rounded-xl font-bold hover:bg-primary/5 transition-all">Secondary</button>
+<button class="text-slate-500 px-6 py-3 rounded-xl font-bold hover:bg-slate-100 transition-all">Ghost Button</button>
+<button class="bg-slate-200 text-slate-400 px-6 py-3 rounded-xl font-bold cursor-not-allowed" disabled="">Disabled</button>
+</div>
+</div>
+<div class="space-y-6 text-right" dir="rtl">
+<p class="text-xs font-bold uppercase tracking-widest text-slate-400">نماذج باللغة العربية</p>
+<div class="flex flex-wrap gap-4 justify-start">
+<button class="gradient-primary text-white px-6 py-3 rounded-xl font-bold shadow-lg neon-glow-primary">إجراء رئيسي</button>
+<button class="border-2 border-primary/30 text-primary px-6 py-3 rounded-xl font-bold">إجراء ثانوي</button>
+<button class="text-slate-500 px-6 py-3 rounded-xl font-bold">زر شبحي</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Form Elements -->
+<section class="space-y-8" id="forms">
+<div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+<h3 class="text-2xl font-bold">2. Form Elements / نماذج</h3>
+<p class="text-slate-500 text-sm mt-1">Glassmorphic inputs and control states.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="glass-card p-8 rounded-xl space-y-6">
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-600 dark:text-slate-300">Email Address / البريد الإلكتروني</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">mail</span>
+<input class="w-full bg-white/50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 pl-12 pr-4 py-3 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="john@example.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-600 dark:text-slate-300">Select Region / اختر المنطقة</label>
+<select class="w-full bg-white/50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all appearance-none">
+<option>Dubai, UAE</option>
+<option>Abu Dhabi, UAE</option>
+<option>Riyadh, KSA</option>
+</select>
+</div>
+</div>
+<div class="glass-card p-8 rounded-xl space-y-8">
+<div class="flex items-center justify-between">
+<div class="space-y-0.5">
+<p class="text-sm font-bold">Push Notifications</p>
+<p class="text-xs text-slate-500">Stay updated on your status</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center gap-4">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium">Checkbox Item</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="w-5 h-5 border-slate-300 text-primary focus:ring-primary" name="ui-radio" type="radio"/>
+<span class="text-sm font-medium">Radio Active</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Status & Feedback -->
+<section class="space-y-8" id="status">
+<div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+<h3 class="text-2xl font-bold">3. Status &amp; Feedback / حالة</h3>
+<p class="text-slate-500 text-sm mt-1">Neon-glow chips and precision progress bars.</p>
+</div>
+<div class="glass-card p-8 rounded-xl space-y-10">
+<div class="flex flex-wrap gap-4">
+<span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+<span class="size-2 rounded-full bg-emerald-500"></span>
+                            ACTIVE / نشط
+                        </span>
+<span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-bold border border-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.2)]">
+<span class="size-2 rounded-full bg-amber-500 animate-pulse"></span>
+                            PENDING / قيد الانتظار
+                        </span>
+<span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 text-xs font-bold border border-rose-500/20">
+<span class="size-2 rounded-full bg-rose-500"></span>
+                            FAILED / فشل
+                        </span>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">System Optimization / تحسين النظام</span>
+<span class="text-sm font-black text-primary">84%</span>
+</div>
+<div class="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-slate-700">
+<div class="h-full gradient-primary rounded-full neon-glow-primary" style="width: 84%"></div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-xl border-l-4 border-primary shadow-xl w-full max-w-sm">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">info</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">New Notification</p>
+<p class="text-xs text-slate-500">Your UI Kit is now updated to v1.0.4</p>
+</div>
+<button class="text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Navigation -->
+<section class="space-y-8" id="navigation">
+<div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+<h3 class="text-2xl font-bold">4. Navigation / التنقل</h3>
+<p class="text-slate-500 text-sm mt-1">Tab bar variants and breadcrumbs.</p>
+</div>
+<div class="glass-card p-8 rounded-xl space-y-8">
+<div class="flex border-b border-slate-200 dark:border-slate-800">
+<button class="px-8 py-4 border-b-2 border-primary text-primary font-bold text-sm">English Label</button>
+<button class="px-8 py-4 border-b-2 border-transparent text-slate-400 font-bold text-sm hover:text-slate-600">Inactive State</button>
+<button class="px-8 py-4 border-b-2 border-transparent text-slate-400 font-bold text-sm" dir="rtl">التسمية العربية</button>
+</div>
+<div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Library</a>
+<span class="material-symbols-outlined text-xs text-primary">chevron_right</span>
+<span class="text-slate-800 dark:text-slate-200">Current View</span>
+</div>
+</div>
+</section>
+<!-- 5. Cards & Containers -->
+<section class="space-y-8" id="cards">
+<div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+<h3 class="text-2xl font-bold">5. Cards &amp; Containers</h3>
+<p class="text-slate-500 text-sm mt-1">High-end glassmorphic shells with 16px radii.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-card p-6 rounded-xl border-t-4 border-t-primary shadow-lg group hover:-translate-y-1 transition-all">
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">diamond</span>
+</div>
+<h4 class="text-lg font-bold mb-2">Luxury Elevation</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Precision crafted borders with subtle backdrop blurs for a premium feel.</p>
+</div>
+<div class="bg-primary p-6 rounded-xl shadow-2xl relative overflow-hidden group">
+<div class="absolute -right-10 -bottom-10 size-40 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="relative z-10 text-white space-y-4">
+<span class="material-symbols-outlined text-4xl">auto_awesome</span>
+<h4 class="text-lg font-bold">Brand Highlight</h4>
+<p class="text-sm text-white/80 leading-relaxed">Solid primary containers for key call-to-actions and impactful messaging.</p>
+</div>
+</div>
+<div class="glass-card overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="h-32 bg-slate-200 dark:bg-slate-700">
+<img class="w-full h-full object-cover opacity-60" data-alt="Abstract blue tech background pattern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHMKCMeTfU4GZJ7K0cuoHzLtfS_mIhnR5ajPBu0FpxDyJMIZ32WOWG0rJ2OcqWmWB4ANVQjRPEWqqhksD10yaBJV0dM_n9A8NTZE4gAn6CtERNXfMylZvDQpeDeLLZjg_lk-NNKLH2y5sadSPOhqdjfDv5xMHbJCsvOtR9ER2hFjLx2P5-v44IXPcTESEF8HRJXFYrHCbdi05jwVfNq5_Xasv3s9wyLqYy6spliWppk8vC87uwgc-ddrRX6L6vYU_AYEYEtP6xt6E"/>
+</div>
+<div class="p-5 space-y-2">
+<h4 class="text-md font-bold">Media Container</h4>
+<p class="text-xs text-slate-500">Standard card layout with media top section and localized body text.</p>
+<div class="pt-4 flex justify-between items-center">
+<span class="text-[10px] font-bold text-primary uppercase">Read More</span>
+<span class="material-symbols-outlined text-primary text-sm">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<footer class="mt-20 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark py-12 px-6">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-3 grayscale opacity-60">
+<div class="size-8 gradient-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">shield_with_heart</span>
+</div>
+<span class="font-bold tracking-tight text-sm">IPR-O UI KIT v1.0.4</span>
+</div>
+<p class="text-sm text-slate-400 font-medium">© 2024 Intellect ProActive Design System. All Rights Reserved.</p>
+<div class="flex gap-6 text-sm font-bold text-slate-500">
+<a class="hover:text-primary" href="#">Support</a>
+<a class="hover:text-primary" href="#">License</a>
+<a class="hover:text-primary" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+</body></html>

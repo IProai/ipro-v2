@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Connector Detail &amp; Activation | Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ad2bee",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#0a0a0a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #ad2bee 0%, #6a1b9a 100%);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background-size: 200% 100%;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1c1022;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3c2348;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-white/5 bg-background-dark/80 backdrop-blur-md px-6 lg:px-20 py-3">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-3">
+<div class="size-8 brand-gradient rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">hub</span>
+</div>
+<h1 class="text-lg font-extrabold tracking-tight hidden md:block">Intellect <span class="text-primary">ProActive</span></h1>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+<a class="hover:text-white transition-colors text-white" href="#">Marketplace</a>
+<a class="hover:text-white transition-colors" href="#">Automations</a>
+<a class="hover:text-white transition-colors" href="#">Analytics</a>
+<a class="hover:text-white transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-lg">search</span>
+<input class="bg-white/5 border-white/10 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-primary focus:border-primary w-64 outline-none transition-all" placeholder="Search connectors..." type="text"/>
+</div>
+<button class="p-2 hover:bg-white/5 rounded-lg transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full"></span>
+</button>
+<div class="size-9 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center overflow-hidden">
+<img alt="User Profile Avatar" data-alt="User circular profile avatar icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjBM8jUIH_bw1VxGgCZQ143xzNrOmL5uv6f18YsJvYoBCm4_ZaqKR6XOV3ogMzkEUIGu_m6DYZFHORUTQKyRJIoy8kOEVg4PtIv4_7wogE8z1aCdGskqafz7AfASXgKZlFXuHUtfROipTjoBrw_2hfqcftHk1VwRjeQ1KIiSlFLE1pGqpSuqQJEslM-08gvslQyVblTh9zzc1EXdZs3X0aJCyJX7NWEpBXAa9MJZHUiACIMtBcgAI03SuC3WoDrKEVOnj6NbNNKqY"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-6 lg:px-20 py-8">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm text-slate-500 mb-8">
+<a class="hover:text-primary transition-colors" href="#">Marketplace Hub</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-300">Messaging Connectors</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-white font-medium">WhatsApp Business</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Details & Media -->
+<div class="lg:col-span-8 space-y-10">
+<!-- Header Info Card -->
+<section class="glass rounded-xl p-8 flex flex-col md:flex-row gap-8 items-start relative overflow-hidden">
+<div class="absolute -top-12 -right-12 size-48 bg-primary/10 blur-[100px] rounded-full"></div>
+<div class="size-24 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-4 shadow-2xl shrink-0">
+<img alt="WhatsApp Business Logo" class="w-full grayscale brightness-200 opacity-80" data-alt="Official WhatsApp Business icon in white monochrome" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADQMD-blYhSjiLnUeLOBnvXKMuEz-nQOaAYnLlgWwwwc3kBJ5OStwdWUpmUk4F_iG_fo1jiBAuz6oXdIiNeoJuCJ6cJ3byY-FUXXfNuowUcsLjE1FcH7YwrKrt15bX3-5ou38HIzdUp6EeRkytqxWh9sbGf8DndnIEUD3IdkDkE1AnuGToqgoa3hVYq8RTfxvSZqg5yyIsAVJYyRXLgQ-5IkjwoCzL5K3pT5LDn6GrnbPSfEXcEgF2e-FJvAk4sbhD8d0NpMVAu5Q"/>
+</div>
+<div class="flex-1 space-y-4">
+<div class="flex flex-wrap items-center gap-3">
+<h2 class="text-3xl font-bold tracking-tight">WhatsApp Business</h2>
+<span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 flex items-center gap-1 uppercase tracking-wider">
+<span class="material-symbols-outlined text-xs">verified</span> Certified
+                            </span>
+<span class="text-slate-500 text-sm font-medium">v2.4.1</span>
+</div>
+<p class="text-slate-400 text-lg leading-relaxed max-w-2xl">
+                            Deploy high-fidelity messaging workflows for global customer engagement. Support for templates, media messaging, and automated agent handoff.
+                        </p>
+<div class="flex flex-wrap gap-4 pt-2">
+<div class="flex items-center gap-2 text-sm text-slate-400">
+<span class="material-symbols-outlined text-primary text-lg">category</span>
+<span>Engagement</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-400">
+<span class="material-symbols-outlined text-primary text-lg">public</span>
+<span>Global Support</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-400">
+<span class="material-symbols-outlined text-primary text-lg">security</span>
+<span>End-to-End Encryption</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Rich Media Gallery -->
+<section>
+<h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">collections</span>
+                        Integration Interface
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="aspect-video glass rounded-xl overflow-hidden border border-white/10 group cursor-pointer relative">
+<img alt="Dashboard Interface" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Modern messaging dashboard with charts and conversation lists" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADX378jrpsl6fhzF3v3ev1UDH-xQoDd0SNXYQ-LydnBKUCiI_TpGNYd0bL15d6dQv9e1x1A33o2Uw_icukplZKwy5a7_twI1gxirYJ-NG7mpHOfSpY_P_hVyEaIesl81cyG_uCKWZeAoRElw4mLWSrJqkMYqBPLUcSGWA8r_hGp7qlfuIu73z7OX20Gi7_5j0nMaYCDOB2kIfTrEm5Ov-VFeteSwfnQnEspgH7KZIPlDyA3RQl5HGa-ep4aDH4pKQafX4WMhY5j58"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-end items-end opacity-0 group-hover:opacity-100 transition-opacity">
+<p class="text-sm font-medium">Real-time Analytics Dashboard</p>
+</div>
+</div>
+<div class="grid grid-rows-2 gap-4">
+<div class="glass rounded-xl overflow-hidden border border-white/10 group cursor-pointer relative">
+<img alt="Workflow Editor" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Node-based visual automation workflow editor interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaYLdVElDxJc23ABA5eFl2KcBTMqTleCLkrbiuAC-VqD3q9zVXuTb-YMZz7d5esFu_6mwXjmR_0DiZ3EpolnkqWVbP9ZPLBVnzm0_-kTkPGJEqAq-uJdeJdDyt2QX08FtHC4mKNm5WG6SKwbUZ0TCBIWIqaAg5OZaTga1FC3BcEaN-sjbb-RF3lFt2fbFMUMxIbVgpz4StJrB0sks2c4K0L13J8xECe4kspI_ccrt5oE4lQDqq8dI1U_ltOwP0HHQjA_gTLOGGSPI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-end items-end opacity-0 group-hover:opacity-100 transition-opacity">
+<p class="text-xs font-medium">Visual Flow Builder</p>
+</div>
+</div>
+<div class="glass rounded-xl overflow-hidden border border-white/10 group cursor-pointer relative">
+<img alt="Code Snippet" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Dark code editor showing JSON configuration for messaging API" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc6f-plTUi6IK-0Xakr8f3GqV02hjvrvy1faPLV0_3NfraXc-6jjCIdDDy9ZhBQG5wIsrBcMjEy55vvm-s7KQLOezFK1pEoZ9tuD04-4keKCUJh3txNTgm2gyfOHvoffbtQRo15SopMPAvRgTsQBo1l-us5mJhx7a12TCEOezlVupP1korGMcxTQDPh1b_GA6GGJUEs7k8SQ7RWJfzwJ8nwPsFtsK7mTdys20iQfoKuNcl84ABPKa81bdlQ3T3NAAo1u352z6fxqI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-end items-end opacity-0 group-hover:opacity-100 transition-opacity">
+<p class="text-xs font-medium">Developer Console API</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Supported Playbooks -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+                            Optimized Playbooks
+                        </h3>
+<a class="text-sm text-primary hover:underline" href="#">View all 12 templates</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="glass p-5 rounded-xl border border-white/10 hover:border-primary/50 transition-colors group">
+<div class="size-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined">restart_alt</span>
+</div>
+<h4 class="font-bold mb-2 group-hover:text-primary transition-colors">Automated Customer Recovery</h4>
+<p class="text-sm text-slate-400 leading-relaxed">Re-engage inactive users with personalized WhatsApp templates based on last interaction.</p>
+</div>
+<div class="glass p-5 rounded-xl border border-white/10 hover:border-primary/50 transition-colors group">
+<div class="size-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<h4 class="font-bold mb-2 group-hover:text-primary transition-colors">Hybrid Agent Routing</h4>
+<p class="text-sm text-slate-400 leading-relaxed">Automate initial triage with AI bots and seamlessly hand off complex queries to live agents.</p>
+</div>
+</div>
+</section>
+<!-- Configuration Requirements -->
+<section>
+<h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">fact_check</span>
+                        Activation Checklist
+                    </h3>
+<div class="glass rounded-xl overflow-hidden border border-white/5">
+<div class="p-4 border-b border-white/5 bg-white/5 flex items-center justify-between">
+<span class="text-xs font-bold uppercase tracking-widest text-slate-500">Requirements</span>
+<span class="text-xs text-slate-400">Estimated setup: 5-10 mins</span>
+</div>
+<div class="divide-y divide-white/5">
+<div class="p-4 flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-emerald-400">check_circle</span>
+<div>
+<p class="text-sm font-semibold">Meta Business Account</p>
+<p class="text-xs text-slate-500">Verified business status required</p>
+</div>
+</div>
+<button class="text-xs font-bold text-slate-400 hover:text-white transition-colors">Documentation</button>
+</div>
+<div class="p-4 flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-600">radio_button_unchecked</span>
+<div>
+<p class="text-sm font-semibold">API Auth Token</p>
+<p class="text-xs text-slate-500">Generate from Meta Developer Portal</p>
+</div>
+</div>
+<button class="text-xs font-bold text-primary">Configure</button>
+</div>
+<div class="p-4 flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-600">radio_button_unchecked</span>
+<div>
+<p class="text-sm font-semibold">Webhook URL</p>
+<p class="text-xs text-slate-500">Register Intellect ProActive callback endpoint</p>
+</div>
+</div>
+<button class="text-xs font-bold text-primary">Configure</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Activation & Health -->
+<div class="lg:col-span-4 space-y-6 sticky top-24">
+<!-- Activation Panel -->
+<div class="glass rounded-xl p-6 border border-primary/20 bg-primary/5 relative overflow-hidden">
+<div class="absolute -top-12 -left-12 size-32 bg-primary/20 blur-[60px] rounded-full"></div>
+<h3 class="text-lg font-bold mb-4 relative z-10">Activate Connector</h3>
+<p class="text-sm text-slate-400 mb-6 relative z-10 leading-relaxed">
+                        Ready to connect your WhatsApp Business account? Ensure all prerequisites are met before enabling.
+                    </p>
+<button class="w-full brand-gradient text-white font-bold py-4 rounded-lg shadow-[0_0_20px_rgba(173,43,238,0.4)] hover:shadow-[0_0_30px_rgba(173,43,238,0.6)] transition-all flex items-center justify-center gap-2 relative z-10 group overflow-hidden">
+<div class="absolute inset-0 shimmer animate-[shimmer_2s_infinite]"></div>
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">bolt</span>
+                        Enable Connector
+                    </button>
+<button class="w-full mt-3 bg-white/5 hover:bg-white/10 text-white font-bold py-3 rounded-lg border border-white/10 transition-all text-sm">
+                        Request Sandbox Access
+                    </button>
+<div class="mt-6 pt-6 border-t border-white/10 space-y-3">
+<div class="flex justify-between text-xs">
+<span class="text-slate-400">Pricing Tier</span>
+<span class="text-white font-semibold">Enterprise (Included)</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-400">Monthly Cap</span>
+<span class="text-white font-semibold">1,000,000 messages</span>
+</div>
+</div>
+</div>
+<!-- Integration Health Preview -->
+<div class="glass rounded-xl p-6 border border-white/10">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 mb-4 flex items-center justify-between">
+                        Live Ecosystem Health
+                        <span class="flex size-2 bg-emerald-500 rounded-full animate-pulse"></span>
+</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-xs text-slate-400">Average Global Latency</span>
+<span class="text-xs font-mono text-emerald-400">142ms</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-400/80 w-[85%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-xs text-slate-400">Uptime (Last 30d)</span>
+<span class="text-xs font-mono text-emerald-400">99.98%</span>
+</div>
+<div class="flex gap-0.5">
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-amber-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+<div class="h-4 flex-1 bg-emerald-500/30 rounded-sm"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-2">
+<div class="p-3 bg-white/5 rounded-lg border border-white/5">
+<p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Success Rate</p>
+<p class="text-lg font-mono font-bold">99.2%</p>
+</div>
+<div class="p-3 bg-white/5 rounded-lg border border-white/5">
+<p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Peak Load</p>
+<p class="text-lg font-mono font-bold">4.2k <span class="text-xs font-normal">req/s</span></p>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Specs Mini -->
+<div class="px-2">
+<button class="w-full flex items-center justify-between text-slate-500 hover:text-white transition-colors text-sm py-2 group">
+<span>Advanced Technical Specs</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="mt-4 flex gap-4">
+<div class="size-10 rounded-full border border-white/10 flex items-center justify-center text-slate-500 hover:text-primary hover:border-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm">share</span>
+</div>
+<div class="size-10 rounded-full border border-white/10 flex items-center justify-center text-slate-500 hover:text-primary hover:border-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm">bookmark</span>
+</div>
+<div class="size-10 rounded-full border border-white/10 flex items-center justify-center text-slate-500 hover:text-primary hover:border-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm">help</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Space -->
+<footer class="mt-20 border-t border-white/5 py-10 px-6 lg:px-20 text-center">
+<p class="text-slate-600 text-sm">© 2024 Intellect ProActive Integration Cloud. All rights reserved.</p>
+</footer>
+<style>
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</body></html>

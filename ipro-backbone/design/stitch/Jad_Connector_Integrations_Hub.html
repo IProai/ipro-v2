@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jad-Connector Integrations Hub | Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ad2bee",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#1c1022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(173, 43, 238, 0.05);
+        }
+        .pulse-dot {
+            box-shadow: 0 0 0 0 rgba(173, 43, 238, 0.7);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(173, 43, 238, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(173, 43, 238, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(173, 43, 238, 0); }
+        }
+        .luxury-gradient {
+            background: linear-gradient(135deg, #ad2bee 0%, #d476ff 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-primary/10 bg-white/70 backdrop-blur-md px-10 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight">Intellect ProActive</h2>
+</div>
+<div class="hidden md:flex items-center gap-1 bg-primary/5 rounded-xl px-2 py-1 border border-primary/10">
+<span class="material-symbols-outlined text-primary text-sm pl-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm placeholder:text-primary/40 w-64" placeholder="Search integrations..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-semibold text-primary border-b-2 border-primary pb-1" href="#">Integrations</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">API Docs</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Logs</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="luxury-gradient text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add_link</span>
+                        Add New Connector
+                    </button>
+<button class="p-2.5 rounded-xl bg-white border border-primary/10 text-slate-600 hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-10 rounded-full border-2 border-primary/20 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of a developer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIwEzVDGs4tmIslS4AfDRZ_mJ0-mcdqLxs9ad2xdBy8hdYdrkCJidU_sRCXxBONdXsHXdVlTnVZ0SUI3GFriVuwQ0n1oBK8Dboudw76tgr_2sAM_c6h5Ztyyoe9TjIkrwXsWplrkG1_qvKDr7uD--o1r598_-8BwQOOOjJ1oiOV0_5nKQ5-2twPGJmh-5V8N-C2VT7ZgU66Z3rqPawBe1pubE-lRJroUyDj3vH_580hYILUs6Q6axj-Juvj2i5kZ7ipN5lCV2FYZE"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-primary/10 bg-white/40 p-6 flex flex-col justify-between hidden xl:flex">
+<div class="space-y-6">
+<div>
+<h3 class="text-xs font-bold text-primary/60 uppercase tracking-widest mb-4">Core Controls</h3>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white transition-all text-slate-600" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-medium text-sm">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white shadow-sm text-primary transition-all" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-bold text-sm">Connectors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white transition-all text-slate-600" href="#">
+<span class="material-symbols-outlined">webhook</span>
+<span class="font-medium text-sm">Webhooks</span>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold text-primary/60 uppercase tracking-widest mb-4">Security</h3>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white transition-all text-slate-600" href="#">
+<span class="material-symbols-outlined">key</span>
+<span class="font-medium text-sm">API Secrets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white transition-all text-slate-600" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-medium text-sm">Environments</span>
+</a>
+</div>
+</div>
+</div>
+<div class="bg-primary/5 p-4 rounded-xl border border-primary/10">
+<p class="text-xs font-medium text-primary/70 mb-2">Usage Limit</p>
+<div class="h-1.5 w-full bg-primary/10 rounded-full mb-2">
+<div class="h-full bg-primary rounded-full w-3/4"></div>
+</div>
+<p class="text-[10px] text-slate-500">750k / 1M API Calls</p>
+</div>
+</aside>
+<!-- Main Content Area -->
+<section class="flex-1 overflow-y-auto bg-background-light p-8">
+<div class="max-w-6xl mx-auto space-y-8">
+<!-- Global Health Section -->
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl font-black tracking-tight text-slate-900">Jad-Connector Integrations Hub</h1>
+<p class="text-slate-500">Real-time connectivity management and global health monitoring.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Uptime Gauge -->
+<div class="glass-card rounded-xl p-6 flex items-center justify-between">
+<div class="space-y-1">
+<p class="text-sm font-medium text-slate-500 uppercase tracking-wider">Global Uptime</p>
+<p class="text-3xl font-bold">99.98%</p>
+<span class="text-xs font-bold text-emerald-600 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +0.02%
+                                </span>
+</div>
+<div class="relative size-16 flex items-center justify-center">
+<svg class="size-full transform -rotate-90">
+<circle class="text-primary/10" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-primary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="17.5" stroke-width="6"></circle>
+</svg>
+<span class="absolute text-[10px] font-bold">LIVE</span>
+</div>
+</div>
+<!-- API Call Gauge -->
+<div class="glass-card rounded-xl p-6 flex items-center justify-between">
+<div class="space-y-1">
+<p class="text-sm font-medium text-slate-500 uppercase tracking-wider">Total Throughput</p>
+<p class="text-3xl font-bold">1.2M</p>
+<span class="text-xs font-bold text-orange-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_down</span> -2.4%
+                                </span>
+</div>
+<div class="relative size-16 flex items-center justify-center">
+<svg class="size-full transform -rotate-90">
+<circle class="text-primary/10" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-primary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="40" stroke-width="6"></circle>
+</svg>
+<span class="material-symbols-outlined text-primary text-xl">api</span>
+</div>
+</div>
+<!-- Latency Gauge -->
+<div class="glass-card rounded-xl p-6 flex items-center justify-between">
+<div class="space-y-1">
+<p class="text-sm font-medium text-slate-500 uppercase tracking-wider">System Latency</p>
+<p class="text-3xl font-bold">42ms</p>
+<span class="text-xs font-bold text-emerald-600 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">bolt</span> Optimize
+                                </span>
+</div>
+<div class="relative size-16 flex items-center justify-center">
+<svg class="size-full transform -rotate-90">
+<circle class="text-primary/10" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-primary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="120" stroke-width="6"></circle>
+</svg>
+<span class="material-symbols-outlined text-primary text-xl">speed</span>
+</div>
+</div>
+</div>
+<!-- Connectivity Grid Header -->
+<div class="flex items-center justify-between pt-4">
+<h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sensors</span>
+                            Active Connectivity Grid
+                        </h2>
+<div class="flex gap-2">
+<button class="bg-white border border-primary/10 px-4 py-2 rounded-lg text-xs font-bold hover:bg-primary/5 transition-colors">Sort: Health</button>
+<button class="bg-white border border-primary/10 px-4 py-2 rounded-lg text-xs font-bold hover:bg-primary/5 transition-colors">Filter: Communication</button>
+</div>
+</div>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-12">
+<!-- WhatsApp Card -->
+<div class="glass-card rounded-xl p-6 hover:shadow-xl transition-all group relative overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<div class="size-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center text-[#25D366]">
+<span class="material-symbols-outlined text-3xl">chat</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Sync Active</span>
+<div class="size-2 rounded-full bg-emerald-500 pulse-dot"></div>
+</div>
+</div>
+<h3 class="font-bold text-lg mb-1">WhatsApp Business</h3>
+<p class="text-xs text-slate-500 mb-6 font-medium">Core Messaging API Integration</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="bg-primary/5 p-3 rounded-lg border border-primary/5">
+<p class="text-[10px] text-primary/60 font-bold uppercase mb-1">Latency</p>
+<p class="text-sm font-bold">18ms</p>
+</div>
+<div class="bg-primary/5 p-3 rounded-lg border border-primary/5">
+<p class="text-[10px] text-primary/60 font-bold uppercase mb-1">Success</p>
+<p class="text-sm font-bold">99.9%</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-primary/10">
+<button class="text-xs font-bold text-primary hover:underline">Config Specs</button>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors cursor-pointer">settings</span>
+</div>
+</div>
+<!-- Stripe Card -->
+<div class="glass-card rounded-xl p-6 hover:shadow-xl transition-all group relative overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<div class="size-12 rounded-xl bg-[#635BFF]/10 flex items-center justify-center text-[#635BFF]">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Processing</span>
+<div class="size-2 rounded-full bg-emerald-500 pulse-dot"></div>
+</div>
+</div>
+<h3 class="font-bold text-lg mb-1">Stripe Checkout</h3>
+<p class="text-xs text-slate-500 mb-6 font-medium">Financial Flow &amp; Reconciliation</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="bg-primary/5 p-3 rounded-lg border border-primary/5">
+<p class="text-[10px] text-primary/60 font-bold uppercase mb-1">Avg Transaction</p>
+<p class="text-sm font-bold">$142.00</p>
+</div>
+<div class="bg-primary/5 p-3 rounded-lg border border-primary/5">
+<p class="text-[10px] text-primary/60 font-bold uppercase mb-1">Retries</p>
+<p class="text-sm font-bold">0.02%</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-primary/10">
+<button class="text-xs font-bold text-primary hover:underline">View Ledger</button>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors cursor-pointer">settings</span>
+</div>
+</div>
+<!-- ERP Card -->
+<div class="glass-card rounded-xl p-6 hover:shadow-xl transition-all group relative overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<div class="size-12 rounded-xl bg-slate-900/10 flex items-center justify-center text-slate-800">
+<span class="material-symbols-outlined text-3xl">corporate_fare</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-orange-500">Scheduled</span>
+<div class="size-2 rounded-full bg-orange-400"></div>
+</div>
+</div>
+<h3 class="font-bold text-lg mb-1">SAP ERP Connector</h3>
+<p class="text-xs text-slate-500 mb-6 font-medium">Enterprise Resource Planning</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="bg-primary/5 p-3 rounded-lg border border-primary/5">
+<p class="text-[10px] text-primary/60 font-bold uppercase mb-1">Next Sync</p>
+<p class="text-sm font-bold">14:00 GMT</p>
+</div>
+<div class="bg-primary/5 p-3 rounded-lg border border-primary/5">
+<p class="text-[10px] text-primary/60 font-bold uppercase mb-1">Payload</p>
+<p class="text-sm font-bold">4.2 GB</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-primary/10">
+<button class="text-xs font-bold text-primary hover:underline">Log Analytics</button>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors cursor-pointer">settings</span>
+</div>
+</div>
+<!-- Oracle Card -->
+<div class="glass-card rounded-xl p-6 hover:shadow-xl transition-all group relative overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<div class="size-12 rounded-xl bg-red-600/10 flex items-center justify-center text-red-600">
+<span class="material-symbols-outlined text-3xl">database</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Active</span>
+<div class="size-2 rounded-full bg-emerald-500 pulse-dot"></div>
+</div>
+</div>
+<h3 class="font-bold text-lg mb-1">Oracle Cloud</h3>
+<p class="text-xs text-slate-500 mb-6 font-medium">Main Database Cluster Integration</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="bg-primary/5 p-3 rounded-lg border border-primary/5">
+<p class="text-[10px] text-primary/60 font-bold uppercase mb-1">Throughput</p>
+<p class="text-sm font-bold">850 QPS</p>
+</div>
+<div class="bg-primary/5 p-3 rounded-lg border border-primary/5">
+<p class="text-[10px] text-primary/60 font-bold uppercase mb-1">Health</p>
+<p class="text-sm font-bold text-emerald-600">Optimal</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-primary/10">
+<button class="text-xs font-bold text-primary hover:underline">DB Console</button>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors cursor-pointer">settings</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Jad Configuration Side Drawer (Context Panel) -->
+<aside class="w-80 border-l border-primary/10 bg-white/60 p-6 flex flex-col gap-8 hidden 2xl:flex overflow-y-auto">
+<div>
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-lg font-bold">Jad Configuration</h2>
+<span class="material-symbols-outlined text-slate-400">close</span>
+</div>
+<div class="space-y-6">
+<!-- Environment Toggle -->
+<div class="space-y-3">
+<label class="text-xs font-bold text-slate-500 uppercase">Current Environment</label>
+<div class="flex p-1 bg-primary/5 rounded-xl border border-primary/10">
+<button class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-primary">Sandbox</button>
+<button class="flex-1 py-2 text-xs font-bold rounded-lg bg-primary text-white shadow-sm">Production</button>
+</div>
+</div>
+<!-- Webhook Mapping -->
+<div class="space-y-3">
+<label class="text-xs font-bold text-slate-500 uppercase">Webhook Endpoint</label>
+<div class="relative">
+<input class="w-full bg-white border-primary/10 rounded-xl text-xs py-3 pr-10 font-medium text-slate-700" readonly="" type="text" value="https://api.ipr-o.com/v1/hook"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-primary text-sm cursor-pointer">content_copy</span>
+</div>
+</div>
+<!-- API Rotation -->
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<label class="text-xs font-bold text-slate-500 uppercase">Secret Rotation</label>
+<span class="text-[10px] font-bold text-emerald-600">SECURE</span>
+</div>
+<div class="p-4 bg-white rounded-xl border border-primary/10 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-400 font-bold uppercase">Last Rotated</span>
+<span class="text-xs font-medium">Oct 12, 2023</span>
+</div>
+<button class="text-[10px] font-bold text-primary border border-primary/20 px-3 py-1.5 rounded-lg hover:bg-primary hover:text-white transition-all">Rotate Keys</button>
+</div>
+</div>
+</div>
+<!-- Advanced Settings -->
+<div class="space-y-4">
+<label class="text-xs font-bold text-slate-500 uppercase">Event Triggers</label>
+<div class="space-y-3">
+<div class="flex items-center justify-between group">
+<span class="text-xs font-medium text-slate-600">On Connect Error</span>
+<div class="w-8 h-4 bg-primary rounded-full relative">
+<div class="size-3 bg-white rounded-full absolute right-0.5 top-0.5 shadow-sm"></div>
+</div>
+</div>
+<div class="flex items-center justify-between group">
+<span class="text-xs font-medium text-slate-600">Latency Threshold</span>
+<div class="w-8 h-4 bg-primary/20 rounded-full relative">
+<div class="size-3 bg-white rounded-full absolute left-0.5 top-0.5 shadow-sm"></div>
+</div>
+</div>
+<div class="flex items-center justify-between group">
+<span class="text-xs font-medium text-slate-600">Automatic Retry</span>
+<div class="w-8 h-4 bg-primary rounded-full relative">
+<div class="size-3 bg-white rounded-full absolute right-0.5 top-0.5 shadow-sm"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto">
+<button class="w-full bg-slate-900 text-white py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-lg">save</span>
+                        Apply Configuration
+                    </button>
+<p class="text-[10px] text-center text-slate-400 mt-4 leading-relaxed">Changes to production environments require senior architect approval and may result in a brief 100ms handshake delay.</p>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

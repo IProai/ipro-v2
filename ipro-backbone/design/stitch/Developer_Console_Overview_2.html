@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IPR-O | Cyber-Tech Developer Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#8b5cf6",
+                        cyber: {
+                            black: "#050507",
+                            card: "#0d0d12",
+                            border: "#1e1e26",
+                            cyan: "#00f2ff",
+                            green: "#39ff14",
+                            gold: "#d4af37",
+                            red: "#ff2e2e"
+                        }
+                    },
+                    fontFamily: {
+                        sans: ["Outfit", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
+                    },
+                },
+            },
+        };
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body { @apply bg-cyber-black text-slate-300 font-sans antialiased; }
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 3px; height: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #2d2d39; border-radius: 10px; }
+        .cyber-border {
+            border: 1px solid theme('colors.cyber.border');
+            position: relative;
+        }
+        .cyber-border::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 10px; height: 10px;
+            border-top: 1px solid theme('colors.primary');
+            border-left: 1px solid theme('colors.primary');
+        }
+        .matrix-glow {
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+        }
+        .floor-glow-blue { filter: drop-shadow(0 20px 30px rgba(0, 242, 255, 0.15)); }
+        .floor-glow-gold { filter: drop-shadow(0 20px 30px rgba(212, 175, 55, 0.15)); }
+        .floor-glow-purple { filter: drop-shadow(0 20px 30px rgba(139, 92, 246, 0.15)); }
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, theme('colors.cyber.cyan'), transparent);
+            opacity: 0.1;
+            animation: scan 4s linear infinite;
+        }
+        .terminal-scroll {
+            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden selection:bg-primary/30 selection:text-white">
+<aside class="w-64 border-r border-cyber-border flex flex-col bg-cyber-black z-20">
+<div class="p-6 flex items-center gap-3">
+<div class="relative w-10 h-10 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/20 blur-md rounded-lg"></div>
+<div class="relative w-full h-full border border-primary/50 rounded flex items-center justify-center bg-cyber-card">
+<span class="text-white font-bold tracking-tighter text-xs">IPR-O</span>
+</div>
+</div>
+<div>
+<span class="font-bold text-lg tracking-tight text-white block leading-none">ProActive</span>
+<span class="text-[10px] text-primary font-mono tracking-widest uppercase opacity-80">Command Center</span>
+</div>
+</div>
+<nav class="flex-1 px-4 mt-4 space-y-1 overflow-y-auto custom-scrollbar">
+<div class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] px-3 mb-3">Core Modules</div>
+<a class="flex items-center gap-3 px-3 py-2.5 text-cyber-cyan bg-cyber-cyan/5 border-l-2 border-cyber-cyan rounded-r-md transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">cloud_sync</span>
+<span class="text-sm font-medium">Environments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">rocket_launch</span>
+<span class="text-sm font-medium">Deployments</span>
+</a>
+<div class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] px-3 mb-3 mt-8">Architecture</div>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">api</span>
+<span class="text-sm font-medium">API Gateway</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+<span class="text-sm font-medium">Event Streams</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+<span class="text-sm font-medium">Edge Functions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">encrypted</span>
+<span class="text-sm font-medium">Vault &amp; IAM</span>
+</a>
+</nav>
+<div class="p-4 border-t border-cyber-border">
+<div class="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/5 rounded-lg">
+<div class="w-9 h-9 rounded bg-gradient-to-br from-primary to-cyber-cyan p-0.5">
+<img alt="User avatar" class="w-full h-full rounded bg-cyber-black object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlEMULumKwFT60k2Fhilv0AnC0fRfdsfKDppXwML8ofWqWoebI6W4reWaRuBwS-QBSDok9UYnr10WGAZlc9mCi5QabTgWxbEtJWcqtdT33BJSeW1MBJv_1Eni-hrvlsmOszi8jOtP2L5Su1x7iMh4AkzFlmoE_nUQhPASoqG2VqBjFCBvubgb7GLMwXAcRvOU0jbT_BmfHxRqu1jbpIFBg3JDel1wzwadztyxTpJWUrpAZQgTcD1M1EyHKM5VPEedzIFAXR0-9e2s"/>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-bold text-white truncate">admin_dev_01</p>
+<p class="text-[10px] text-slate-500 font-mono">ROOT_LEVEL</p>
+</div>
+<button class="text-slate-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">settings</span>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 bg-[#07070a]">
+<header class="h-16 border-b border-cyber-border flex items-center justify-between px-8 bg-cyber-black/50 backdrop-blur-md z-10">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 text-xs bg-white/[0.03] border border-white/10 rounded focus:border-primary focus:ring-0 text-slate-200 placeholder:text-slate-600 font-mono transition-all" placeholder="Query system logs..." type="text"/>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-cyber-green/5 border border-cyber-green/20 text-cyber-green rounded text-[10px] font-bold uppercase tracking-widest">
+<span class="w-1.5 h-1.5 rounded-full bg-cyber-green animate-pulse shadow-[0_0_8px_rgba(57,255,20,0.8)]"></span>
+                Engines Operational
+            </div>
+</div>
+<div class="flex items-center gap-5">
+<div class="flex items-center gap-1">
+<button class="w-9 h-9 flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/5 rounded transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/5 rounded transition-all">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+</div>
+<div class="h-8 w-px bg-cyber-border"></div>
+<button class="bg-primary hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] text-white px-5 py-2 rounded text-xs font-bold uppercase tracking-widest transition-all">
+                + New Deployment
+            </button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+<div class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="text-3xl font-bold text-white tracking-tight mb-2">Developer Console <span class="text-primary">Overview</span></h1>
+<p class="text-slate-500 text-sm font-medium">Real-time infrastructure orchestration &amp; multi-tenant health metrics.</p>
+</div>
+<div class="flex gap-2">
+<span class="text-[10px] font-mono text-slate-600 bg-white/5 px-2 py-1 rounded">SID: 882-991-X</span>
+<span class="text-[10px] font-mono text-slate-600 bg-white/5 px-2 py-1 rounded">REGION: DXB-CENTRAL</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-10">
+<div class="cyber-card bg-cyber-card cyber-border p-6 rounded-lg floor-glow-blue overflow-hidden">
+<div class="scanline"></div>
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="text-[10px] font-mono uppercase tracking-[0.2em] text-cyber-cyan">ENVIRONMENT</span>
+<h3 class="text-xl font-bold text-white mt-1">Dev-Stage-01</h3>
+</div>
+<span class="px-2 py-0.5 border border-cyber-cyan/30 text-cyber-cyan text-[9px] font-bold rounded uppercase tracking-widest bg-cyber-cyan/5">Sandbox</span>
+</div>
+<div class="flex items-center justify-between mb-6">
+<div class="relative w-24 h-24">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-white/5" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-cyber-cyan transition-all duration-1000" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="60" stroke-width="6"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xl font-bold text-white font-mono">76%</span>
+<span class="text-[8px] text-slate-500 uppercase tracking-tighter">Capacity</span>
+</div>
+</div>
+<div class="flex-1 ml-6 space-y-3 font-mono">
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-slate-500">Latency</span>
+<span class="text-white font-bold">142ms</span>
+</div>
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-slate-500">Errors</span>
+<span class="text-cyber-green">0.04%</span>
+</div>
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-slate-500">Uptime</span>
+<span class="text-white">99.99%</span>
+</div>
+</div>
+</div>
+<div class="bg-black/40 rounded p-2 text-[9px] font-mono text-cyber-cyan/70 terminal-scroll h-12 overflow-hidden border border-white/5">
+<p>&gt; [INFO] Container d-01 spawned</p>
+<p>&gt; [WARN] GC overhead limit reached</p>
+<p>&gt; [INFO] Re-routing traffic via node-7</p>
+</div>
+</div>
+<div class="cyber-card bg-cyber-card cyber-border p-6 rounded-lg floor-glow-gold overflow-hidden">
+<div class="scanline" style="animation-delay: 1s"></div>
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="text-[10px] font-mono uppercase tracking-[0.2em] text-cyber-gold">ENVIRONMENT</span>
+<h3 class="text-xl font-bold text-white mt-1">QA-Internal-A</h3>
+</div>
+<span class="px-2 py-0.5 border border-cyber-gold/30 text-cyber-gold text-[9px] font-bold rounded uppercase tracking-widest bg-cyber-gold/5">Staging</span>
+</div>
+<div class="flex items-center justify-between mb-6">
+<div class="relative w-24 h-24">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-white/5" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-cyber-gold transition-all duration-1000" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="120" stroke-width="6"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xl font-bold text-white font-mono">54%</span>
+<span class="text-[8px] text-slate-500 uppercase tracking-tighter">Capacity</span>
+</div>
+</div>
+<div class="flex-1 ml-6 space-y-3 font-mono">
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-slate-500">Latency</span>
+<span class="text-white font-bold text-cyber-gold">189ms</span>
+</div>
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-slate-500">Errors</span>
+<span class="text-cyber-gold">1.2%</span>
+</div>
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-slate-500">Uptime</span>
+<span class="text-white">99.82%</span>
+</div>
+</div>
+</div>
+<div class="bg-black/40 rounded p-2 text-[9px] font-mono text-cyber-gold/70 terminal-scroll h-12 overflow-hidden border border-white/5">
+<p>&gt; [ERR] Failed DB migration #82</p>
+<p>&gt; [WARN] Slow query detected on node-A</p>
+<p>&gt; [RETRY] Attempting connection pool init...</p>
+</div>
+</div>
+<div class="cyber-card bg-cyber-card cyber-border p-6 rounded-lg floor-glow-purple overflow-hidden">
+<div class="scanline" style="animation-delay: 2s"></div>
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="text-[10px] font-mono uppercase tracking-[0.2em] text-primary">ENVIRONMENT</span>
+<h3 class="text-xl font-bold text-white mt-1">Cluster-Global-Prod</h3>
+</div>
+<span class="px-2 py-0.5 border border-primary/30 text-primary text-[9px] font-bold rounded uppercase tracking-widest bg-primary/5">Production</span>
+</div>
+<div class="flex items-center justify-between mb-6">
+<div class="relative w-24 h-24">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-white/5" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary transition-all duration-1000" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="18" stroke-width="6"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xl font-bold text-white font-mono">93%</span>
+<span class="text-[8px] text-slate-500 uppercase tracking-tighter">Capacity</span>
+</div>
+</div>
+<div class="flex-1 ml-6 space-y-3 font-mono">
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-slate-500">Latency</span>
+<span class="text-white font-bold">42ms</span>
+</div>
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-slate-500">Errors</span>
+<span class="text-cyber-green">0.00%</span>
+</div>
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-slate-500">Uptime</span>
+<span class="text-white">99.999%</span>
+</div>
+</div>
+</div>
+<div class="bg-black/40 rounded p-2 text-[9px] font-mono text-primary/70 terminal-scroll h-12 overflow-hidden border border-white/5">
+<p>&gt; [INFO] All regions synced successfully</p>
+<p>&gt; [SYS] Autoscaling triggered: +2 nodes</p>
+<p>&gt; [INFO] Heartbeat OK - DXB-WEST-0</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+<div class="lg:col-span-2 bg-cyber-card cyber-border rounded-lg flex flex-col h-[500px]">
+<div class="p-4 border-b border-cyber-border flex items-center justify-between bg-white/[0.01]">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-cyber-green animate-pulse shadow-[0_0_10px_theme('colors.cyber.green')]"></div>
+<h2 class="font-bold text-white text-sm uppercase tracking-widest">Event Explorer Feed</h2>
+</div>
+<div class="flex border border-cyber-border rounded overflow-hidden">
+<button class="text-[9px] font-bold px-3 py-1 bg-cyber-green/20 text-cyber-green uppercase border-r border-cyber-border">Live Feed</button>
+<button class="text-[9px] font-bold px-3 py-1 text-slate-500 hover:text-white uppercase transition-colors">Historical</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar font-mono text-[11px]">
+<table class="w-full text-left border-collapse">
+<thead class="bg-cyber-black/80 sticky top-0 text-slate-600 uppercase border-b border-cyber-border z-10">
+<tr>
+<th class="px-6 py-3 font-bold text-[9px] tracking-widest">Timestamp</th>
+<th class="px-6 py-3 font-bold text-[9px] tracking-widest">Event Hash</th>
+<th class="px-6 py-3 font-bold text-[9px] tracking-widest">Schema</th>
+<th class="px-6 py-3 font-bold text-[9px] tracking-widest text-center">Protocol</th>
+<th class="px-6 py-3 font-bold text-[9px] tracking-widest text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/[0.02]">
+<tr class="hover:bg-cyber-green/5 transition-colors cursor-crosshair group">
+<td class="px-6 py-3 text-slate-500">14:22:01.002</td>
+<td class="px-6 py-3 text-cyber-green matrix-glow">0x4F92...B83</td>
+<td class="px-6 py-3 text-white">order.payment_verified</td>
+<td class="px-6 py-3 text-center"><span class="text-cyber-cyan opacity-80">GRPC</span></td>
+<td class="px-6 py-3 text-right"><span class="text-cyber-green font-bold">[ OK ]</span></td>
+</tr>
+<tr class="hover:bg-cyber-gold/5 transition-colors cursor-crosshair group">
+<td class="px-6 py-3 text-slate-500">14:22:00.892</td>
+<td class="px-6 py-3 text-cyber-gold">0xAB12...D19</td>
+<td class="px-6 py-3 text-white">user.auth_retry</td>
+<td class="px-6 py-3 text-center"><span class="text-primary opacity-80">MQTT</span></td>
+<td class="px-6 py-3 text-right"><span class="text-cyber-gold font-bold">[ WARN ]</span></td>
+</tr>
+<tr class="hover:bg-cyber-green/5 transition-colors cursor-crosshair">
+<td class="px-6 py-3 text-slate-500">14:21:58.421</td>
+<td class="px-6 py-3 text-cyber-green matrix-glow">0xCC82...X22</td>
+<td class="px-6 py-3 text-white">sys.cache_flush</td>
+<td class="px-6 py-3 text-center"><span class="text-cyber-cyan opacity-80">REDIS</span></td>
+<td class="px-6 py-3 text-right"><span class="text-cyber-green font-bold">[ OK ]</span></td>
+</tr>
+<tr class="hover:bg-cyber-red/5 transition-colors cursor-crosshair">
+<td class="px-6 py-3 text-slate-500">14:21:40.118</td>
+<td class="px-6 py-3 text-cyber-red">0x99AA...Y01</td>
+<td class="px-6 py-3 text-white">db.query_timeout</td>
+<td class="px-6 py-3 text-center"><span class="text-primary opacity-80">PGSQL</span></td>
+<td class="px-6 py-3 text-right"><span class="text-cyber-red font-bold">[ CRIT ]</span></td>
+</tr>
+<tr class="hover:bg-cyber-green/5 transition-colors cursor-crosshair">
+<td class="px-6 py-3 text-slate-500">14:21:35.500</td>
+<td class="px-6 py-3 text-cyber-green matrix-glow">0x4122...M83</td>
+<td class="px-6 py-3 text-white">worker.heartbeat</td>
+<td class="px-6 py-3 text-center"><span class="text-cyber-cyan opacity-80">UDP</span></td>
+<td class="px-6 py-3 text-right"><span class="text-cyber-green font-bold">[ OK ]</span></td>
+</tr>
+<tr class="hover:bg-cyber-green/5 transition-colors cursor-crosshair">
+<td class="px-6 py-3 text-slate-500">14:21:30.211</td>
+<td class="px-6 py-3 text-cyber-green matrix-glow">0x7232...Z83</td>
+<td class="px-6 py-3 text-white">worker.heartbeat</td>
+<td class="px-6 py-3 text-center"><span class="text-cyber-cyan opacity-80">UDP</span></td>
+<td class="px-6 py-3 text-right"><span class="text-cyber-green font-bold">[ OK ]</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="bg-cyber-card cyber-border rounded-lg flex flex-col h-[500px]">
+<div class="p-4 border-b border-cyber-border flex items-center justify-between bg-white/[0.01]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">history_edu</span>
+<h2 class="font-bold text-white text-sm uppercase tracking-widest">Deployment Pipeline</h2>
+</div>
+<button class="text-[9px] text-primary font-bold hover:underline tracking-tighter uppercase">Access Logs</button>
+</div>
+<div class="flex-1 overflow-y-auto p-5 space-y-5 custom-scrollbar font-mono">
+<div class="group relative p-4 bg-white/[0.02] border border-white/5 rounded-lg hover:border-cyber-green/30 transition-all">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-[10px] font-bold text-white uppercase tracking-wider">v3.4.1-patch.2</h4>
+<span class="text-[9px] text-cyber-green">COMPLETE</span>
+</div>
+<p class="text-[10px] text-slate-500 leading-tight mb-3">Hotfix applied to Auth Module [IDX-92]</p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-1.5 opacity-60">
+<img alt="dev" class="w-5 h-5 rounded-full border border-cyber-black" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4aFRig8Xijkth4DDkf0PU_6mApT0FOSTcWvtXZlzYGw1K1CYSd-UihX7u5tkhXq-WPjqYHh5wzKlsOXBshWFgLMLck02FijQbyD8m87nssjBV040VMFeW4xWk37k3_jpoAHvPvh_CtShPbvJOyy6w0npMW6F0Zz5yIcVUMOAhCO7t-EWtZKZ7q8iQ1fzAXJ51cwoeGUFT4fPci2GNMN7swLon3NT2aFk8hJiEmtPaW47dsVsD1rDePr9Q6RLF1PpyFCd19gNkx20"/>
+<img alt="dev" class="w-5 h-5 rounded-full border border-cyber-black" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnctIbBWjZ_ZbYHttySv8dSavcAG842oH6x9pqYJvpYDqDM-0cGrgweX_Xe_mCTxiXEI1NfsGfRldAhg4plmKJm_a1T-YOLuxaADqvQ1EOblhgR3aARjGi4f7Ge8lasxudQjyGeOytbjfwZtxp1HDt-kIX6rU2NBLWJm5qagx9fYyMqalfyRd-xFtGZYg8XTDEZ15iTQd1sCeUlX2dIGr6mC9lz6-xWARDE6TtCSXjXQElXtSSka-kjKVdJRALvL2h0jobw7sXCfE"/>
+</div>
+<span class="text-[9px] text-slate-600">SHA: d9a1c2</span>
+</div>
+</div>
+<div class="group relative p-4 bg-primary/5 border border-primary/20 rounded-lg">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-[10px] font-bold text-primary uppercase tracking-wider">v3.5.0-rc.1</h4>
+<span class="text-[9px] text-primary animate-pulse">RUNNING...</span>
+</div>
+<p class="text-[10px] text-slate-400 leading-tight mb-3">Deploying Multi-Region Event Sourcing Mesh</p>
+<div class="w-full bg-white/5 h-1 rounded-full overflow-hidden mb-2">
+<div class="bg-primary h-full w-[65%] shadow-[0_0_10px_theme('colors.primary')]"></div>
+</div>
+<div class="flex justify-between text-[8px] text-slate-500 uppercase">
+<span>Step 4/7: DB Sync</span>
+<span>65%</span>
+</div>
+</div>
+<div class="group relative p-4 bg-cyber-red/5 border border-cyber-red/20 rounded-lg">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-[10px] font-bold text-cyber-red uppercase tracking-wider">v3.4.0-rollback</h4>
+<span class="text-[9px] text-cyber-red">FAILED</span>
+</div>
+<p class="text-[10px] text-slate-500 leading-tight mb-3">Postgres lock timeout on cluster B-node7</p>
+<button class="w-full py-1.5 border border-cyber-red/30 text-[9px] font-bold text-cyber-red hover:bg-cyber-red hover:text-white transition-all uppercase">Re-run Pipeline</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-8 right-8 flex flex-col gap-4">
+<button class="bg-cyber-black border border-primary/50 text-primary w-14 h-14 rounded-lg shadow-[0_0_30px_rgba(139,92,246,0.2)] flex items-center justify-center transition-all hover:scale-110 active:scale-95 group relative">
+<span class="material-symbols-outlined text-2xl">terminal</span>
+<div class="absolute right-full mr-4 bg-cyber-black border border-cyber-border text-white text-[10px] font-bold py-2 px-4 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none uppercase tracking-widest">
+            Execute Cloud Shell
+        </div>
+</button>
+</div>
+
+</body></html>

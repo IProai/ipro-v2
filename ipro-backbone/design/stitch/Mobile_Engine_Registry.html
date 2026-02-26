@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mobile Engine Registry | Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(115, 17, 212, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(115, 17, 212, 0.2);
+        }
+        .status-pulse-green {
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            animation: pulse-green 2s infinite;
+        }
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .status-pulse-purple {
+            box-shadow: 0 0 0 0 rgba(115, 17, 212, 0.7);
+            animation: pulse-purple 2s infinite;
+        }
+        @keyframes pulse-purple {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(115, 17, 212, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(115, 17, 212, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(115, 17, 212, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen antialiased">
+<!-- Mobile-Optimized Desktop Container -->
+<div class="max-w-[480px] mx-auto min-h-screen bg-background-light dark:bg-background-dark shadow-2xl relative flex flex-col border-x border-primary/10">
+<!-- Sticky Header Section -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/20 px-6 py-4">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">settings_input_component</span>
+<h1 class="text-xl font-bold tracking-tight">ProActive</h1>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnsKeuCOY5k8gvZduw103Bn82xcQTVTJNSbLU25UmUQ98nIc05IPEtNcRpelw_ZayD63Sl18nhp2Es3s1FsLi3z7Ar582-7deTKeYXxvRqrQdTFK78tAuNDkEuC5mpH-6jeX5wXBo0YUHIuGC5RUweGstQFIneHk-DKHig-lJZAqkmdE9pXnkdu0_LStcm-_o_ruCoMH8tI_0eTiE9EoUmItl56xSx8HEGpFRslpJ0LDfiDAyXfYlAnyRHT_nTOObnMFBtgL_jwsk"/>
+</div>
+</div>
+</div>
+<!-- Search and Filter Bar -->
+<div class="flex gap-2">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full bg-slate-200/50 dark:bg-primary/5 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-slate-500" placeholder="Search Engines..." type="text"/>
+</div>
+<button class="bg-primary text-white p-2 rounded-lg flex items-center justify-center min-w-[44px]">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+<!-- Quick Filter Chips -->
+<div class="flex gap-2 mt-4 overflow-x-auto no-scrollbar pb-1">
+<button class="px-4 py-1.5 rounded-full bg-primary text-white text-xs font-semibold whitespace-nowrap">All Units</button>
+<button class="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold whitespace-nowrap border border-primary/20">Active</button>
+<button class="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold whitespace-nowrap border border-primary/20">Standby</button>
+<button class="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold whitespace-nowrap border border-primary/20">Critical</button>
+</div>
+</header>
+<!-- Main Content: Engine List -->
+<main class="flex-1 px-4 py-6 space-y-4 overflow-y-auto">
+<h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 px-2">Registry Overview (4 Active)</h2>
+<!-- Engine Tile 1 (Expanded State) -->
+<div class="glass-card rounded-xl overflow-hidden border-l-4 border-l-green-500 transition-all">
+<div class="p-4 flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg bg-primary/20 flex items-center justify-center relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-50" data-alt="Abstract engine core schematic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATf2NbQmZE8MMEzg5FE5TETT2qc-28FWVA4Qkbs98wROtmXMjW9Xn4mxvLcC_CGk9mN2L24nVSr2OW5M94LGaPbpWdh5kDFr3Q6p2s3RBCGbVqrRuEAbnSMlLoI1HaFPcML-I61daTUgUBrDVrdnkCHQ_0lvtEgdZ2br5OXvwDmZCcYY1wfLzbVRVx97pOpzaqN67sLsroz2CfY3FZbsxuHydjDht0Y2GK_VAysqjKqkzQoOQVZhbRfNHxnyhMXcg0Li4dhTi-b5c"/>
+<span class="material-symbols-outlined text-primary text-3xl relative z-10">cyclone</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg leading-tight">Vortex-7 Core</h3>
+<div class="w-2.5 h-2.5 rounded-full bg-green-500 status-pulse-green"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-mono">ID: SN-9942-X</p>
+<div class="mt-1 flex items-center gap-2">
+<span class="text-[10px] px-2 py-0.5 rounded bg-green-500/10 text-green-500 font-bold uppercase">Optimal</span>
+</div>
+</div>
+</div>
+<!-- Expanded Details Section -->
+<div class="px-4 pb-4 border-t border-primary/10 pt-4 bg-primary/5">
+<div class="grid grid-cols-3 gap-3 mb-4">
+<div class="text-center p-2 rounded-lg bg-background-light dark:bg-background-dark/50 border border-primary/10">
+<p class="text-[10px] text-slate-500 uppercase font-bold">RPM</p>
+<p class="text-sm font-bold text-primary">14,202</p>
+</div>
+<div class="text-center p-2 rounded-lg bg-background-light dark:bg-background-dark/50 border border-primary/10">
+<p class="text-[10px] text-slate-500 uppercase font-bold">Temp</p>
+<p class="text-sm font-bold text-primary">82°C</p>
+</div>
+<div class="text-center p-2 rounded-lg bg-background-light dark:bg-background-dark/50 border border-primary/10">
+<p class="text-[10px] text-slate-500 uppercase font-bold">Load</p>
+<p class="text-sm font-bold text-primary">64%</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">power_settings_new</span>
+<span class="text-sm font-medium">Ignition System</span>
+</div>
+<button class="w-10 h-5 bg-primary rounded-full relative transition-colors">
+<span class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm"></span>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">ac_unit</span>
+<span class="text-sm font-medium">Active Cooling</span>
+</div>
+<button class="w-10 h-5 bg-primary rounded-full relative transition-colors">
+<span class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm"></span>
+</button>
+</div>
+</div>
+<button class="w-full mt-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg text-xs font-bold transition-colors uppercase tracking-wider">
+                        Full Configuration Diagnostics
+                    </button>
+</div>
+</div>
+<!-- Engine Tile 2 (Collapsed) -->
+<div class="glass-card rounded-xl border-l-4 border-l-primary transition-all">
+<div class="p-4 flex items-center gap-4 cursor-pointer">
+<div class="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-30" data-alt="Abstract engine gear pattern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpO89JidIK2dEh48bVbm2ToL7azn2_sWhVa4fxhSGfNtk3z97i1aC6dIzLa6XWGHzYAn1NUm5Q0Ni0wqg29qrXqi4pzsA9pOV0WpdH2koxt9NsIMNVH5rO4PVVhcQnDZyrpy98c_d9YrfFzqbsZT8icdU5ylrD-NkhayxIPbDHS_Oc1DwjKfMbUCLt55UluJsuKSFm5dnnitX41cKsy3WNC5fOW3ro2AcLXEJMiXCXsqMwwV_He8U7vJ6Yud42OhtcNZBUVQvu8g0"/>
+<span class="material-symbols-outlined text-primary text-3xl relative z-10">hub</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg leading-tight">Nexus Alpha</h3>
+<div class="w-2.5 h-2.5 rounded-full bg-primary status-pulse-purple"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-mono">ID: SN-8821-B</p>
+<div class="mt-1 flex items-center gap-2">
+<span class="text-[10px] px-2 py-0.5 rounded bg-primary/10 text-primary font-bold uppercase tracking-tighter">Standby Mode</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">expand_more</span>
+</div>
+</div>
+<!-- Engine Tile 3 (Collapsed) -->
+<div class="glass-card rounded-xl border-l-4 border-l-red-500 transition-all opacity-90">
+<div class="p-4 flex items-center gap-4 cursor-pointer">
+<div class="w-16 h-16 rounded-lg bg-red-500/10 flex items-center justify-center relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-20" data-alt="Alert status abstract pattern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHS47YGqTwXD8UKtSxC7FZGTOJblAFTphb8xgmOvy8t-d_jf7QBrwwiyQtWNTj58kpMWkL2bZmg-JB4L3Y_SVJl3yUaYI_qnaO0kZKLGe2lwpIvT6Un06aOsWBvYsNa058yoqhviNSTsSNODDIe1IWSnwKzfmVO3EsvCaRcv5DKJfK39on9Od_qXo3AJ30V80cpxLPQ7-YX-H-5f5JXvd_0qXIBekj4YTCdYdparpG8m3WgnXsVIYm8t3vh62KxpIZypxWbcmfsk4"/>
+<span class="material-symbols-outlined text-red-500 text-3xl relative z-10">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg leading-tight">Titan Heavy-9</h3>
+<div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-mono">ID: SN-4402-Q</p>
+<div class="mt-1 flex items-center gap-2">
+<span class="text-[10px] px-2 py-0.5 rounded bg-red-500/10 text-red-500 font-bold uppercase tracking-tighter">Critical Overload</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">expand_more</span>
+</div>
+</div>
+<!-- Engine Tile 4 (Collapsed) -->
+<div class="glass-card rounded-xl border-l-4 border-l-green-500 transition-all">
+<div class="p-4 flex items-center gap-4 cursor-pointer">
+<div class="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-30" data-alt="High tech turbine visual" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJTHqi_cu4Z-umFhPXflm-yuhcyOzZcghXdu2mHWX1E_hv-NOVFsuzlQzQDToSeE0WTYI3PDXrlO2P_Us1-3VFKVMNVULMrNCQjSnBmdvjuBffdMxjmkmqBoT4cnTzPnqEF8WpZAOZrNujIW7zlDvv0qKGS57iOU1pexCmMbruY3Un-mGGW--T3N5mhY61lGfdookk3VH6xWsI1ZqgZmavy0tQsu2J5JD2sVg_PIqWUShbaiPnCnwi1mVt5sf7o4WU9krgIE_Kffc"/>
+<span class="material-symbols-outlined text-primary text-3xl relative z-10">bolt</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg leading-tight">Spark-X Micro</h3>
+<div class="w-2.5 h-2.5 rounded-full bg-green-500 status-pulse-green"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-mono">ID: SN-1022-M</p>
+<div class="mt-1 flex items-center gap-2">
+<span class="text-[10px] px-2 py-0.5 rounded bg-green-500/10 text-green-500 font-bold uppercase tracking-tighter">Active</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">expand_more</span>
+</div>
+</div>
+</main>
+<!-- Navigation Footer -->
+<footer class="sticky bottom-0 bg-background-light dark:bg-background-dark/90 backdrop-blur-xl border-t border-primary/20 py-4 px-8">
+<div class="flex justify-between items-center max-w-[320px] mx-auto">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Registry</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold">Metrics</span>
+</button>
+<div class="relative -top-8">
+<button class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background-light dark:border-background-dark">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-bold">Logs</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold">System</span>
+</button>
+</div>
+</footer>
+</div>
+</body></html>

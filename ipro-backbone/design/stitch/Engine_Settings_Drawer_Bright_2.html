@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brand-Themed Engine Config | Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b21b6", // Brand Violet
+                        "brand-blue": "#3b82f6", // Brand Blue
+                        "background-light": "#fdfcff",
+                        "background-dark": "#0f0913",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .brand-gradient {
+                background: linear-gradient(135deg, #5b21b6 0%, #3b82f6 100%);
+            }
+            .glass-header {
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+            }
+            .glass-section {
+                background: rgba(255, 255, 255, 0.5);
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(91, 33, 182, 0.08);
+                box-shadow: 0 0 15px rgba(91, 33, 182, 0.03);
+            }
+            .glow-border {
+                border: 1px solid rgba(139, 92, 246, 0.2);
+                box-shadow: inset 0 0 10px rgba(139, 92, 246, 0.05);
+            }
+            .custom-slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 22px;
+                height: 22px;
+                background: #5b21b6;
+                cursor: pointer;
+                border-radius: 50%;
+                border: 3px solid white;
+                box-shadow: 0 0 15px rgba(91, 33, 182, 0.5);
+            }
+            .drawer-shadow {
+                box-shadow: -40px 0 80px -20px rgba(91, 33, 182, 0.1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen overflow-hidden">
+<div class="fixed inset-0 flex blur-md pointer-events-none opacity-40">
+<div class="w-64 border-r border-primary/5 p-6 flex flex-col gap-6">
+<div class="h-10 w-40 bg-primary/10 rounded-lg"></div>
+<div class="space-y-4">
+<div class="h-8 w-full bg-slate-200 rounded"></div>
+<div class="h-8 w-full bg-slate-200 rounded"></div>
+<div class="h-8 w-full bg-slate-200 rounded"></div>
+</div>
+</div>
+<div class="flex-1 p-10 space-y-8">
+<div class="flex justify-between">
+<div class="h-12 w-64 bg-slate-200 rounded-xl"></div>
+<div class="h-12 w-32 bg-slate-200 rounded-xl"></div>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<div class="h-40 bg-white rounded-xl shadow-sm border border-slate-100"></div>
+<div class="h-40 bg-white rounded-xl shadow-sm border border-slate-100"></div>
+<div class="h-40 bg-white rounded-xl shadow-sm border border-slate-100"></div>
+</div>
+</div>
+</div>
+<div class="fixed inset-0 bg-slate-950/20 backdrop-blur-sm z-40"></div>
+<div class="fixed right-0 top-0 bottom-0 w-[640px] bg-white dark:bg-background-dark z-50 flex flex-col drawer-shadow border-l border-primary/10">
+<div class="relative overflow-hidden brand-gradient p-8 text-white">
+<div class="absolute top-0 right-0 p-4">
+<button class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-2xl">
+<span class="material-symbols-outlined text-4xl text-white">psychology</span>
+</div>
+<div>
+<div class="flex items-center gap-3">
+<h2 class="text-2xl font-black tracking-tight">AI Engine Configuration</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-400/20 text-emerald-300 text-[10px] font-black uppercase tracking-widest border border-emerald-400/30">Active</span>
+</div>
+<div class="flex items-center gap-2 mt-1 opacity-90">
+<span class="text-sm font-bold tracking-wide">IPR-O Ecosystem</span>
+<span class="w-1 h-1 rounded-full bg-white/40"></span>
+<span class="text-sm font-medium">Standardized v4.2.0</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-8 py-8 space-y-10">
+<section class="space-y-6">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined font-bold">settings_input_component</span>
+<h3 class="text-xs font-black uppercase tracking-[0.2em] text-slate-500">General Configuration</h3>
+</div>
+<div class="glass-section glow-border rounded-2xl p-6 space-y-5">
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Access Endpoint</label>
+<div class="relative">
+<input class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm font-mono text-slate-600 focus:ring-2 focus:ring-primary/20 outline-none transition-all" readonly="" type="text" value="https://api.iproactive.ai/v1/engine/ai-core-01"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Secure API Key</label>
+<div class="relative">
+<input class="w-full border border-slate-200 rounded-xl px-4 py-3.5 text-sm font-mono focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all bg-white" type="password" value="••••••••••••••••••••••••••••"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+<div class="w-px h-4 bg-slate-200 mx-1"></div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">refresh</span>
+</button>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Event Webhook URL</label>
+<input class="w-full border border-slate-200 rounded-xl px-4 py-3.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all bg-white" placeholder="https://external-service.com/hooks" type="url"/>
+</div>
+</div>
+</section>
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined font-bold">query_stats</span>
+<h3 class="text-xs font-black uppercase tracking-[0.2em] text-slate-500">Usage Limits</h3>
+</div>
+<div class="px-3 py-1 rounded-full bg-slate-100 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Auto-Scaling Enabled</div>
+</div>
+<div class="glass-section glow-border rounded-2xl p-8 space-y-8">
+<div class="flex justify-between items-center">
+<div>
+<p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Monthly Requests</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-black text-primary">75,000</span>
+<span class="text-slate-400 text-sm font-medium">/ 100k limit</span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-slate-700">75%</div>
+<p class="text-[10px] font-bold text-slate-400 uppercase">Quota Utilized</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="relative w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+<div class="absolute inset-y-0 left-0 brand-gradient w-3/4 rounded-full shadow-[0_0_10px_rgba(91,33,182,0.3)]"></div>
+<input class="custom-slider absolute inset-0 w-full h-3 opacity-100 appearance-none bg-transparent cursor-pointer z-10" max="100000" min="0" type="range" value="75000"/>
+</div>
+<div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+<span>Min Threshold</span>
+<span>Scale: 25k</span>
+<span>Scale: 50k</span>
+<span class="text-primary">Target: 75k</span>
+<span>Enterprise: 100k+</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6 pt-2">
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase">Concurrency</label>
+<div class="flex items-center border border-slate-200 rounded-xl overflow-hidden h-12 bg-white">
+<button class="w-12 h-full hover:bg-slate-50 text-slate-400 flex items-center justify-center"><span class="material-symbols-outlined text-sm">remove</span></button>
+<input class="flex-1 border-none text-center text-sm font-black text-slate-700 focus:ring-0" type="text" value="50"/>
+<button class="w-12 h-full hover:bg-slate-50 text-slate-400 flex items-center justify-center"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase">Retry Policy</label>
+<select class="w-full h-12 border border-slate-200 rounded-xl px-4 text-sm font-bold text-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none bg-white">
+<option>Standard (3x)</option>
+<option>Aggressive (5x)</option>
+<option>No Retries</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined font-bold">domain_verification</span>
+<h3 class="text-xs font-black uppercase tracking-[0.2em] text-slate-500">Tenant Access Controls</h3>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="pl-9 pr-4 py-1.5 bg-slate-100 border-none rounded-full text-xs font-medium placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 w-40 transition-all focus:w-56" placeholder="Filter tenants..." type="text"/>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-5 bg-white rounded-2xl border border-slate-100 hover:border-primary/30 transition-all shadow-sm group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary/5 overflow-hidden border border-primary/10 p-0.5">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Corporate logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHtBb11ksAFI7LUszRMuXQQ9-DZVq_9FHbsAxx0_M7YamSDWhbvdKLZji-sf5vOcdTguDli1xfVU8i8D6SQFCcnKk6VYT3uwd1Y6fPMqfKGxPTfmH6ACyQ_MFA1dm7INPVvZVBNbDvdq5TqSYU18K2oxxc0hCivs9tYc_04_vnh_v8cQzQC-34NBz1VYTko3DfEtPdaFguoFTvLqguzl6hZBz1TKK9w6hgePd9ukAcqKlExKb5o1MSCUq7KyJNmZXxtzq9olHHBFk"/>
+</div>
+<div>
+<p class="text-sm font-black text-slate-800">Global FinTech Solutions</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-slate-400 font-mono">ID: TN-00918-GF</span>
+<span class="w-1 h-1 rounded-full bg-slate-200"></span>
+<span class="text-[10px] text-primary font-bold">Full Access</span>
+</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6.5 bg-slate-200 rounded-full peer peer-checked:bg-primary transition-all after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5.5 after:shadow-md"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-5 bg-white rounded-2xl border border-slate-100 hover:border-primary/30 transition-all shadow-sm group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-slate-50 overflow-hidden border border-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-300">corporate_fare</span>
+</div>
+<div>
+<p class="text-sm font-black text-slate-800">Hyperion Logistics</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-slate-400 font-mono">ID: TN-02144-HL</span>
+<span class="w-1 h-1 rounded-full bg-slate-200"></span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">Disabled</span>
+</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6.5 bg-slate-200 rounded-full peer peer-checked:bg-primary transition-all after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5.5 after:shadow-md"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-5 bg-white rounded-2xl border border-slate-100 hover:border-primary/30 transition-all shadow-sm group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary/5 overflow-hidden border border-primary/10 p-0.5">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Quantum Retail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpLuG-tdlXtqnjL9t5EGBLiwvZUKkFxlhbUqt5n_6e99cLhlkvdFPX4XiqJNAZdOgZvG4JsmgAPOu58qrQVJ8_IjSpblWqXlyRATgj1rWRsBuIEUrgIjRVgaCJu7rmbhWC46txN3FXOo6lgT9GmKXWnT_MgVYEqMSQ1rPPHb89uRp_OKgoQ7j8gG27NFT3wp2ENzkQQyqDYFBeh0r0HvYHvvjub37vWoXgITK6rxhKSKW_B-Z64DMV554XOmwPWxY4cNL8u2Fg4nU"/>
+</div>
+<div>
+<p class="text-sm font-black text-slate-800">Quantum Retail Co.</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-slate-400 font-mono">ID: TN-00331-QR</span>
+<span class="w-1 h-1 rounded-full bg-slate-200"></span>
+<span class="text-[10px] text-primary font-bold">Limited Access</span>
+</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6.5 bg-slate-200 rounded-full peer peer-checked:bg-primary transition-all after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5.5 after:shadow-md"></div>
+</label>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-dashed border-slate-200 rounded-2xl text-slate-400 text-xs font-black uppercase tracking-widest hover:bg-primary/5 hover:border-primary/30 hover:text-primary transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                Grant New Tenant Authority
+            </button>
+</section>
+</div>
+<div class="sticky bottom-0 bg-white border-t border-slate-100 px-8 py-8 flex items-center justify-between shadow-[0_-10px_40px_rgba(0,0,0,0.02)]">
+<button class="px-6 py-3 rounded-xl text-slate-400 font-bold text-xs uppercase tracking-widest hover:text-red-500 hover:bg-red-50 transition-all">
+            Reset Config
+        </button>
+<div class="flex items-center gap-4">
+<button class="px-8 py-4 rounded-2xl text-slate-700 font-bold text-sm border border-slate-200 hover:bg-slate-50 transition-all">
+                Discard Changes
+            </button>
+<button class="px-10 py-4 rounded-2xl brand-gradient text-white font-black text-sm shadow-[0_10px_25px_rgba(91,33,182,0.4)] hover:shadow-[0_15px_30px_rgba(91,33,182,0.5)] transition-all flex items-center gap-3 transform hover:-translate-y-0.5">
+                Update Engine
+                <span class="material-symbols-outlined text-lg">bolt</span>
+</button>
+</div>
+</div>
+</div>
+
+</body></html>

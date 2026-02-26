@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Standardized Dark Control Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#0B0E14",
+                        "surface-dark": "#161B22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(22, 27, 34, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glow-primary {
+            box-shadow: 0 0 15px rgba(115, 17, 212, 0.3);
+        }
+        .sidebar-item-active {
+            background: linear-gradient(90deg, rgba(115, 17, 212, 0.15) 0%, rgba(115, 17, 212, 0) 100%);
+            border-left: 3px solid #7311d4;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-300">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 border-r border-slate-200 dark:border-white/5 bg-white dark:bg-background-dark hidden md:flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white glow-primary">
+<span class="material-symbols-outlined text-xl">deployed_code</span>
+</div>
+<h1 class="font-bold text-lg tracking-tight">Intellect Pro</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1 mt-4">
+<a class="sidebar-item-active flex items-center gap-3 px-3 py-2.5 text-primary font-medium rounded-r-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Control Hub</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">lan</span>
+<span>Network Nodes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">security</span>
+<span>Threat Matrix</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span>System Logs</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-white/5 space-y-4">
+<div class="p-4 rounded-xl bg-primary/10 border border-primary/20">
+<p class="text-xs font-semibold text-primary uppercase tracking-wider mb-1">System Load</p>
+<div class="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 42%;"></div>
+</div>
+<p class="text-[10px] text-slate-500 mt-2">Running at 42% capacity</p>
+</div>
+<button class="w-full py-2.5 px-4 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold transition-all glow-primary">
+                    Deploy Update
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+<!-- Top Navigation Bar -->
+<header class="h-16 flex items-center justify-between px-8 border-b border-slate-200 dark:border-white/5 sticky top-0 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary">search</span>
+<input class="w-full bg-slate-100 dark:bg-white/5 border-none focus:ring-1 focus:ring-primary rounded-lg pl-10 pr-4 py-2 text-sm placeholder:text-slate-500 transition-all" placeholder="Global search or command (⌘K)" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10">
+<span class="flex size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-300">System Online</span>
+</div>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-white/10"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold">Admin User</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-tighter">Pro Access</p>
+</div>
+<div class="size-9 rounded-full bg-slate-200 dark:bg-primary/20 border-2 border-primary overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="User profile avatar with professional look" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHcF6NWNDKAXBVBU_rOy3k8WSMViE-GUmaeqRIuwgj0AND0STIxPC734x72eg2yuadZu6cYS4_ISnS-tJeEU5XLTB9kOWDfOdIQuYhAFacgX9ftSQFkWdfVB3QTvWT0fxx0ydB_erWbAusBjth7hVZ625D7FhU885oxgsVm1r9OgHmVNX6NYgBWvsIcc_0N1s5P94XEvegMnlwgrIlKq1qU-lxgWq67LNKUD_yVPulGC1YuJoL597lPEdqcNDM465Mwq7nsGmLu4M"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 space-y-8">
+<!-- Page Title -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-primary text-xs font-bold tracking-widest uppercase">Intellect ProActive</span>
+<span class="px-2 py-0.5 rounded text-[10px] bg-primary/10 text-primary border border-primary/20">V 2.4.0</span>
+</div>
+<h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Standardized Control Hub</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Dynamic Theming: Dark Mode Variant (#0B0E14)</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 text-sm font-semibold rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-primary/40 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">tune</span>
+                            System Settings
+                        </button>
+<button class="px-4 py-2 text-sm font-semibold rounded-lg bg-primary text-white hover:bg-primary/90 glow-primary transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">bolt</span>
+                            Quick Actions
+                        </button>
+</div>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">memory</span>
+</div>
+<span class="text-rose-500 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                                +2.4%
+                            </span>
+</div>
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">CPU Load</p>
+<h3 class="text-2xl font-bold mt-1">24.8%</h3>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">database</span>
+</div>
+<span class="text-emerald-500 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+                                -1.2%
+                            </span>
+</div>
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Memory Usage</p>
+<h3 class="text-2xl font-bold mt-1">62.1%</h3>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<span class="text-emerald-500 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                                +12
+                            </span>
+</div>
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Active Nodes</p>
+<h3 class="text-2xl font-bold mt-1">1,284</h3>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">gpp_good</span>
+</div>
+<span class="text-slate-400 text-xs font-bold">Stable</span>
+</div>
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Threat Level</p>
+<h3 class="text-2xl font-bold mt-1">L-Minimal</h3>
+</div>
+</div>
+</div>
+<!-- Charts and Lists -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Performance Graph -->
+<div class="glass-card lg:col-span-2 p-6 rounded-xl flex flex-col h-[400px]">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h4 class="font-bold text-lg">System Throughput</h4>
+<p class="text-xs text-slate-500">Real-time data stream monitoring (Mbps)</p>
+</div>
+<div class="flex gap-2">
+<button class="px-2 py-1 text-[10px] font-bold rounded bg-primary text-white">LIVE</button>
+<button class="px-2 py-1 text-[10px] font-bold rounded bg-slate-200 dark:bg-white/5">24H</button>
+</div>
+</div>
+<div class="flex-1 w-full relative">
+<!-- Visualizing the line chart using SVG -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 800 200">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#7311d4" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#7311d4" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0 150 Q 50 140, 100 160 T 200 120 T 300 140 T 400 80 T 500 110 T 600 60 T 700 90 T 800 40 V 200 H 0 Z" fill="url(#chartGradient)"></path>
+<path d="M0 150 Q 50 140, 100 160 T 200 120 T 300 140 T 400 80 T 500 110 T 600 60 T 700 90 T 800 40" fill="none" stroke="#7311d4" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<!-- Vertical Axis Labels -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-[10px] text-slate-500 pb-2">
+<span>1000</span>
+<span>750</span>
+<span>500</span>
+<span>250</span>
+<span>0</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-4 text-[10px] font-medium text-slate-500">
+<span>00:00</span>
+<span>04:00</span>
+<span>08:00</span>
+<span>12:00</span>
+<span>16:00</span>
+<span>20:00</span>
+<span>23:59</span>
+</div>
+</div>
+<!-- Side Activity List -->
+<div class="glass-card p-6 rounded-xl flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-bold text-lg">Security Events</h4>
+<button class="text-xs text-primary font-bold hover:underline">View All</button>
+</div>
+<div class="flex-1 space-y-4 overflow-y-auto pr-2">
+<div class="flex gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 cursor-pointer">
+<div class="size-8 rounded bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+</div>
+<div>
+<p class="text-xs font-bold">Node Authentication</p>
+<p class="text-[10px] text-slate-500 mt-0.5">Primary cluster node #842 validated successfully.</p>
+<p class="text-[9px] text-slate-400 mt-1">2 mins ago</p>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 cursor-pointer">
+<div class="size-8 rounded bg-amber-500/10 flex items-center justify-center text-amber-500 flex-shrink-0">
+<span class="material-symbols-outlined text-xl">warning</span>
+</div>
+<div>
+<p class="text-xs font-bold">Latency Warning</p>
+<p class="text-[10px] text-slate-500 mt-0.5">High response delay detected in US-East zone.</p>
+<p class="text-[9px] text-slate-400 mt-1">14 mins ago</p>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 cursor-pointer">
+<div class="size-8 rounded bg-rose-500/10 flex items-center justify-center text-rose-500 flex-shrink-0">
+<span class="material-symbols-outlined text-xl">block</span>
+</div>
+<div>
+<p class="text-xs font-bold">Access Blocked</p>
+<p class="text-[10px] text-slate-500 mt-0.5">Unidentified IP 192.168.1.45 flagged as hostile.</p>
+<p class="text-[9px] text-slate-400 mt-1">45 mins ago</p>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 cursor-pointer">
+<div class="size-8 rounded bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-xl">sync</span>
+</div>
+<div>
+<p class="text-xs font-bold">Routine Sync</p>
+<p class="text-[10px] text-slate-500 mt-0.5">All local caches synchronized with Global Hub.</p>
+<p class="text-[9px] text-slate-400 mt-1">1 hour ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Summary Card -->
+<div class="glass-card rounded-xl p-6 flex flex-wrap items-center justify-between gap-6 border-l-4 border-l-primary">
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Global Status</span>
+<span class="text-lg font-bold flex items-center gap-2">
+<span class="size-2 rounded-full bg-emerald-500"></span>
+                                All Systems Nominal
+                            </span>
+</div>
+<div class="h-10 w-px bg-white/10 hidden sm:block"></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Next Scheduled Task</span>
+<span class="text-lg font-bold">System Optimization</span>
+</div>
+<div class="h-10 w-px bg-white/10 hidden sm:block"></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Active Users</span>
+<div class="flex -space-x-2 mt-1">
+<div class="size-7 rounded-full border-2 border-surface-dark bg-slate-300 overflow-hidden" title="User 1">
+<img alt="User 1" data-alt="Small circular profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADZJQ_6GWWtwYR4cBTeqkVay59Q-vHpHsWZZLKcF16IY1ugSZiD7WxrIj5WgmLDqh0LLzDIp0hPtw6weDqIOWrSoQ_YssLSL52PEUknX1H-6MkmnEnSKE_ccbZPRdfsd7f-X6ZPyOSYH08vpf049cNwwBILkhZb0wolIykyup0LR86_FdqlFngUzXIFouLO5_M35eK1cxonq6eMD_w_DPIHPsGtdyJQheZrz4jZqO3UAoCGEcN9Pf8PZeYB9hVcESiPSL_vGoqdDk"/>
+</div>
+<div class="size-7 rounded-full border-2 border-surface-dark bg-slate-400 overflow-hidden" title="User 2">
+<img alt="User 2" data-alt="Small circular profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVWH1nLQE0XJHLx0JN3qXCXQxYPOZP1QBx4mrNiwpKRJEh8B-S-LMR6oIZS6UTGtgzRCjEaHvc_4UcfSsPVQ3DzbDuugigTlrA2-7Qi1O7gLxVfqZdYz6F3HPTQS0E-6mLDTIal9abcc7r7owp30QmHgix8-z10rQR_ZH8IIs79cvbUhYljPRBvLyOZFUSxjWxwd-B6-CiU4AkU9L3819u-tUvwIKqD7Fbkdez5oD8oJZR9dxWcab2M9-VNELzWcADXzHzoK8D97g"/>
+</div>
+<div class="size-7 rounded-full border-2 border-surface-dark bg-slate-500 overflow-hidden" title="User 3">
+<img alt="User 3" data-alt="Small circular profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSwd3DCuAGA9bdP2BRDkRkniXcbJNGTy374TbyxSBMjQX4gFvDKaOw8lE5h7FDaItTXgwhfKztJBtFO-z_yM0QWEf_-KNfBJ6D_AItjF9nZxebUYzM-phXTT-u_i43YDB5JobO3kKI0DD2rsv-YxWjhBuLOYcA5YiykTWPExL8yhPAQXnuga-pGP2d8bPBxNFH5y_kj6UnQuF_oPSG3Gng5K3JJAlYxzvEMyarXATI4mqvzc4So2iguQmPlyrZmsuxn_XyiUGqBhE"/>
+</div>
+<div class="size-7 rounded-full border-2 border-surface-dark bg-primary flex items-center justify-center text-[10px] font-bold text-white">
+                                    +12
+                                </div>
+</div>
+</div>
+</div>
+<button class="flex items-center gap-2 px-6 py-3 bg-primary/20 hover:bg-primary/30 border border-primary/30 text-primary font-bold rounded-lg transition-all">
+<span class="material-symbols-outlined">description</span>
+                        Generate Report
+                    </button>
+</div>
+</div>
+<!-- Global Footer -->
+<footer class="mt-auto py-6 px-8 border-t border-slate-200 dark:border-white/5 flex items-center justify-between">
+<p class="text-xs text-slate-500 font-medium tracking-tight">© 2024 Intellect ProActive Design System. Proprietary &amp; Confidential.</p>
+<div class="flex items-center gap-6">
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="text-xs text-slate-500 hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

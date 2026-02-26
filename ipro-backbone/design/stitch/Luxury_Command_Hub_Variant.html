@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intellect ProActive - Luxury Command Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3B82F6",
+                        "background-light": "#F3F7FA",
+                        "background-dark": "#0F172A",
+                        accent: {
+                            light: "#E2E8F0",
+                            dark: "#1E293B"
+                        }
+                    },
+                    fontFamily: {
+                        display: ["Plus Jakarta Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                        '2xl': "24px",
+                    },
+                },
+            },
+        };
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .sidebar-item-active {
+            background: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .dark .sidebar-item-active {
+            background: #1E293B;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex-shrink-0 bg-slate-50/50 dark:bg-slate-900/50 border-r border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="p-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-gradient-to-tr from-blue-600 to-indigo-400 rounded-lg flex items-center justify-center text-white font-bold">I</div>
+<div>
+<h1 class="font-bold text-lg leading-tight tracking-tight">Intellect ProActive</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Control Hub</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 pb-4 space-y-1">
+<div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-4 py-2 mt-4">Platforms</div>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl sidebar-item-active text-primary transition-all" href="#">
+<span class="material-icons-outlined text-xl">dashboard</span> iProProjects
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-outlined text-xl">account_balance_wallet</span> iProSmartBooks
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-outlined text-xl">groups</span> iProGuest
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-outlined text-xl">apartment</span> iProElite
+                </a>
+<div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-4 py-2 mt-6">Systems</div>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-outlined text-xl">memory</span> AI Engine
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-outlined text-xl">settings_input_component</span> Jad Connector
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-outlined text-xl">cloud_sync</span> iProCore
+                </a>
+<div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-4 py-2 mt-6">Settings</div>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800 rounded-xl transition-all" href="#">
+<span class="material-icons-outlined text-xl">receipt_long</span> Billing
+                </a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-slate-200/50 dark:bg-slate-800 text-xs font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-all" onclick="toggleDarkMode()">
+<span class="material-icons-outlined text-sm">dark_mode</span>
+                    Toggle Theme
+                </button>
+</div>
+</aside>
+<main class="flex-1 overflow-hidden flex flex-col">
+<header class="h-16 flex items-center justify-between px-8 bg-white/30 dark:bg-slate-900/30 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 z-10">
+<div class="relative w-96">
+<span class="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search across projects, invoices, events..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-slate-100 dark:bg-slate-800 rounded-full px-3 py-1 gap-2 text-xs font-medium">
+<span class="text-slate-400">EN</span>
+<div class="h-3 w-px bg-slate-300 dark:bg-slate-600"></div>
+<span>العربية</span>
+</div>
+<button class="relative p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 bg-red-500 text-[10px] text-white flex items-center justify-center rounded-full font-bold">3</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-800">
+<div class="text-right">
+<p class="text-sm font-bold leading-none">OmHa</p>
+<p class="text-[10px] text-slate-400">Administrator</p>
+</div>
+<img alt="Profile" class="w-8 h-8 rounded-full border border-slate-200 dark:border-slate-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWh171aU34LYBGmiHQBwMZV8En_OH6ZvK10sPPU_abrjC5JLbhHG6laoEzEwCmenLsxuec2sMLPQ0On9gVdNTEAA6TA-Rcah89U0EKHLQCbYEgefFczT_UGn3LRyUTlVyZDix9TtnXPosLCNms1yLR-3078wYiFK8e39OSD9nGWbKvx8XLS0BPOtIRizQ5V2lx0jUbKh9PV22kJXDZTKpghLsenPNISP90j6Tac5IcOaL4ceqMok72Oi1KXwEdnWqm2QPDM7ZU6pE"/>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 space-y-6">
+<div class="flex items-end justify-between">
+<div>
+<h2 class="text-3xl font-bold tracking-tight">Good morning, OmHa,</h2>
+<p class="text-slate-500 mt-1">Here is what's happening across your ecosystem today.</p>
+</div>
+<div class="flex gap-2">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
+<span class="material-icons-outlined text-sm">check_circle</span>
+                            iProCore Active
+                        </div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
+<span class="material-icons-outlined text-sm">sync</span>
+                            Jad Connector
+                        </div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-100 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold">
+<span class="material-icons-outlined text-sm">rocket_launch</span>
+                            All Engines Active
+                        </div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-6">
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-1/3 h-full pointer-events-none opacity-20 group-hover:opacity-30 transition-opacity">
+<svg class="h-full w-full" viewBox="0 0 200 100">
+<path class="text-primary" d="M0 80 Q 50 20 100 80 T 200 50" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+<div class="relative z-10 flex gap-6">
+<div class="w-32 h-32 rounded-xl overflow-hidden shadow-lg flex-shrink-0">
+<img alt="Villa 221A" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbd9dHgSHQ4SN4aALheCNYPnQ70t0yNcEFPm8NmjPNCkGcWE30DDcEo11fLJDo69My4nUkxKSn9PZF077G7s2RrDlQ21Bzl4rNtuY8xvfBVi5Lg4Mfn1Z5BrmZD8mIVvxG5W_E-CZUZ0TpOOc126CvMyrxKwrwGVs4pJm0Qa8jFQPsZ1_UwIY47vAcMeP50yVohb8u8Ejgx-vlc3hq_rJtGYv8wQrMo3qopEd-R6F7bSnJF4FKDMflBMuQe2-2SR_7prJzBViZDlQ"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Urgent Attention</span>
+<span class="material-icons-outlined text-slate-400 text-sm">info</span>
+</div>
+<h3 class="text-xl font-bold mb-1">1 project <span class="text-primary">Villa 221A</span> needs review.</h3>
+<p class="text-slate-500 text-sm mb-4">2 invoices pending approval. Revenue this month is up <span class="text-emerald-500 font-bold">15%</span>.</p>
+<div class="flex items-center gap-6">
+<div>
+<p class="text-xs text-slate-400 uppercase font-bold tracking-wider">Revenue</p>
+<p class="text-lg font-bold">AED 455,200</p>
+</div>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+<div class="flex -space-x-2">
+<img alt="User" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6QJJENwtTtdZrjHTFNqj8iN2kqCpGBbe1c7_ATpI29A5W4cFWk5zWGdFDevlZNkvPZ3xthdDYCce0IFCys3ZKjRwpmRxNmIlUCa3nAxyQuVB2l9Es2f6m04SSYB3soGrrBKKN1KjO3joy0Tvk9V6dGK6xwIt-tG21a_l3lwpQ75Y19hoaDm28jY4chORlzzZAkIR15l99xKsc1yBkWDO0RfjYX_i9RGRE_UZA8FasLPHlHZzpXef2OGMNMoJFQ-stUr3h5ziJrT0"/>
+<img alt="User" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5G2DtkuOCqI5s868nH8ewB4rMJ3N2OKU40nCsibhgLhp_yQ9PC_YPrWHdchzUO2BZt318Uw5UJhBxGW6XnF_6J2wJiy6hnrHuJFs2v-HRO66s5_Bv1WAzA25BIY83Ie2uhEbT_cg5Ie96kmMx2KQ94qVBsYm8QZZoCRav9Eovdlac8GcQFArmAIZMDBHUJLn4BtajT4A0KCCZgDoWTvy7MUH5lrxEqAxla_UEfN4pEw-g03PkneVzLWqeha6Lhhy_Y8ZNVi47L8Q"/>
+<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 border-2 border-white dark:border-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-400">+5</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="glass-card rounded-2xl p-5 hover:shadow-xl transition-all group">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+<span class="material-icons-outlined">business_center</span>
+</div>
+<div>
+<h4 class="font-bold">iProProjects</h4>
+<p class="text-[10px] text-slate-400 uppercase tracking-tight font-bold">Fit-out management</p>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400"><span class="material-icons-outlined text-sm">desktop_windows</span></button>
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400"><span class="material-icons-outlined text-sm">chat_bubble_outline</span></button>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-end justify-between">
+<span class="text-xs font-semibold text-slate-500">12 Active Users</span>
+<span class="text-xs font-bold text-primary">75%</span>
+</div>
+<div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 75%"></div>
+</div>
+<div class="flex gap-2 pt-2">
+<button class="flex-1 py-1.5 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">View Projects</button>
+<button class="flex-1 py-1.5 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Insights</button>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-5 hover:shadow-xl transition-all group">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+<span class="material-icons-outlined">account_balance</span>
+</div>
+<div>
+<h4 class="font-bold">iProSmartBooks</h4>
+<p class="text-[10px] text-slate-400 uppercase tracking-tight font-bold">Financial command center</p>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400"><span class="material-icons-outlined text-sm">desktop_windows</span></button>
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400"><span class="material-icons-outlined text-sm">assignment</span></button>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs text-slate-400">Sync status: <span class="text-emerald-500 font-bold">Healthy</span></span>
+<span class="text-lg font-bold">AED 32,000</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-1.5 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Reports</button>
+<button class="flex-1 py-1.5 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Invoices</button>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-5 hover:shadow-xl transition-all">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center">
+<span class="material-icons-outlined">medical_services</span>
+</div>
+<div>
+<h4 class="font-bold">iProClinic</h4>
+<p class="text-[10px] text-slate-400 uppercase tracking-tight font-bold">Healthcare Operations</p>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400"><span class="material-icons-outlined text-sm">desktop_windows</span></button>
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400"><span class="material-icons-outlined text-sm">cloud_upload</span></button>
+</div>
+</div>
+<div class="flex gap-4 items-center">
+<div class="flex-1 bg-slate-100/50 dark:bg-slate-800/50 rounded-lg p-2">
+<p class="text-[10px] font-bold text-slate-400 uppercase">Alerts</p>
+<p class="text-sm font-bold">2 AI Notifications</p>
+</div>
+<div class="flex-1 bg-slate-100/50 dark:bg-slate-800/50 rounded-lg p-2">
+<p class="text-[10px] font-bold text-slate-400 uppercase">Status</p>
+<p class="text-sm font-bold text-emerald-500">Normal</p>
+</div>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 py-1.5 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Records</button>
+<button class="flex-1 py-1.5 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Compliance</button>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-5 hover:shadow-xl transition-all">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+<span class="material-icons-outlined">precision_manufacturing</span>
+</div>
+<div>
+<h4 class="font-bold">iProFactory</h4>
+<p class="text-[10px] text-slate-400 uppercase tracking-tight font-bold">Supply Chain Hub</p>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400"><span class="material-icons-outlined text-sm">monitor</span></button>
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400"><span class="material-icons-outlined text-sm">view_in_ar</span></button>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-xs text-slate-500"><strong class="text-slate-800 dark:text-white">5</strong> Active lines</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-1.5 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Line Status</button>
+<button class="flex-1 py-1.5 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Planning</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="glass-card rounded-2xl p-6 h-full flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-lg">Installed Engines</h3>
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded"><span class="material-icons-outlined text-slate-400">more_horiz</span></button>
+</div>
+<div class="space-y-4 flex-1">
+<div class="flex items-center gap-4 p-3 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 rounded-xl transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+<span class="material-icons-outlined">verified</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<div class="flex items-center justify-between">
+<h5 class="text-sm font-bold">Smart Approval</h5>
+<span class="w-5 h-5 bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 text-[10px] font-bold flex items-center justify-center rounded-full">3</span>
+</div>
+<p class="text-[10px] text-slate-400 truncate">3 pending approvals in workflow</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 rounded-xl transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+<span class="material-icons-outlined">draw</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<div class="flex items-center justify-between">
+<h5 class="text-sm font-bold">E-Sign Engine</h5>
+<span class="w-5 h-5 bg-slate-100 dark:bg-slate-800 text-slate-400 text-[10px] font-bold flex items-center justify-center rounded-full">4</span>
+</div>
+<p class="text-[10px] text-slate-400 truncate">2 contracts signed today</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 rounded-xl transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-400 flex items-center justify-center shrink-0">
+<span class="material-icons-outlined">calendar_today</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<div class="flex items-center justify-between">
+<h5 class="text-sm font-bold">Calendar Sync</h5>
+<span class="w-5 h-5 bg-slate-100 dark:bg-slate-800 text-slate-400 text-[10px] font-bold flex items-center justify-center rounded-full">1</span>
+</div>
+<p class="text-[10px] text-slate-400 truncate">1 meeting scheduled</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 rounded-xl transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center shrink-0">
+<span class="material-icons-outlined">sync</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<div class="flex items-center justify-between">
+<h5 class="text-sm font-bold">iProCore</h5>
+<span class="text-[10px] font-bold text-emerald-500 uppercase">Live</span>
+</div>
+<p class="text-[10px] text-slate-400 truncate">Jad Connector connected</p>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-icons-outlined text-sm text-blue-500">info</span>
+<span class="text-xs font-semibold">System updates available</span>
+</div>
+<button class="text-[10px] font-bold uppercase tracking-wider text-primary hover:underline">Update all</button>
+</div>
+<button class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                                    Update all engines
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

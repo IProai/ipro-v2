@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Developer Role Simulator - Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "secondary-blue": "#3b82f6",
+                        "background-dark": "#050208",
+                        "panel-dark": "#0e0816",
+                        "success-neon": "#10b981",
+                        "error-neon": "#ef4444"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer components {
+            .glass-panel {
+                @apply bg-panel-dark/80 backdrop-blur-xl border border-white/5;
+            }
+            .sidebar-item {
+                @apply flex items-center gap-3 px-4 py-2 rounded-lg transition-all cursor-pointer hover:bg-white/5 text-slate-400;
+            }
+            .sidebar-item.active {
+                @apply bg-primary/10 text-primary border-l-2 border-primary rounded-l-none;
+            }
+            .status-indicator {
+                @apply w-2 h-2 rounded-full;
+            }
+            .capability-row {
+                @apply grid grid-cols-12 gap-4 py-3 px-4 border-b border-white/5 items-center hover:bg-white/[0.02];
+            }
+            .neon-border-glow {
+                box-shadow: 0 0 15px rgba(127, 19, 236, 0.3);
+            }
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-slate-200 min-h-screen flex flex-col overflow-hidden">
+<header class="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-panel-dark/50 z-30">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-7 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h1 class="font-bold tracking-tight text-lg">Role Simulator <span class="text-slate-500 font-normal">v2.4.0</span></h1>
+</div>
+<nav class="flex items-center gap-1 bg-black/40 p-1 rounded-lg border border-white/5">
+<button class="px-4 py-1.5 text-xs font-semibold rounded-md bg-white/10 text-white">Capability Matrix</button>
+<button class="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white">Live UI Preview</button>
+<button class="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white">Audit Logs</button>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex flex-col items-end">
+<span class="text-[10px] uppercase tracking-widest text-primary font-bold">Simulator Active</span>
+<span class="text-xs text-slate-400">Env: Staging-Beta-04</span>
+</div>
+<div class="size-8 rounded-full border border-primary/40 p-0.5">
+<img alt="Admin" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5lK-i-vsKgTk9jnvT5uW59KsFwsELsTwB4guHb-FF7SaUJxuXGoRe1VqquVs43UP_DkyXXIt6OPuMANZLarQQwpwV82Iu6FOUEdrR4OKRAnsOGerEwhdDnUv53MRR9IlSpEcUorOHViAgIzDdd93cysJtsVdBrsl-9oErj15CqZBH2p7nCoH2l1-9j4MUoOMOPZcicWGVeaD3YTv7OkpD_l3CyZ8zWyh9n8ze9VI1ZhPoEMYovehLLMYW3-AtvF6RkDztAP7Rinw"/>
+</div>
+</div>
+</header>
+<div class="flex-1 flex overflow-hidden">
+<aside class="w-72 border-r border-white/10 bg-panel-dark/30 flex flex-col">
+<div class="p-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-lg">search</span>
+<input class="w-full bg-white/5 border-white/10 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-primary focus:border-primary" placeholder="Search modules..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-2 pb-4">
+<div class="mb-6">
+<h3 class="px-4 text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-2">Core Engines</h3>
+<div class="sidebar-item active">
+<span class="material-symbols-outlined text-xl">psychology</span>
+<span class="text-sm font-medium">AI Reasoning Engine</span>
+</div>
+<div class="sidebar-item">
+<span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+<span class="text-sm font-medium">Billing &amp; Credits</span>
+</div>
+<div class="sidebar-item">
+<span class="material-symbols-outlined text-xl">shield</span>
+<span class="text-sm font-medium">Security &amp; IAM</span>
+</div>
+<div class="sidebar-item">
+<span class="material-symbols-outlined text-xl">database</span>
+<span class="text-sm font-medium">Vector Graph Storage</span>
+</div>
+</div>
+<div class="mb-6">
+<h3 class="px-4 text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-2">Service Modules</h3>
+<div class="sidebar-item">
+<span class="material-symbols-outlined text-xl">hub</span>
+<span class="text-sm font-medium">API Gateway</span>
+</div>
+<div class="sidebar-item">
+<span class="material-symbols-outlined text-xl">mail</span>
+<span class="text-sm font-medium">Notification Bus</span>
+</div>
+<div class="sidebar-item">
+<span class="material-symbols-outlined text-xl">monitoring</span>
+<span class="text-sm font-medium">Telemetry Pro</span>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 bg-background-dark relative overflow-hidden flex flex-col">
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-5xl mx-auto">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-2xl font-bold text-white">AI Reasoning Engine</h2>
+<p class="text-slate-400 text-sm">Testing granular permissions for GPT-4o &amp; Claude-3 integration layers.</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 rounded bg-success-neon/10 text-success-neon text-[10px] font-bold border border-success-neon/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span> SIMULATION LIVE
+                            </span>
+</div>
+</div>
+<div class="glass-panel rounded-xl overflow-hidden border border-white/10">
+<div class="grid grid-cols-12 gap-4 py-3 px-6 bg-white/5 text-[10px] uppercase tracking-widest font-bold text-slate-400">
+<div class="col-span-5">Capability Name</div>
+<div class="col-span-2 text-center">Action</div>
+<div class="col-span-3">Flag identifier</div>
+<div class="col-span-2 text-right">Access</div>
+</div>
+<div class="capability-row px-6">
+<div class="col-span-5 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">model_training</span>
+<div>
+<div class="text-sm font-semibold text-white">Model Training Access</div>
+<div class="text-[10px] text-slate-500">Allows fine-tuning on custom datasets</div>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[10px] font-mono border border-blue-500/20 uppercase">Execute</span>
+</div>
+<div class="col-span-3 font-mono text-xs text-slate-400">ai.train.custom</div>
+<div class="col-span-2 text-right">
+<button class="size-5 rounded-full border-2 border-success-neon bg-success-neon/20 ml-auto flex items-center justify-center">
+<div class="size-2 rounded-full bg-success-neon shadow-[0_0_8px_#10b981]"></div>
+</button>
+</div>
+</div>
+<div class="capability-row px-6">
+<div class="col-span-5 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">visibility</span>
+<div>
+<div class="text-sm font-semibold text-white">View Weights &amp; Biases</div>
+<div class="text-[10px] text-slate-500">Read-only access to model architecture</div>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-mono border border-emerald-500/20 uppercase">Read</span>
+</div>
+<div class="col-span-3 font-mono text-xs text-slate-400">ai.view.architecture</div>
+<div class="col-span-2 text-right">
+<button class="size-5 rounded-full border-2 border-success-neon bg-success-neon/20 ml-auto flex items-center justify-center">
+<div class="size-2 rounded-full bg-success-neon shadow-[0_0_8px_#10b981]"></div>
+</button>
+</div>
+</div>
+<div class="capability-row px-6">
+<div class="col-span-5 flex items-center gap-3 opacity-60">
+<span class="material-symbols-outlined text-slate-500">delete_forever</span>
+<div>
+<div class="text-sm font-semibold text-white">Delete Model Versions</div>
+<div class="text-[10px] text-slate-500">Purge historical model training data</div>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="px-2 py-0.5 rounded bg-red-500/10 text-red-400 text-[10px] font-mono border border-red-500/20 uppercase">Delete</span>
+</div>
+<div class="col-span-3 font-mono text-xs text-slate-400">ai.delete.model</div>
+<div class="col-span-2 text-right">
+<button class="size-5 rounded-full border-2 border-slate-700 bg-slate-800 ml-auto"></button>
+</div>
+</div>
+<div class="capability-row px-6">
+<div class="col-span-5 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">settings_input_component</span>
+<div>
+<div class="text-sm font-semibold text-white">Parameter Tuning</div>
+<div class="text-[10px] text-slate-500">Modify temperature and top-p settings</div>
+</div>
+</div>
+<div class="col-span-2 text-center">
+<span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 text-[10px] font-mono border border-amber-500/20 uppercase">Update</span>
+</div>
+<div class="col-span-3 font-mono text-xs text-slate-400">ai.config.params</div>
+<div class="col-span-2 text-right">
+<button class="size-5 rounded-full border-2 border-success-neon bg-success-neon/20 ml-auto flex items-center justify-center">
+<div class="size-2 rounded-full bg-success-neon shadow-[0_0_8px_#10b981]"></div>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-8 space-y-3 max-w-md">
+<div class="flex items-center gap-4 bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl">
+<div class="size-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-500">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-white">Permission Granted</p>
+<p class="text-xs text-slate-400">Action: <span class="font-mono">ai.train.custom</span> executed by [MockUser]</p>
+</div>
+<span class="text-[10px] font-mono text-slate-500 italic">2s ago</span>
+</div>
+<div class="flex items-center gap-4 bg-red-500/10 border border-red-500/20 p-4 rounded-xl">
+<div class="size-8 rounded-full bg-red-500/20 flex items-center justify-center text-red-500">
+<span class="material-symbols-outlined text-lg">block</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-white">Permission Blocked</p>
+<p class="text-xs text-slate-400">Action: <span class="font-mono">ai.delete.model</span> denied for [MockUser]</p>
+</div>
+<span class="text-[10px] font-mono text-slate-500 italic">Just now</span>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-8 right-8 w-80 glass-panel rounded-2xl border border-primary/30 p-6 neon-border-glow shadow-2xl">
+<div class="flex items-center justify-between mb-4">
+<h4 class="text-xs font-bold uppercase tracking-widest text-primary">Simulation Controller</h4>
+<span class="material-symbols-outlined text-slate-500 text-lg cursor-pointer">drag_indicator</span>
+</div>
+<div class="space-y-4">
+<div>
+<label class="text-[10px] text-slate-500 font-bold uppercase mb-2 block tracking-widest">Select Target Role</label>
+<select class="w-full bg-white/5 border-white/10 rounded-lg py-2 text-sm text-white focus:ring-primary focus:border-primary">
+<option>Junior AI Researcher</option>
+<option selected="">Senior Machine Learning Eng</option>
+<option>Platform Architect</option>
+<option>Read-Only Auditor</option>
+</select>
+</div>
+<div class="pt-4 border-t border-white/10">
+<label class="text-[10px] text-slate-500 font-bold uppercase mb-3 block tracking-widest">Overrides</label>
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs text-slate-300">Superuser Bypass</span>
+<button class="w-10 h-5 bg-slate-800 rounded-full relative transition-colors">
+<div class="absolute left-1 top-1 size-3 bg-slate-500 rounded-full"></div>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-300">Tenant Isolation</span>
+<button class="w-10 h-5 bg-primary rounded-full relative transition-colors">
+<div class="absolute right-1 top-1 size-3 bg-white rounded-full shadow-[0_0_8px_white]"></div>
+</button>
+</div>
+</div>
+<button class="w-full py-3 mt-2 bg-gradient-to-r from-primary to-secondary-blue rounded-xl text-white text-xs font-bold uppercase tracking-widest shadow-lg shadow-primary/20 hover:opacity-90 transition-all">
+                        Reset Permissions
+                    </button>
+</div>
+</div>
+</main>
+</div>
+<div class="fixed inset-0 z-[-1] pointer-events-none">
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px]"></div>
+<div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary-blue/5 blur-[120px]"></div>
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 40px 40px;"></div>
+</div>
+
+</body></html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>إنتلكت برو أكتيف - لوحة التحكم المميزة</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#0a070e",
+                        "glass": "rgba(255, 255, 255, 0.03)",
+                        "glass-border": "rgba(255, 255, 255, 0.08)",
+                    },
+                    fontFamily: {
+                        "display": ["IBM Plex Sans Arabic", "Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif;
+        }
+        .glass-morphism {
+            background: rgba(115, 17, 212, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .sidebar-gradient {
+            background: linear-gradient(180deg, rgba(10, 7, 14, 1) 0%, rgba(26, 17, 34, 1) 100%);
+        }
+        .hero-glow {
+            background: radial-gradient(circle at 50% 50%, rgba(115, 17, 212, 0.15) 0%, transparent 70%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden selection:bg-primary/30">
+<div class="flex h-screen overflow-hidden">
+<!-- Right Sidebar (Navigation) -->
+<aside class="w-72 h-full flex flex-col border-l border-glass-border sidebar-gradient hidden lg:flex">
+<div class="p-8 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-2xl">rocket_launch</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-xl font-bold tracking-tight text-slate-100">إنتلكت برو</h1>
+<span class="text-[10px] text-primary font-bold uppercase tracking-widest leading-none">ProActive Hub</span>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
+<div class="text-[11px] font-bold text-slate-500 uppercase px-4 pb-2 tracking-widest">القائمة الرئيسية</div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary border border-primary/20 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium text-sm">لوحة القيادة</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-medium text-sm">التحليلات الذكية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-medium text-sm">المشاريع التقنية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-medium text-sm">المركز المالي</span>
+</a>
+<div class="pt-8 text-[11px] font-bold text-slate-500 uppercase px-4 pb-2 tracking-widest">النظام البيئي</div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-medium text-sm">اتصالات الشبكة</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">memory</span>
+<span class="font-medium text-sm">الذكاء الاصطناعي</span>
+</a>
+</nav>
+<div class="p-6 mt-auto border-t border-glass-border">
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-primary text-white rounded-xl font-bold text-sm shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+<span>مشروع جديد</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+<!-- Top Navbar (Mirrored) -->
+<header class="h-20 flex items-center justify-between px-8 border-b border-glass-border glass-morphism sticky top-0 z-50">
+<div class="flex items-center gap-6 flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-500">search</span>
+<input class="w-full bg-slate-900/50 border-glass-border rounded-xl pr-12 pl-4 py-2.5 text-sm focus:ring-primary focus:border-primary text-slate-100 placeholder:text-slate-500" placeholder="البحث في النظام البيئي..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-900/50 border border-glass-border rounded-lg">
+<span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-[11px] font-bold text-slate-400 tracking-wide uppercase">نظام متصل</span>
+</div>
+<button class="size-10 flex items-center justify-center rounded-xl bg-slate-900/50 border border-glass-border text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-xl bg-slate-900/50 border border-glass-border text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-glass-border mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="flex flex-col text-left items-end">
+<span class="text-sm font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">أومها د.</span>
+<span class="text-[10px] text-slate-500 leading-none uppercase tracking-tighter">المسؤول العام</span>
+</div>
+<div class="size-10 rounded-xl bg-primary/20 border-2 border-primary/40 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of OmHa" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS8QMv-Z6lcjgShgGo7xnjagfvLgiGWtUBch9ahX-iii04cn61XZmWrNMAnGgowNheOEuyRZtpHH9xflBR07wv2XQ9mfS4zUmW0CFVyiDS27j9s9FrQkFe16eYSgypZOikeYV7_UQtSY_8J6cazZhipcp5sjkUJCarAQVhD-JjW_JWx8VsV6pBwbghD5poaa8OF4j-ZnBrhQGG07b1sX-yRx3PiLaPse6Mt_mWc8r11xwDi4lDwH3G1GQ8RXSNPzxz4MjYtz9y2l4"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Body -->
+<div class="p-8 space-y-8 max-w-7xl mx-auto w-full">
+<!-- Hero Greeting -->
+<section class="relative p-10 rounded-3xl overflow-hidden border border-glass-border hero-glow">
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="space-y-2 text-right">
+<h2 class="text-4xl font-bold text-slate-100 tracking-tight">صباح الخير، أومها</h2>
+<p class="text-slate-400 max-w-md text-lg">مرحباً بك في مركز القيادة التقني. إليك لمحة سريعة عن أداء نظامك البيئي اليوم.</p>
+</div>
+<div class="flex gap-4">
+<div class="px-6 py-4 glass-morphism rounded-2xl border border-glass-border text-center min-w-[140px]">
+<span class="block text-[11px] text-slate-500 uppercase font-bold tracking-widest mb-1">وقت النظام</span>
+<span class="text-2xl font-bold text-slate-100 leading-none">09:42 ص</span>
+</div>
+<div class="px-6 py-4 glass-morphism rounded-2xl border border-glass-border text-center min-w-[140px]">
+<span class="block text-[11px] text-slate-500 uppercase font-bold tracking-widest mb-1">المنطقة</span>
+<span class="text-2xl font-bold text-slate-100 leading-none">دبي</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="p-6 glass-morphism rounded-2xl border border-glass-border relative overflow-hidden group hover:border-primary/50 transition-all">
+<div class="absolute -right-4 -bottom-4 size-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">payments</span>
+<span class="text-xs font-bold text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-md">+١٢.٥٪</span>
+</div>
+<p class="text-slate-500 text-sm font-medium mb-1">إجمالي الإيرادات</p>
+<h3 class="text-2xl font-bold text-slate-100">٤٥٠,٠٠٠ <span class="text-sm font-normal text-slate-400">د.إ</span></h3>
+</div>
+<div class="p-6 glass-morphism rounded-2xl border border-glass-border relative overflow-hidden group hover:border-primary/50 transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">terminal</span>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-md">١٢ نشط</span>
+</div>
+<p class="text-slate-500 text-sm font-medium mb-1">المشاريع التقنية</p>
+<h3 class="text-2xl font-bold text-slate-100">٣٤ <span class="text-sm font-normal text-slate-400">مشروع</span></h3>
+</div>
+<div class="p-6 glass-morphism rounded-2xl border border-glass-border relative overflow-hidden group hover:border-primary/50 transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">task_alt</span>
+<span class="text-xs font-bold text-slate-400 bg-slate-400/10 px-2 py-1 rounded-md">مستقر</span>
+</div>
+<p class="text-slate-500 text-sm font-medium mb-1">معدل الإنجاز</p>
+<h3 class="text-2xl font-bold text-slate-100">٨٨.٤٪</h3>
+</div>
+<div class="p-6 glass-morphism rounded-2xl border border-glass-border relative overflow-hidden group hover:border-primary/50 transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">group</span>
+<span class="text-xs font-bold text-amber-500 bg-amber-500/10 px-2 py-1 rounded-md">+٣ جدد</span>
+</div>
+<p class="text-slate-500 text-sm font-medium mb-1">الشركاء التقنيين</p>
+<h3 class="text-2xl font-bold text-slate-100">١٢٨ <span class="text-sm font-normal text-slate-400">عضو</span></h3>
+</div>
+</div>
+<!-- Product Ecosystem Cards -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Main Dashboard Column -->
+<div class="xl:col-span-2 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-slate-100 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">apps</span>
+                                وحدات النظام المثبتة
+                            </h3>
+<button class="text-sm font-bold text-primary hover:underline">عرض الكل</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Card 1 -->
+<div class="p-6 glass-morphism rounded-2xl border border-glass-border hover:shadow-2xl hover:shadow-primary/5 transition-all">
+<div class="flex items-start justify-between mb-6">
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl">account_tree</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase tracking-wider">iProProjects</span>
+</div>
+<h4 class="text-lg font-bold text-slate-100 mb-2">إدارة المشاريع المتقدمة</h4>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">تحكم كامل في دورة حياة المشاريع البرمجية مع تتبع آلي للوقت والموارد.</p>
+<div class="space-y-4">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-slate-400">نسبة التقدم الكلية</span>
+<span class="text-slate-100">٧٥٪</span>
+</div>
+<div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-3/4 shadow-[0_0_10px_rgba(115,17,212,0.5)]"></div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-glass-border flex justify-between items-center">
+<div class="flex -space-x-2 space-x-reverse">
+<img class="size-8 rounded-full border-2 border-background-dark" data-alt="Team member avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkix6_jR4pQGS2kEgpzDm9ZzJaJJclCi1UZdGhLwMAxxZnyNXqR7KkqfkUVApDjgCHhwhbRNspqJlufpgFm9tXvG0cwNGqxnVoJJyh25Q47T9lJRf8x7wsL2j5jaBEjokPQfXwVYczvLeJHZA7WnW5EDxPaH_sAvu3THffOoHQ7KKYBbwMoFFKv0fsSkj8rBMqB-GF9bCbucDfpW9DUV6Vy6V7pVav0FRBsKvkCn4UVf9vCuPDhCl2ajGa9ZPn3dG_RvLEydguqOI"/>
+<img class="size-8 rounded-full border-2 border-background-dark" data-alt="Team member avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_W135pUP06Rx7DZCStS_DyVcBYuOCfP2K07AhHLVUaw81eUzXwmPs6idwljJl7siVDa82Cpv224gqKMkPiTim5sDOFt8-3NaN-ZttNLtdC1l04Ax4XBPCbUO0srsgnoYsSQo0L8Mv9H060EULC7TK4qqgpjYQxVJ-xTbxwe4ixMqoY4rNEodpleD_cH1uGDSEaTpy7nFWK0mJw2IjQaqLKMS1az69VUUJVdkhzCC6SLU1FjDjFwlDTRQQUTsotfFRFVv1cjgBhpU"/>
+<img class="size-8 rounded-full border-2 border-background-dark" data-alt="Team member avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyLja_0dr9JfFO1i5lgSJtbiL8kuZCTTkrvn0aE25lPiT_dNG7lq48G8ZB9bk6MKH3-FZwToiQMuZjuwUzV75R8Pr23ReT1HAYG3-Zt4M48SVpOC6CanGEr2LQaZPf4ihWUxHtFowyWoSvgq7qVMBxJUqwU8WFGdjCzkhXFFZ9WvYj8jtbPI8hmlD02S4559qRmUx6UAiG-jrye6yLBMQUPwqpqmX1hGcmkY9yD9B4hqeh6N-Oh_u3q1SqtA2ztEg8LcdyYkSwmY4"/>
+<div class="size-8 rounded-full border-2 border-background-dark bg-slate-800 flex items-center justify-center text-[10px] text-slate-400">+٥</div>
+</div>
+<button class="text-xs font-bold text-slate-100 bg-white/5 px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">فتح الوحدة</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="p-6 glass-morphism rounded-2xl border border-glass-border hover:shadow-2xl hover:shadow-primary/5 transition-all">
+<div class="flex items-start justify-between mb-6">
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl">menu_book</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-500 text-[10px] font-bold uppercase tracking-wider">iProSmartBooks</span>
+</div>
+<h4 class="text-lg font-bold text-slate-100 mb-2">الكتب الذكية المحاسبية</h4>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">أتمتة الفواتير والتقارير المالية والضريبية بدقة متناهية متوافقة مع الأنظمة المحلية.</p>
+<div class="bg-slate-900/50 rounded-xl p-4 flex items-center justify-between border border-glass-border">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">description</span>
+<div>
+<p class="text-[10px] font-bold text-slate-500 uppercase">آخر تقرير</p>
+<p class="text-xs font-bold text-slate-100">ميزانية الربع الثالث</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-lg">download</span>
+</div>
+<div class="mt-6 pt-6 border-t border-glass-border flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 font-bold uppercase">الوضع الراهن</span>
+<span class="text-xs font-bold text-emerald-500">مكتمل التدقيق</span>
+</div>
+<button class="text-xs font-bold text-slate-100 bg-white/5 px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">فتح الوحدة</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Left Sidebar (Utilities & Stats) -->
+<aside class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-slate-100">الأدوات المساعدة</h3>
+</div>
+<!-- Currency/Market Section -->
+<div class="p-6 glass-morphism rounded-2xl border border-glass-border space-y-4">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary">currency_exchange</span>
+<span class="font-bold text-sm text-slate-100">سعر الصرف (د.إ)</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-glass-border">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-slate-100 uppercase">USD / AED</span>
+</div>
+<span class="text-sm font-bold text-slate-100">٣.٦٧</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-glass-border">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-slate-100 uppercase">EUR / AED</span>
+</div>
+<span class="text-sm font-bold text-slate-100">٣.٩٨</span>
+</div>
+</div>
+<!-- Modules List -->
+<div class="p-6 glass-morphism rounded-2xl border border-glass-border space-y-4">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary">extension</span>
+<span class="font-bold text-sm text-slate-100">خدمات نشطة</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between group cursor-pointer p-2 rounded-lg hover:bg-white/5 transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-indigo-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-indigo-500 text-lg">cloud</span>
+</div>
+<span class="text-xs font-bold text-slate-300">سحابة التخزين</span>
+</div>
+<div class="w-10 h-5 bg-primary/40 rounded-full relative p-1 cursor-pointer">
+<div class="absolute left-1 top-1 size-3 bg-white rounded-full translate-x-5 transition-transform"></div>
+</div>
+</div>
+<div class="flex items-center justify-between group cursor-pointer p-2 rounded-lg hover:bg-white/5 transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-rose-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-rose-500 text-lg">shield_person</span>
+</div>
+<span class="text-xs font-bold text-slate-300">نظام الأمان</span>
+</div>
+<div class="w-10 h-5 bg-primary/40 rounded-full relative p-1 cursor-pointer">
+<div class="absolute left-1 top-1 size-3 bg-white rounded-full translate-x-5 transition-transform"></div>
+</div>
+</div>
+<div class="flex items-center justify-between group cursor-pointer p-2 rounded-lg hover:bg-white/5 transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-500 text-lg">psychology_alt</span>
+</div>
+<span class="text-xs font-bold text-slate-300">مساعد الذكاء الاصطناعي</span>
+</div>
+<div class="w-10 h-5 bg-slate-800 rounded-full relative p-1 cursor-pointer">
+<div class="absolute left-1 top-1 size-3 bg-slate-600 rounded-full transition-transform"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Mini Banner -->
+<div class="relative rounded-2xl p-6 bg-gradient-to-br from-primary to-purple-900 overflow-hidden group border border-white/10">
+<span class="material-symbols-outlined absolute -bottom-4 -left-4 text-8xl text-white/10 rotate-12 group-hover:rotate-0 transition-transform duration-700">auto_awesome</span>
+<div class="relative z-10 space-y-2">
+<h5 class="font-bold text-white text-sm">ترقية الخطة للنظام؟</h5>
+<p class="text-white/70 text-[11px] leading-relaxed">احصل على وصول غير محدود لجميع أدوات الذكاء الاصطناعي المتقدمة.</p>
+<button class="mt-2 text-[10px] font-bold text-white bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition-colors">اكتشف المزيد</button>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+</div>
+</body></html>

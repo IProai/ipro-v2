@@ -1,0 +1,36 @@
+{
+    "name": "jad-runtime",
+    "version": "0.1.0",
+    "description": "JAD Connector — Execution Plane (Phase 04)",
+    "main": "dist/index.js",
+    "scripts": {
+        "dev": "ts-node src/index.ts",
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "test": "vitest run",
+        "db:generate": "prisma generate",
+        "db:migrate": "prisma migrate dev",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@prisma/client": "^5.11.0",
+        "@types/dotenv": "^6.1.1",
+        "dotenv": "^17.3.1",
+        "express": "^4.19.2",
+        "jsonwebtoken": "^9.0.2",
+        "uuid": "^9.0.0",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/jsonwebtoken": "^9.0.6",
+        "@types/node": "^20.11.0",
+        "@types/supertest": "^6.0.2",
+        "@types/uuid": "^9.0.8",
+        "prisma": "^5.11.0",
+        "supertest": "^7.0.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.0",
+        "vitest": "^1.4.0"
+    }
+}

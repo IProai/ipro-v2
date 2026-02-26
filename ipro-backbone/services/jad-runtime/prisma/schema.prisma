@@ -1,0 +1,131 @@
+// JAD Connector — Prisma Schema
+// Phase 04: Execution Plane — separate DB from IProCore
+// All models carry tenantId for row-level isolation.
+// tenantId is resolved from JWT claim only (no FK to IProCore Tenant table — service separation).
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/jad-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("JAD_DATABASE_URL")
+}
+
+// ─── CONNECTOR CATALOG ────────────────────────────────────────────────────────
+
+/// Global catalog entry for a connector type (e.g. "Slack", "HubSpot").
+/// Not tenant-scoped — owned by the platform.
+model ConnectorDefinition {
+  id            String   @id @default(uuid())
+  name          String   @unique
+  type          String   // webhook | oauth | api_key | internal
+  description   String   @default("")
+  configSchema  Json     @default("{}") // JSON schema for credential config
+  logoUrl       String?
+  enabled       Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  activations ConnectorActivation[]
+  webhooks    WebhookEvent[]
+
+  @@index([enabled])
+}
+
+// ─── CONNECTOR ACTIVATION ─────────────────────────────────────────────────────
+
+/// Per-tenant activation of a ConnectorDefinition.
+/// credentialRef = opaque reference string (e.g. "env:SLACK_BOT_TOKEN").
+/// NEVER returned in API responses.
+model ConnectorActivation {
+  id              String    @id @default(uuid())
+  tenantId        String    // from JWT claim — never from request body
+  connectorId     String
+  credentialRef   String    // opaque ref, never returned
+  status          String    @default("pending") // pending | active | error | revoked
+  activatedAt     DateTime?
+  revokedAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  connector   ConnectorDefinition  @relation(fields: [connectorId], references: [id])
+  healthLogs  ConnectorHealthLog[]
+  workflows   WorkflowRun[]
+
+  @@index([tenantId])
+  @@index([connectorId])
+}
+
+// ─── HEALTH LOGS ──────────────────────────────────────────────────────────────
+
+/// Append-only health check log entries per activation.
+model ConnectorHealthLog {
+  id           String   @id @default(uuid())
+  tenantId     String
+  activationId String
+  status       String   // ok | degraded | error
+  latencyMs    Int?
+  message      String?
+  checkedAt    DateTime @default(now())
+
+  activation ConnectorActivation @relation(fields: [activationId], references: [id])
+
+  @@index([tenantId])
+  @@index([activationId])
+  @@index([checkedAt])
+}
+
+// ─── WEBHOOK EVENTS ───────────────────────────────────────────────────────────
+
+/// Inbound external webhook events.
+/// Raw payload stored as received — never mutated.
+model WebhookEvent {
+  id              String    @id @default(uuid())
+  tenantId        String    // derived from connector activation's tenantId
+  connectorId     String
+  rawPayload      Json
+  signatureValid  Boolean   @default(false)
+  processedAt     DateTime?
+  createdAt       DateTime  @default(now())
+
+  connector    ConnectorDefinition @relation(fields: [connectorId], references: [id])
+  workflowRuns WorkflowRun[]
+
+  @@index([tenantId])
+  @@index([connectorId])
+  @@index([processedAt])
+}
+
+// ─── WORKFLOW RUNS ────────────────────────────────────────────────────────────
+
+/// Execution record for a connector workflow.
+/// Status machine: pending → running → success | failed
+/// logs is an append-only JSON array of {ts, level, message} entries.
+/// Phase 04B: governance fields added for full audit trail.
+model WorkflowRun {
+  id                 String    @id @default(uuid())
+  tenantId           String
+  activationId       String
+  webhookEventId     String?
+  status             String    @default("pending") // pending | running | success | failed
+  retryCount         Int       @default(0)
+  logs               Json      @default("[]")
+  startedAt          DateTime?
+  completedAt        DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  // Phase 04B governance fields
+  initiatingUserId   String?   // null for system/webhook triggers
+  triggerSource      String    @default("system") // manual | webhook | system | ai
+  approvedByUserId   String?   // reserved for confirmation gate — always null in Phase 04
+  requestId          String?   // propagated X-Request-ID from originating call
+
+  activation   ConnectorActivation @relation(fields: [activationId], references: [id])
+  webhookEvent WebhookEvent?       @relation(fields: [webhookEventId], references: [id])
+
+  @@index([tenantId])
+  @@index([status])
+  @@index([activationId])
+}

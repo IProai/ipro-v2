@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mobile Audit &amp; Compliance Log | Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#0a0610",
+                        "severity-critical": "#FF3D00",
+                        "severity-sensitive": "#FFB800",
+                        "severity-standard": "#00FF88",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(25, 16, 34, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(115, 17, 212, 0.2);
+        }
+        .neon-border-primary {
+            box-shadow: 0 0 10px rgba(115, 17, 212, 0.3), inset 0 0 2px rgba(115, 17, 212, 0.5);
+        }
+        .glow-red { box-shadow: 0 0 15px rgba(255, 61, 0, 0.4); }
+        .glow-amber { box-shadow: 0 0 15px rgba(255, 184, 0, 0.4); }
+        .glow-green { box-shadow: 0 0 15px rgba(0, 255, 136, 0.4); }
+        
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0610;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #362348;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen antialiased selection:bg-primary/30">
+<div class="relative flex flex-col min-h-screen w-full max-w-[480px] mx-auto bg-background-dark border-x border-primary/10 shadow-2xl overflow-x-hidden">
+<!-- Header Section -->
+<header class="sticky top-0 z-50 glass-panel px-4 py-4 flex items-center justify-between border-b border-primary/20">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center neon-border-primary">
+<span class="material-symbols-outlined text-white text-xl">security</span>
+</div>
+<div>
+<h1 class="text-white text-lg font-bold leading-none tracking-tight uppercase italic">IPR-O</h1>
+<p class="text-[10px] text-primary font-bold tracking-[0.2em] uppercase opacity-80">Audit Command</p>
+</div>
+</div>
+<button class="flex items-center gap-2 bg-primary/20 hover:bg-primary/30 border border-primary/40 rounded-full px-4 py-1.5 transition-all">
+<span class="material-symbols-outlined text-sm text-primary">filter_list</span>
+<span class="text-xs font-bold text-white uppercase tracking-wider">Filter</span>
+</button>
+</header>
+<!-- Quick Stats / Status Bar -->
+<div class="px-4 py-4 grid grid-cols-3 gap-3">
+<div class="flex flex-col gap-1 p-3 rounded-xl bg-primary/5 border border-primary/10">
+<span class="text-[10px] uppercase tracking-widest text-slate-400">Events</span>
+<span class="text-lg font-bold text-white">1.2k</span>
+</div>
+<div class="flex flex-col gap-1 p-3 rounded-xl bg-severity-critical/5 border border-severity-critical/20">
+<span class="text-[10px] uppercase tracking-widest text-severity-critical opacity-80">Critical</span>
+<span class="text-lg font-bold text-severity-critical">14</span>
+</div>
+<div class="flex flex-col gap-1 p-3 rounded-xl bg-severity-standard/5 border border-severity-standard/20">
+<span class="text-[10px] uppercase tracking-widest text-severity-standard opacity-80">Uptime</span>
+<span class="text-lg font-bold text-severity-standard">99.9%</span>
+</div>
+</div>
+<!-- Filter Pills Scrollable -->
+<div class="flex gap-2 overflow-x-auto px-4 pb-4 no-scrollbar">
+<span class="flex-none bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase flex items-center gap-1">
+                Tenant: All <span class="material-symbols-outlined text-[14px]">close</span>
+</span>
+<span class="flex-none bg-slate-800 text-slate-300 text-[10px] font-bold px-3 py-1 rounded-full uppercase flex items-center gap-1 border border-slate-700">
+                Engine: Active
+            </span>
+<span class="flex-none bg-slate-800 text-slate-300 text-[10px] font-bold px-3 py-1 rounded-full uppercase flex items-center gap-1 border border-slate-700">
+                Type: Root
+            </span>
+<span class="flex-none bg-slate-800 text-slate-300 text-[10px] font-bold px-3 py-1 rounded-full uppercase flex items-center gap-1 border border-slate-700">
+                Region: EU
+            </span>
+</div>
+<!-- Main Audit Feed -->
+<main class="flex-1 px-4 space-y-4 pb-24">
+<!-- Audit Card: Critical -->
+<div class="relative overflow-hidden rounded-xl border border-severity-critical/30 bg-background-dark/80 group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-severity-critical glow-red"></div>
+<div class="p-4 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-black text-severity-critical uppercase tracking-widest mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] fill-1">report</span>
+                                Critical Event
+                            </span>
+<h3 class="text-white text-base font-bold tracking-tight leading-tight">Emergency Break-Glass Access</h3>
+</div>
+<span class="text-[10px] font-medium text-slate-500 bg-slate-800/50 px-2 py-0.5 rounded">2m ago</span>
+</div>
+<div class="grid grid-cols-2 gap-4 text-xs">
+<div class="flex flex-col gap-0.5">
+<span class="text-slate-500 uppercase tracking-tighter text-[9px]">Initiator</span>
+<span class="text-slate-200 font-medium truncate">admin_root_01</span>
+</div>
+<div class="flex flex-col gap-0.5 text-right">
+<span class="text-slate-500 uppercase tracking-tighter text-[9px]">Target</span>
+<span class="text-slate-200 font-medium truncate">Vault-Primary</span>
+</div>
+</div>
+<div class="mt-2 pt-3 border-t border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-cover bg-center border border-primary/20" data-alt="Avatar of user admin root zero one" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBJMrEHBWdebITiIo_KIx7iwTEENOtasfAFTHzk21t15s7ErIamRRoJsI9K9io2UZyoW-QM4hBqEgb_b2H4Bxf5WexpJF3yut0DlD7WzIwqNhe9b3DBvGZpnfKSMiLNqCrPWPKAFolkW8DrRoZohwLXrF35NDuQvfgOvqeKKZ6QVKodTneh_Qr0p9nt8QPBoFwbGUxQLCtBeJXXETjHWab9Mci3eGz3CW_-aSaSV1dpWP61kfwwwC9qP-5CD7KoCYo0uRcGYstzJjU')"></div>
+<span class="text-[10px] text-slate-400 font-mono tracking-tighter">SID: 8821-X99</span>
+</div>
+<button class="flex items-center gap-1 text-primary text-[11px] font-bold uppercase tracking-wider group-hover:underline">
+                            Details
+                            <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Audit Card: Sensitive -->
+<div class="relative overflow-hidden rounded-xl border border-severity-sensitive/30 bg-background-dark/80 group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-severity-sensitive glow-amber"></div>
+<div class="p-4 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-black text-severity-sensitive uppercase tracking-widest mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] fill-1">shield</span>
+                                Sensitive Action
+                            </span>
+<h3 class="text-white text-base font-bold tracking-tight leading-tight">IAM Policy Override Applied</h3>
+</div>
+<span class="text-[10px] font-medium text-slate-500 bg-slate-800/50 px-2 py-0.5 rounded">14m ago</span>
+</div>
+<div class="grid grid-cols-2 gap-4 text-xs">
+<div class="flex flex-col gap-0.5">
+<span class="text-slate-500 uppercase tracking-tighter text-[9px]">Initiator</span>
+<span class="text-slate-200 font-medium truncate">sec_ops_manager</span>
+</div>
+<div class="flex flex-col gap-0.5 text-right">
+<span class="text-slate-500 uppercase tracking-tighter text-[9px]">Target</span>
+<span class="text-slate-200 font-medium truncate">Tenant-A-Prod</span>
+</div>
+</div>
+<div class="mt-2 pt-3 border-t border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-cover bg-center border border-primary/20" data-alt="Avatar of security operations manager" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQRc3_X1MqbcrqV3s4dJVuNax3bPrgl_3uqvuTfKOPctY3S9Rx0vlOVJ1uy2IzSVM93o0l48FOEVgh7lljda0nRTv83AN30IEEArc7c-AGcyoYGi4myt7Q7D1rtG0EFlswt8FXVzvayJIVo9uS7Bpi6Cs1YaSi6nvTv-FJlKpirxLWzJuUNsoDSbq6RswO_wjtcTNvVsej8zefZ0vtYzh1vSqqmcndR-K3FDt7TptU7RRKYniPyfV9vbmJb7QAbaC6mvNOfeISaRs')"></div>
+<span class="text-[10px] text-slate-400 font-mono tracking-tighter">SID: 4410-L02</span>
+</div>
+<button class="flex items-center gap-1 text-primary text-[11px] font-bold uppercase tracking-wider">
+                            Details
+                            <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Audit Card: Standard -->
+<div class="relative overflow-hidden rounded-xl border border-slate-800 bg-background-dark/80 group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-severity-standard glow-green"></div>
+<div class="p-4 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-black text-severity-standard uppercase tracking-widest mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] fill-1">check_circle</span>
+                                Standard Log
+                            </span>
+<h3 class="text-white text-base font-bold tracking-tight leading-tight">Routine Key Rotation Success</h3>
+</div>
+<span class="text-[10px] font-medium text-slate-500 bg-slate-800/50 px-2 py-0.5 rounded">1h ago</span>
+</div>
+<div class="grid grid-cols-2 gap-4 text-xs">
+<div class="flex flex-col gap-0.5">
+<span class="text-slate-500 uppercase tracking-tighter text-[9px]">Process</span>
+<span class="text-slate-200 font-medium truncate">System-Automation-Engine</span>
+</div>
+<div class="flex flex-col gap-0.5 text-right">
+<span class="text-slate-500 uppercase tracking-tighter text-[9px]">Component</span>
+<span class="text-slate-200 font-medium truncate">KMS-Service</span>
+</div>
+</div>
+<!-- Metadata Expansion (Example State) -->
+<div class="mt-2 pt-3 border-t border-slate-800 space-y-2">
+<div class="bg-primary/5 rounded p-2 font-mono text-[9px] text-primary space-y-1">
+<div class="flex justify-between"><span>IP_ADDR:</span><span>192.168.1.104</span></div>
+<div class="flex justify-between"><span>SESSION:</span><span>AUTH_00921-X</span></div>
+<div class="flex justify-between"><span>REGION:</span><span>US-EAST-1</span></div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm">robot</span>
+<span class="text-[10px] text-slate-400 font-mono tracking-tighter">AUTO-TASK-9</span>
+</div>
+<button class="flex items-center gap-1 text-primary text-[11px] font-bold uppercase tracking-wider">
+                                Collapse
+                                <span class="material-symbols-outlined text-sm rotate-180">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Audit Card: Standard #2 -->
+<div class="relative overflow-hidden rounded-xl border border-slate-800 bg-background-dark/80 group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-severity-standard"></div>
+<div class="p-4 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-[10px] font-black text-severity-standard uppercase tracking-widest mb-1 flex items-center gap-1 opacity-70">
+<span class="material-symbols-outlined text-[12px]">info</span>
+                                Standard Log
+                            </span>
+<h3 class="text-white text-base font-bold tracking-tight leading-tight">Dashboard Settings Modified</h3>
+</div>
+<span class="text-[10px] font-medium text-slate-500 bg-slate-800/50 px-2 py-0.5 rounded">3h ago</span>
+</div>
+<div class="grid grid-cols-2 gap-4 text-xs">
+<div class="flex flex-col gap-0.5">
+<span class="text-slate-500 uppercase tracking-tighter text-[9px]">Initiator</span>
+<span class="text-slate-200 font-medium truncate">ui_analyst_04</span>
+</div>
+<div class="flex flex-col gap-0.5 text-right">
+<span class="text-slate-500 uppercase tracking-tighter text-[9px]">Scope</span>
+<span class="text-slate-200 font-medium truncate">Personalization</span>
+</div>
+</div>
+<div class="mt-2 pt-3 border-t border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-cover bg-center border border-primary/20" data-alt="Avatar of UI Analyst Four" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAs23wsdzOFo8ta-mzTZzbLQSRp4pngC7mZHGOL13-_a2OTSaKRGtU39GTiegXnmnF3PuwJoujdQQRC98QBYl5GmKvfc2VI0qdtYASCJg4pdRoEVumqyZpoANOt6YgELw30Cv-FUFJs94IHTSGFnzTye1yL5bCazv17VGjuKA9CnN98f5l3OjhkmCBdFgdY-T9VLWbZlHHB-uXw4k1NtFvREoz8XNXsTdZKvM10_ou_ZuKdCV6SooCQht0_lRqFPdEVdXDWr8dCy-4')"></div>
+<span class="text-[10px] text-slate-400 font-mono tracking-tighter">SID: 1092-B88</span>
+</div>
+<button class="flex items-center gap-1 text-primary text-[11px] font-bold uppercase tracking-wider">
+                            Details
+                            <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Glass Bottom Bar Navigation -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] glass-panel border-t border-primary/30 px-6 py-3 flex justify-between items-center z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Dash</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-white">
+<div class="relative">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="absolute -top-1 -right-1 size-2 bg-severity-critical rounded-full glow-red"></span>
+</div>
+<span class="text-[9px] font-bold uppercase tracking-widest">Audit</span>
+</button>
+<button class="size-12 rounded-full bg-primary flex items-center justify-center -translate-y-6 shadow-xl neon-border-primary border-4 border-background-dark">
+<span class="material-symbols-outlined text-white text-2xl">search</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Stats</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[9px] font-bold uppercase tracking-widest">Config</span>
+</button>
+</nav>
+<!-- Visual Background Accents -->
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+<div class="absolute top-[-10%] right-[-20%] size-[300px] bg-primary/10 blur-[100px] rounded-full"></div>
+<div class="absolute bottom-[10%] left-[-20%] size-[300px] bg-primary/10 blur-[100px] rounded-full"></div>
+<div class="absolute top-[20%] left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-primary/20 via-transparent to-transparent"></div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>إنتلكت برو أكتيف - المركز العربي الموحد</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #7311d4;
+            --primary-light: #8e36e9;
+            --primary-dark: #5a0da6;
+            --accent: #00f2ff;
+            --bg-light: #f8fafc;
+            --bg-dark: #0f172a;
+            --card-light: rgba(255, 255, 255, 0.8);
+            --card-dark: rgba(30, 41, 59, 0.7);
+            --border-light: rgba(226, 232, 240, 0.8);
+            --border-dark: rgba(255, 255, 255, 0.1);
+        }
+        @layer base {
+            body {
+                @apply font-display antialiased transition-colors duration-300;
+            }
+        }
+        .glass-panel {
+            @apply backdrop-blur-xl border transition-all duration-300;
+            background: var(--card-light);
+            border-color: var(--border-light);
+        }
+        .dark .glass-panel {
+            background: var(--card-dark);
+            border-color: var(--border-dark);
+        }
+        .sidebar-brand-gradient {
+            background: linear-gradient(135deg, #7311d4 0%, #4f0ca1 100%);
+        }
+        .ipro-gradient-text {
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-[#7311d4] to-[#c026d3];
+        }
+        .luxury-shadow {
+            box-shadow: 0 10px 40px -10px rgba(115, 17, 212, 0.1);
+        }
+        .dark .luxury-shadow {
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            @apply bg-transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7311d4",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["IBM Plex Sans Arabic", "Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen selection:bg-primary/20">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-72 h-full flex flex-col border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 z-50 transition-all">
+<div class="p-8 flex items-center gap-4">
+<div class="size-11 sidebar-brand-gradient rounded-xl flex items-center justify-center shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined text-white text-2xl">computer</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">إنتلكت برو</h1>
+<span class="text-[10px] text-primary dark:text-primary-light font-bold uppercase tracking-[0.2em]">DUBAI COMMAND</span>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1.5 overflow-y-auto">
+<div class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase px-4 pb-3 tracking-widest">القائمة الرئيسية</div>
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-primary/10 text-primary border border-primary/20 font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[14px]">نظرة عامة</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">insights</span>
+<span class="text-[14px]">مركز البيانات الآني</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">account_tree</span>
+<span class="text-[14px]">المشاريع الفاخرة</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">account_balance</span>
+<span class="text-[14px]">الخزينة الذكية</span>
+</a>
+<div class="pt-8 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase px-4 pb-3 tracking-widest">المنظومة الرقمية</div>
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">hub</span>
+<span class="text-[14px]">مراكز الربط</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">neurology</span>
+<span class="text-[14px]">الذكاء الاصطناعي</span>
+</a>
+</nav>
+<div class="p-6 border-t border-slate-100 dark:border-slate-800">
+<button class="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-primary text-white rounded-xl font-bold text-sm shadow-lg shadow-primary/25 hover:bg-primary-dark transition-all">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+<span>توسيع النظام</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto bg-slate-50 dark:bg-slate-950/50">
+<header class="h-20 flex items-center justify-between px-8 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-40">
+<div class="flex items-center gap-6 flex-1 max-w-2xl">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-2xl pr-12 pl-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 text-slate-900 dark:text-slate-100 placeholder:text-slate-400" placeholder="ابحث في سجلات النظام..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="size-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-primary transition-all" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined dark:hidden">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:block">light_mode</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-primary transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-rose-500 rounded-full border-2 border-white dark:border-slate-800"></span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-700 mx-2"></div>
+<div class="flex items-center gap-4 cursor-pointer group p-1.5 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+<div class="flex flex-col text-right">
+<span class="text-sm font-bold text-slate-900 dark:text-white leading-none mb-1">أومها د.</span>
+<span class="text-[10px] text-primary font-bold uppercase tracking-tighter">المدير العام</span>
+</div>
+<div class="size-10 rounded-xl bg-primary/10 border border-primary/20 overflow-hidden shadow-inner">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS8QMv-Z6lcjgShgGo7xnjagfvLgiGWtUBch9ahX-iii04cn61XZmWrNMAnGgowNheOEuyRZtpHH9xflBR07wv2XQ9mfS4zUmW0CFVyiDS27j9s9FrQkFe16eYSgypZOikeYV7_UQtSY_8J6cazZhipcp5sjkUJCarAQVhD-JjW_JWx8VsV6pBwbghD5poaa8OF4j-ZnBrhQGG07b1sX-yRx3PiLaPse6Mt_mWc8r11xwDi4lDwH3G1GQ8RXSNPzxz4MjYtz9y2l4"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-10 space-y-10 max-w-[1600px] mx-auto w-full">
+<section class="relative p-10 rounded-[2.5rem] overflow-hidden luxury-shadow border border-slate-200/50 dark:border-white/5 bg-white dark:bg-slate-900">
+<div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="space-y-4 text-right">
+<div class="flex items-center gap-3 text-primary font-bold text-sm bg-primary/5 w-fit px-4 py-1.5 rounded-full mr-auto md:mr-0">
+<span class="size-2 rounded-full bg-primary animate-ping"></span>
+                            نظام متصل وآمن
+                        </div>
+<h2 class="text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">صباح الخير، <span class="ipro-gradient-text">أومها</span></h2>
+<p class="text-slate-500 dark:text-slate-400 max-w-lg text-lg leading-relaxed">أهلاً بك في مركز قيادة Intellect ProActive. جميع الأنظمة تعمل بكفاءة قصوى بنسبة 99.9%.</p>
+</div>
+<div class="flex gap-5">
+<div class="px-8 py-5 glass-panel rounded-3xl text-center min-w-[160px] shadow-sm">
+<span class="block text-[11px] text-slate-400 uppercase font-bold tracking-[0.2em] mb-2">توقيت دبي</span>
+<span class="text-3xl font-bold text-slate-900 dark:text-white tracking-tighter">09:42 <span class="text-lg font-medium">صباحاً</span></span>
+</div>
+<div class="px-8 py-5 glass-panel rounded-3xl text-center min-w-[160px] shadow-sm">
+<span class="block text-[11px] text-slate-400 uppercase font-bold tracking-[0.2em] mb-2">حالة النظام</span>
+<span class="text-3xl font-bold text-emerald-500">نشط</span>
+</div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 luxury-shadow group hover:-translate-y-1 transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="size-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-100 dark:border-emerald-500/20">+١٢.٥٪</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold mb-2">إجمالي التدفق المالي</p>
+<h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">٤٥٠,٠٠٠ <span class="text-sm font-medium text-slate-400 mr-1">د.إ</span></h3>
+</div>
+<div class="p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 luxury-shadow group hover:-translate-y-1 transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="size-12 rounded-2xl bg-indigo-100 dark:bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+<span class="material-symbols-outlined text-3xl">developer_mode</span>
+</div>
+<span class="text-[11px] font-bold text-primary bg-primary/5 px-3 py-1.5 rounded-full border border-primary/10">١٢ نشط</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold mb-2">مشاريع تقنية كبرى</p>
+<h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">٣٤ <span class="text-sm font-medium text-slate-400 mr-1">وحدة</span></h3>
+</div>
+<div class="p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 luxury-shadow group hover:-translate-y-1 transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="size-12 rounded-2xl bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-400">
+<span class="material-symbols-outlined text-3xl">bolt</span>
+</div>
+<span class="text-[11px] font-bold text-slate-500 bg-slate-50 dark:bg-slate-800 px-3 py-1.5 rounded-full">مستقر</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold mb-2">أداء المعالجة</p>
+<h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">٩٨.٤٪</h3>
+</div>
+<div class="p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 luxury-shadow group hover:-translate-y-1 transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="size-12 rounded-2xl bg-rose-100 dark:bg-rose-500/10 flex items-center justify-center text-rose-600 dark:text-rose-400">
+<span class="material-symbols-outlined text-3xl">stars</span>
+</div>
+<span class="text-[11px] font-bold text-rose-600 bg-rose-50 dark:bg-rose-500/10 px-3 py-1.5 rounded-full">+٣ جدد</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold mb-2">الشركاء الاستراتيجيين</p>
+<h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">١٢٨ <span class="text-sm font-medium text-slate-400 mr-1">عضو</span></h3>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-10">
+<div class="xl:col-span-2 space-y-8">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-2 bg-primary rounded-full"></div>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">وحدات المنظومة المثبتة</h3>
+</div>
+<button class="text-sm font-bold text-primary hover:text-primary-dark transition-colors flex items-center gap-1">
+                            عرض جميع الوحدات
+                            <span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 luxury-shadow overflow-hidden group hover:border-primary/30 transition-all">
+<div class="p-8">
+<div class="flex items-start justify-between mb-8">
+<div class="size-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">inventory_2</span>
+</div>
+<span class="px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase tracking-widest border border-slate-200 dark:border-slate-700">iProProjects</span>
+</div>
+<h4 class="text-xl font-bold text-slate-900 dark:text-white mb-3">إدارة المشاريع النخبوية</h4>
+<p class="text-slate-500 dark:text-slate-400 text-[15px] leading-relaxed mb-8">نظام تتبع ذكي يجمع بين بساطة الاستخدام وقوة التحليل التقني لفرق العمل الكبرى.</p>
+<div class="space-y-4">
+<div class="flex justify-between text-xs font-bold">
+<span class="text-slate-400">معدل الإنجاز السنوي</span>
+<span class="text-primary">٨٥٪</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[85%] shadow-[0_0_15px_rgba(115,17,212,0.3)]"></div>
+</div>
+</div>
+</div>
+<div class="px-8 py-5 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<div class="flex -space-x-3 space-x-reverse">
+<img alt="Member" class="size-9 rounded-full border-2 border-white dark:border-slate-900 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkix6_jR4pQGS2kEgpzDm9ZzJaJJclCi1UZdGhLwMAxxZnyNXqR7KkqfkUVApDjgCHhwhbRNspqJlufpgFm9tXvG0cwNGqxnVoJJyh25Q47T9lJRf8x7wsL2j5jaBEjokPQfXwVYczvLeJHZA7WnW5EDxPaH_sAvu3THffOoHQ7KKYBbwMoFFKv0fsSkj8rBMqB-GF9bCbucDfpW9DUV6Vy6V7pVav0FRBsKvkCn4UVf9vCuPDhCl2ajGa9ZPn3dG_RvLEydguqOI"/>
+<img alt="Member" class="size-9 rounded-full border-2 border-white dark:border-slate-900 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_W135pUP06Rx7DZCStS_DyVcBYuOCfP2K07AhHLVUaw81eUzXwmPs6idwljJl7siVDa82Cpv224gqKMkPiTim5sDOFt8-3NaN-ZttNLtdC1l04Ax4XBPCbUO0srsgnoYsSQo0L8Mv9H060EULC7TK4qqgpjYQxVJ-xTbxwe4ixMqoY4rNEodpleD_cH1uGDSEaTpy7nFWK0mJw2IjQaqLKMS1az69VUUJVdkhzCC6SLU1FjDjFwlDTRQQUTsotfFRFVv1cjgBhpU"/>
+<img alt="Member" class="size-9 rounded-full border-2 border-white dark:border-slate-900 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyLja_0dr9JfFO1i5lgSJtbiL8kuZCTTkrvn0aE25lPiT_dNG7lq48G8ZB9bk6MKH3-FZwToiQMuZjuwUzV75R8Pr23ReT1HAYG3-Zt4M48SVpOC6CanGEr2LQaZPf4ihWUxHtFowyWoSvgq7qVMBxJUqwU8WFGdjCzkhXFFZ9WvYj8jtbPI8hmlD02S4559qRmUx6UAiG-jrye6yLBMQUPwqpqmX1hGcmkY9yD9B4hqeh6N-Oh_u3q1SqtA2ztEg8LcdyYkSwmY4"/>
+<div class="size-9 rounded-full border-2 border-white dark:border-slate-900 bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold text-slate-500">+٤</div>
+</div>
+<button class="px-5 py-2 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">إدارة الوحدة</button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 luxury-shadow overflow-hidden group hover:border-primary/30 transition-all">
+<div class="p-8">
+<div class="flex items-start justify-between mb-8">
+<div class="size-14 rounded-2xl bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">auto_stories</span>
+</div>
+<span class="px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase tracking-widest border border-slate-200 dark:border-slate-700">iProSmartBooks</span>
+</div>
+<h4 class="text-xl font-bold text-slate-900 dark:text-white mb-3">الدفاتر المالية الذكية</h4>
+<p class="text-slate-500 dark:text-slate-400 text-[15px] leading-relaxed mb-8">أتمتة محاسبية متكاملة متوافقة مع الأنظمة الضريبية المحلية والخليجية بدقة مطلقة.</p>
+<div class="bg-slate-50 dark:bg-slate-800/80 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-amber-500">verified</span>
+<div>
+<p class="text-[10px] font-bold text-slate-400 uppercase">الحالة المالية</p>
+<p class="text-[13px] font-bold text-slate-900 dark:text-white">تقرير الربع الحالي جاهز</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors">download</span>
+</div>
+</div>
+<div class="px-8 py-5 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-400 font-bold uppercase">المزامنة الأخيرة</span>
+<span class="text-xs font-bold text-emerald-500">منذ دقيقتين</span>
+</div>
+<button class="px-5 py-2 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">فتح المركز المالي</button>
+</div>
+</div>
+</div>
+</div>
+<aside class="space-y-8">
+<div class="flex items-center gap-3">
+<div class="size-2 bg-primary rounded-full"></div>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">الأدوات المساندة</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 luxury-shadow p-8 space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">currency_exchange</span>
+<span class="font-bold text-[15px] text-slate-900 dark:text-white">سعر الصرف (د.إ)</span>
+</div>
+<span class="text-[10px] font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded uppercase">آني</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-primary/20 transition-all cursor-pointer">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-[10px] text-emerald-600 font-bold">$</span></div>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase">USD / AED</span>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">٣.٦٧٢٥</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-primary/20 transition-all cursor-pointer">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-[10px] text-blue-600 font-bold">€</span></div>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase">EUR / AED</span>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">٣.٩٨٤١</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 luxury-shadow p-8 space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">settings_suggest</span>
+<span class="font-bold text-[15px] text-slate-900 dark:text-white">إدارة الخدمات السحابية</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-2">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">cloud_done</span>
+</div>
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">التخزين الآمن</span>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative p-1 cursor-pointer">
+<div class="absolute left-1 top-1 size-4 bg-white rounded-full translate-x-6 transition-transform"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-2">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-xl">security</span>
+</div>
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">فحص الثغرات</span>
+</div>
+<div class="w-12 h-6 bg-slate-200 dark:bg-slate-700 rounded-full relative p-1 cursor-pointer">
+<div class="absolute left-1 top-1 size-4 bg-white rounded-full transition-transform"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-2">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">psychology</span>
+</div>
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">مساعد IPR-O</span>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative p-1 cursor-pointer">
+<div class="absolute left-1 top-1 size-4 bg-white rounded-full translate-x-6 transition-transform"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="relative rounded-3xl p-8 sidebar-brand-gradient overflow-hidden group luxury-shadow">
+<span class="material-symbols-outlined absolute -bottom-8 -left-8 text-9xl text-white/10 rotate-12 group-hover:rotate-0 transition-transform duration-700">workspace_premium</span>
+<div class="relative z-10 space-y-4">
+<h5 class="font-bold text-white text-lg">ترقية الحزمة المؤسسية؟</h5>
+<p class="text-white/80 text-xs leading-relaxed">احصل على وصول حصري لنماذج الذكاء الاصطناعي المخصصة للتحليل المالي العميق.</p>
+<button class="w-full mt-2 text-[12px] font-bold text-primary bg-white hover:bg-slate-50 py-3 rounded-xl transition-all shadow-lg">تواصل مع مستشارك التقني</button>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

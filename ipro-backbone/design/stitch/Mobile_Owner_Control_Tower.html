@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mobile Owner Control Tower | Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#050505",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass {
+            background: rgba(115, 17, 212, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(115, 17, 212, 0.15);
+        }
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(115, 17, 212, 0.4);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<!-- Main Container (Mobile Responsive Design on Desktop) -->
+<div class="relative mx-auto min-h-screen max-w-md bg-background-light dark:bg-background-dark flex flex-col pb-24 border-x border-primary/10">
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center gap-2">
+<div class="size-8 bg-primary rounded flex items-center justify-center text-white neon-glow">
+<span class="material-symbols-outlined text-lg">grid_view</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-primary">IPR-O</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="relative">
+<div class="size-9 rounded-full ring-2 ring-primary p-0.5">
+<img alt="User profile avatar with premium status" class="rounded-full w-full h-full object-cover" data-alt="Professional portrait of a male executive" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDINWoqxcQ8WnkzsV_W3HWqXywyJzP2NWY9Ac38ZRGMT3wzDzYEKPLfUC99ZLxMTrSlZSDT-lgpB4HebAf3v4mO9ssLIjgLtqYmGlFLMu1LZCZS_fqyv2fmliDj5fhPSyrWHOMc_kOfrrGXP1xSRd4q6f4B337qdKs1-vtqYi1ZPeaQXc7WLK9-iPQMv2brIhqHvuaC4Z8RjCL0X5tKqLjci5QaVRN8TCL5Ec0k6pRHsxxhdrzrhmfXc-QZHj2r4-_cCuxx4hN79Qc"/>
+</div>
+<span class="absolute bottom-0 right-0 size-2.5 bg-green-500 rounded-full border-2 border-background-dark"></span>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-6 pt-6 space-y-8">
+<!-- Dashboard Title -->
+<section>
+<p class="text-primary text-xs font-semibold uppercase tracking-widest mb-1">Owner Dashboard</p>
+<h2 class="text-3xl font-bold">Control Tower</h2>
+</section>
+<!-- KPI Cards Vertical Scroll -->
+<section class="space-y-4">
+<!-- KPI Card: Tenants -->
+<div class="glass rounded-xl p-5 flex items-center justify-between relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 blur-3xl -mr-8 -mt-8"></div>
+<div class="space-y-1">
+<p class="text-slate-400 text-sm">Active Tenants</p>
+<h3 class="text-4xl font-bold">1,284</h3>
+<p class="text-green-400 text-xs flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-xs">trending_up</span> +12% this month
+                        </p>
+</div>
+<div class="h-16 w-32 relative">
+<!-- Abstract Neon Sparkline Representation -->
+<div class="absolute inset-0 flex items-end justify-between gap-1 px-1">
+<div class="w-1 bg-primary/30 h-1/2 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-2/3 rounded-full"></div>
+<div class="w-1 bg-primary/60 h-1/2 rounded-full"></div>
+<div class="w-1 bg-primary/80 h-3/4 rounded-full"></div>
+<div class="w-1 bg-primary h-full rounded-full neon-glow"></div>
+</div>
+</div>
+</div>
+<!-- KPI Card: Engine Health -->
+<div class="glass rounded-xl p-5 flex items-center justify-between relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 blur-3xl -mr-8 -mt-8"></div>
+<div class="space-y-1">
+<p class="text-slate-400 text-sm">Engine Health</p>
+<h3 class="text-4xl font-bold text-slate-100">98.2<span class="text-xl font-medium text-slate-400">%</span></h3>
+<p class="text-primary text-xs font-medium">Optimal Performance</p>
+</div>
+<div class="size-20 relative flex items-center justify-center">
+<!-- Neon Ring Progress -->
+<svg class="size-full -rotate-90">
+<circle class="text-primary/10" cx="40" cy="40" fill="transparent" r="34" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-primary neon-glow" cx="40" cy="40" fill="transparent" r="34" stroke="currentColor" stroke-dasharray="213.6" stroke-dashoffset="40" stroke-width="6"></circle>
+</svg>
+<span class="absolute material-symbols-outlined text-primary text-2xl">bolt</span>
+</div>
+</div>
+</section>
+<!-- Quick Actions Horizontal Carousel -->
+<section class="space-y-4">
+<h4 class="text-lg font-bold px-1">Quick Actions</h4>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2 -mx-1 px-1">
+<!-- Action Item 1 -->
+<button class="flex-shrink-0 w-32 h-32 glass rounded-xl flex flex-col items-center justify-center gap-3 border-primary/20 hover:border-primary/50 transition-all group">
+<div class="size-12 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<span class="text-xs font-semibold text-center leading-tight">Create<br/>Tenant</span>
+</button>
+<!-- Action Item 2 -->
+<button class="flex-shrink-0 w-32 h-32 glass rounded-xl flex flex-col items-center justify-center gap-3 border-primary/20 hover:border-primary/50 transition-all group">
+<div class="size-12 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">settings_input_component</span>
+</div>
+<span class="text-xs font-semibold text-center leading-tight">Enable<br/>Engine</span>
+</button>
+<!-- Action Item 3 -->
+<button class="flex-shrink-0 w-32 h-32 glass rounded-xl flex flex-col items-center justify-center gap-3 border-primary/20 hover:border-primary/50 transition-all group">
+<div class="size-12 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">sync</span>
+</div>
+<span class="text-xs font-semibold text-center leading-tight">Global<br/>Sync</span>
+</button>
+<!-- Action Item 4 -->
+<button class="flex-shrink-0 w-32 h-32 glass rounded-xl flex flex-col items-center justify-center gap-3 border-primary/20 hover:border-primary/50 transition-all group">
+<div class="size-12 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">security</span>
+</div>
+<span class="text-xs font-semibold text-center leading-tight">Security<br/>Audit</span>
+</button>
+</div>
+</section>
+<!-- Recent Activity Feed -->
+<section class="space-y-4">
+<div class="flex items-center justify-between px-1">
+<h4 class="text-lg font-bold">Recent Activity</h4>
+<button class="text-xs font-bold text-primary uppercase tracking-widest">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Activity Item 1 -->
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+<div class="relative mt-1">
+<div class="size-3 rounded-full bg-primary neon-glow"></div>
+<div class="absolute inset-0 size-3 rounded-full animate-ping bg-primary opacity-40"></div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex justify-between items-center">
+<p class="text-sm font-semibold">New Engine Deployment</p>
+<span class="text-[10px] text-slate-500 font-medium">2m ago</span>
+</div>
+<p class="text-xs text-slate-400">Region: Middle East - Dubai Hub Cluster Alpha</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+<div class="mt-1">
+<div class="size-3 rounded-full bg-green-500"></div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex justify-between items-center">
+<p class="text-sm font-semibold">Tenant Verification</p>
+<span class="text-[10px] text-slate-500 font-medium">14m ago</span>
+</div>
+<p class="text-xs text-slate-400">Skyline Global Corp has been successfully verified.</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+<div class="mt-1">
+<div class="size-3 rounded-full bg-amber-500"></div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex justify-between items-center">
+<p class="text-sm font-semibold">System Update</p>
+<span class="text-[10px] text-slate-500 font-medium">1h ago</span>
+</div>
+<p class="text-xs text-slate-400">Security patches applied to edge nodes in Zone 4.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Dock -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-6 py-4 bg-background-dark/90 backdrop-blur-xl border-t border-primary/20 flex justify-between items-center z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined fill-1">home</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Data</span>
+</button>
+<button class="flex flex-col items-center -mt-8">
+<div class="size-14 rounded-full bg-primary flex items-center justify-center text-white neon-glow border-4 border-background-dark shadow-2xl">
+<span class="material-symbols-outlined text-3xl">add</span>
+</div>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">hub</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Nodes</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Config</span>
+</button>
+</nav>
+<!-- Decorative Glow Background Elements -->
+<div class="fixed top-0 left-0 w-full h-screen pointer-events-none overflow-hidden z-0">
+<div class="absolute -top-20 -left-20 size-80 bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-40 -right-20 size-80 bg-primary/5 rounded-full blur-[100px]"></div>
+</div>
+</div>
+</body></html>

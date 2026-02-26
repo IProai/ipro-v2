@@ -1,0 +1,28 @@
+# Credentials and Secrets
+gcp-key.json
+api-env.yaml
+jad-env.yaml
+gcloud_auth_out.txt
+gcloud_auth_out_2.txt
+.env
+.env.local
+**/.env
+
+# Dependencies
+node_modules/
+jspm_packages/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# IDE and System Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Cloud Build artifacts (optional to keep, but ignoring local logs)
+gcb-internal.log

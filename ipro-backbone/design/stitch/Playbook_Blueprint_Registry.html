@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Playbook Blueprint Registry - Intellect ProActive</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Space Grotesk -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        .luxury-shadow {
+            box-shadow: 0 10px 15px -3px rgba(19, 91, 236, 0.05), 0 4px 6px -2px rgba(19, 91, 236, 0.02);
+        }
+        .sidebar-gradient {
+            background: linear-gradient(180deg, #ffffff 0%, #f6f6f8 100%);
+        }
+        .btn-brand {
+            background: linear-gradient(135deg, #135bec 0%, #0a3bb3 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 py-3">
+<div class="max-w-[1600px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined block text-2xl">auto_awesome_motion</span>
+</div>
+<div>
+<h2 class="text-lg font-bold leading-none tracking-tight">Intellect ProActive</h2>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Dubai Luxury Edition</p>
+</div>
+</div>
+<nav class="hidden xl:flex items-center gap-6 ml-4">
+<a class="text-sm font-semibold text-primary border-b-2 border-primary pb-1" href="#">Registry</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Tenants</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Analytics</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Engine Config</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary">search</span>
+<input class="bg-slate-100 dark:bg-slate-800 border-none rounded-xl pl-10 pr-4 py-2 text-sm w-64 focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all" placeholder="Search blueprints..." type="text"/>
+</div>
+<button class="btn-brand text-white text-sm font-bold px-5 py-2.5 rounded-xl flex items-center gap-2 hover:shadow-lg transition-all">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                    Create New Blueprint
+                </button>
+<div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden bg-slate-200" data-alt="User profile avatar">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCln03efbV30Aa23Qf9MsNlofhWCrbpvL_i6YmhlweUa3MxbUrQLPumcN5Xc6VrwfrdplUsuP1NIn1ClYEWjs4AFFOdcQJ-vRvrNH5NB1o1xVAK2fuZWS1rvmsBUuJyL2Hwo_5t3Wb1XgY2q87SfkLPA3E2tN8EW0xlSdk5FPn5pzmRFkTWmyuF4flf9w-jCUm0CXbIdaEhynJJM2DQWIzhX0FL_VXX2kr77F2qx1suDb2P5_kZAAF9Cxy7HrkAC5P33K18T1366Aw"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex h-[calc(100vh-68px)]">
+<!-- Left Sidebar: Filters & Categories -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-8 bg-white/50">
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Ecosystem Modules</h3>
+<div class="space-y-1">
+<button class="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-primary/10 text-primary font-semibold text-sm group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">apps</span>
+                            All Blueprints
+                        </div>
+<span class="text-xs bg-primary text-white px-2 py-0.5 rounded-full">24</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors">
+<span class="material-symbols-outlined text-lg">smart_toy</span>
+                        AI Engines
+                    </button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors">
+<span class="material-symbols-outlined text-lg">draw</span>
+                        eSign Modules
+                    </button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors">
+<span class="material-symbols-outlined text-lg">account_balance_wallet</span>
+                        Billing Systems
+                    </button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors">
+<span class="material-symbols-outlined text-lg">hub</span>
+                        CRM Connectors
+                    </button>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Tenant Status</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary/20 w-4 h-4 border-slate-300" type="checkbox"/>
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Deployed</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded text-primary focus:ring-primary/20 w-4 h-4 border-slate-300" type="checkbox"/>
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">In Review</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary/20 w-4 h-4 border-slate-300" type="checkbox"/>
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Drafts</span>
+</label>
+</div>
+</div>
+<div class="mt-auto">
+<div class="p-4 bg-primary/5 rounded-xl border border-primary/10">
+<p class="text-xs font-bold text-primary uppercase mb-1">Update Available</p>
+<p class="text-xs text-slate-500 leading-relaxed mb-3">v2.5.0 core engine is ready for all active blueprints.</p>
+<button class="w-full py-1.5 bg-primary text-white text-xs font-bold rounded-lg">Patch Now</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area: Registry Grid -->
+<section class="flex-1 overflow-y-auto p-8">
+<div class="max-w-[1200px] mx-auto">
+<div class="flex items-end justify-between mb-8">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-primary font-bold text-sm tracking-wider uppercase">Registry</span>
+<span class="text-slate-300 material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-500 font-medium text-sm">Playbook Blueprints</span>
+</div>
+<h1 class="text-4xl font-black tracking-tight text-slate-900 dark:text-white">Blueprint Registry</h1>
+<p class="text-slate-500 mt-2 max-w-xl">Manage high-fidelity ecosystem onboarding and automated engine playbooks for luxury developments.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-slate-600">grid_view</span>
+</button>
+<button class="p-2 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-slate-400">list</span>
+</button>
+</div>
+</div>
+<!-- High-Density Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="glass-card luxury-shadow rounded-xl p-6 border-t-4 border-t-primary group cursor-pointer hover:-translate-y-1 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2.5 bg-primary/10 text-primary rounded-lg">
+<span class="material-symbols-outlined">apartment</span>
+</div>
+<span class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-1 rounded uppercase tracking-wider">Stable v3.4</span>
+</div>
+<h3 class="text-lg font-bold mb-1 group-hover:text-primary transition-colors">Real Estate Launchpad</h3>
+<p class="text-slate-500 text-xs leading-relaxed mb-6">Automated onboarding flow for high-rise luxury properties and unit registries.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md" title="eSign Module">
+<span class="material-symbols-outlined text-sm text-slate-600">draw</span>
+<span class="text-[10px] font-semibold text-slate-600">ESIGN</span>
+</div>
+<div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md" title="Billing Module">
+<span class="material-symbols-outlined text-sm text-slate-600">account_balance_wallet</span>
+<span class="text-[10px] font-semibold text-slate-600">BILLING</span>
+</div>
+<div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md" title="AI Engine">
+<span class="material-symbols-outlined text-sm text-slate-600">smart_toy</span>
+<span class="text-[10px] font-semibold text-slate-600">AI</span>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white bg-slate-200" data-alt="Avatar 1"><img class="w-full h-full rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm3kZcAIW-YNsymJaYH-n6ytl7JUvXEcB-gEOtZRzI0CCxLqE8LZnt3NN2E8RaRGpQyUYK01a0C3qeMysvdwh4HdXKl56pwkIkFwnnbmkRgp7GpwbhzwXmOFh5zTiMrmYuhBanyHazc9dycA5-26SENdDJnphnrvktIMLPDlJBtyy0eTNBNwCU3LnmoAhNC6N_CD98fJMsUJ_PdLmkMxvBBPF1MyPxwBzFAiqvyOZ_51rnDDae2PdwzUVDvVa_OKh7ZiBROLTEtNQ"/></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-slate-200" data-alt="Avatar 2"><img class="w-full h-full rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeZOxFAi72NB9eEkJ8QaHdXq7hmpD_-6UpQyCW9YhE_YQGSYu602wIRRl1y5gqcdTDhe_dVYGn1nGitnYeQCFETUtLM14TxKx82ZvZ1YSvVYtvt7uFcqBFB3EhzsIIEdhEk_xsfUtH-tWLUpV-HK4e-aceWr_--M74lFQUdaQGPWEsG5vazgQA9kdmJwHKQGi0Ic2J2LTDf1HS2Bq6gBTFMhdgjQhMHXgbwG9-34avT_eMGjSREcu_Oaj8-loEQswJPKF1JvBnoyM"/></div>
+</div>
+<button class="text-xs font-bold text-primary flex items-center gap-1">
+                                View Blueprint <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card luxury-shadow rounded-xl p-6 border-t-4 border-t-slate-300 group cursor-pointer hover:-translate-y-1 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2.5 bg-slate-100 dark:bg-slate-800 text-slate-600 rounded-lg">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-1 rounded uppercase tracking-wider">Draft v0.9</span>
+</div>
+<h3 class="text-lg font-bold mb-1 group-hover:text-primary transition-colors">Smart Office Engine</h3>
+<p class="text-slate-500 text-xs leading-relaxed mb-6">Next-gen workplace automation with biometric security and IoT scheduling.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md" title="AI Engine">
+<span class="material-symbols-outlined text-sm text-slate-600">smart_toy</span>
+<span class="text-[10px] font-semibold text-slate-600">AI</span>
+</div>
+<div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md" title="IoT Hub">
+<span class="material-symbols-outlined text-sm text-slate-600">devices</span>
+<span class="text-[10px] font-semibold text-slate-600">IOT</span>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white bg-slate-200" data-alt="Avatar 3"><img class="w-full h-full rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvh257C6XCI5aoHxYnDzGDauTqXxGoK8dgpyOuKJ1FBcQEKfUKVOs2Aioo9X-qSn66NMfUoZ6YX8Q3VQqs8hMTy_LkWZqv_Sx7Y_hpThapBi9o0SdRbTZzVwviXXjGbkKkjOCBMtDuLOVuAdceqbD6nSCfDmwDG2Mh4J4OdDaE7Qyzkeg0o_n-Q7Ge4jrkZaNobReWDASlsztgX9x-9r3_zTto5Oyc6pdJI6iRo0T-hItJSelrHuTJzeLXLnWtJjk4QB7ewK5Sc0w"/></div>
+</div>
+<button class="text-xs font-bold text-primary flex items-center gap-1">
+                                View Blueprint <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card luxury-shadow rounded-xl p-6 border-t-4 border-t-primary group cursor-pointer hover:-translate-y-1 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2.5 bg-primary/10 text-primary rounded-lg">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-1 rounded uppercase tracking-wider">Stable v2.1</span>
+</div>
+<h3 class="text-lg font-bold mb-1 group-hover:text-primary transition-colors">FinTech Core Connector</h3>
+<p class="text-slate-500 text-xs leading-relaxed mb-6">High-speed settlement and compliance module for tenant payments.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md" title="Billing Module">
+<span class="material-symbols-outlined text-sm text-slate-600">account_balance_wallet</span>
+<span class="text-[10px] font-semibold text-slate-600">BILLING</span>
+</div>
+<div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md" title="Security Module">
+<span class="material-symbols-outlined text-sm text-slate-600">shield</span>
+<span class="text-[10px] font-semibold text-slate-600">SECURITY</span>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white bg-slate-200" data-alt="Avatar 4"><img class="w-full h-full rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4C6BHccgv7NSmXnbhddWj0hfK4iLkZLPwJRJ2qmeTRIyoGjE6YXVPjh_vbmVjbXQeNAb2Uf_A652KPfqV1cT4hPUHC9JLYIJ7FlNDqbN2lGzaObhYrC_PsLC_OG0DcoXBVbd1kC0hYHUhX38vmBv_FW5hL5TlDjHj79rtfnBIo_rZ5keMkkWXnkXvQ97jxbU30aiKFNBrsnma0Eh9qAQdCMkQhqsypH1Qd9urxXcZv0Z1v9gGdHmBglv5d_xhWRMI3e72LKBOMXc"/></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-slate-200" data-alt="Avatar 5"><img class="w-full h-full rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCue5P-WzhGcG2n1rmo-yifvIlwKjh9Ux4YFy4pFvXjoO6GMO28xG0hUmkFbpDLsWiZ__tKbPLYSGS6BfRMy2UTMpNv_F7yaqGD4JumZrb6ov2QbBBB2lvg5svlITzVawbRrMsMF4jPuCAqmHrjcKbiuAoewMIhOKxf0tHo9UINY4DY8Ytc4IO6i0QNdcgGa3h3u-k1KhhDpWz-f00UpgOY3Wn9FvtfZYnd3GxYsVgpz0CkYtcxhPFVRtRCN7zdNhsWPwgFrlgQDzU"/></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center bg-slate-100 text-[8px] font-bold text-slate-500">+3</div>
+</div>
+<button class="text-xs font-bold text-primary flex items-center gap-1">
+                                View Blueprint <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 4 (Add New Mock) -->
+<div class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-6 flex flex-col items-center justify-center text-center group hover:border-primary/50 transition-all cursor-pointer">
+<div class="w-12 h-12 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">add</span>
+</div>
+<h3 class="text-slate-600 dark:text-slate-400 font-bold mb-1">New Playbook</h3>
+<p class="text-slate-400 text-xs">Start from a blank canvas</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar: Playbook Designer Panel -->
+<aside class="w-96 sidebar-gradient border-l border-slate-200 dark:border-slate-800 flex flex-col overflow-y-auto">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-bold text-lg">Playbook Designer</h3>
+<div class="flex gap-2">
+<button class="p-1.5 hover:bg-slate-200 rounded transition-colors" title="Settings"><span class="material-symbols-outlined text-slate-500 text-lg">settings</span></button>
+<button class="p-1.5 hover:bg-slate-200 rounded transition-colors" title="Minimize"><span class="material-symbols-outlined text-slate-500 text-lg">close_fullscreen</span></button>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined">apartment</span>
+</div>
+<div>
+<p class="text-xs text-slate-500 font-medium">Active Blueprint</p>
+<p class="text-sm font-bold truncate w-48">Real Estate Launchpad</p>
+</div>
+</div>
+</div>
+<div class="p-6 flex-1 flex flex-col gap-8">
+<!-- Logic Flow Indicator -->
+<div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Logic Flow Visualization</h4>
+<button class="text-[10px] font-bold text-primary underline">Expand Map</button>
+</div>
+<div class="aspect-video bg-slate-100 dark:bg-slate-800 rounded-xl relative overflow-hidden border border-slate-200 dark:border-slate-700 flex items-center justify-center" data-alt="Logic flow diagram preview">
+<!-- Abstract Flow Visual -->
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<svg class="w-full h-full text-primary/20" viewbox="0 0 200 100">
+<circle cx="20" cy="50" fill="currentColor" fill-opacity="0.5" r="8"></circle>
+<circle cx="60" cy="30" fill="currentColor" fill-opacity="0.3" r="8"></circle>
+<circle cx="60" cy="70" fill="currentColor" fill-opacity="0.3" r="8"></circle>
+<circle cx="100" cy="50" fill="currentColor" fill-opacity="0.5" r="8"></circle>
+<circle cx="140" cy="50" fill="currentColor" fill-opacity="0.3" r="8"></circle>
+<circle cx="180" cy="50" fill="currentColor" fill-opacity="0.8" r="8"></circle>
+<path d="M28 50 H52 M68 30 L92 45 M68 70 L92 55 M108 50 H132 M148 50 H172" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+<div class="absolute top-2 left-2 bg-white/80 dark:bg-slate-900/80 px-2 py-1 rounded text-[10px] font-bold border border-slate-200 dark:border-slate-700">6 Steps Active</div>
+</div>
+<span class="material-symbols-outlined text-slate-300 text-4xl">account_tree</span>
+</div>
+</div>
+<!-- Version History -->
+<div>
+<h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Version History</h4>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<div class="mt-1 w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+<div>
+<p class="text-sm font-bold">v3.4.1 — Production <span class="text-[10px] text-slate-400 font-normal ml-2">Current</span></p>
+<p class="text-xs text-slate-500">Updated eSign webhook responses for UAE Pass.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="mt-1 w-2 h-2 rounded-full bg-slate-300"></div>
+<div>
+<p class="text-sm font-semibold text-slate-600">v3.4.0</p>
+<p class="text-xs text-slate-400">Initial deployment for Dubai Marina Hub.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Permissions -->
+<div>
+<h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Registry Permissions</h4>
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold text-slate-600 uppercase">SuperAdmin</span>
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold text-slate-600 uppercase">DevOps</span>
+<button class="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center"><span class="material-symbols-outlined text-xs">add</span></button>
+</div>
+</div>
+</div>
+<!-- Deployment Actions -->
+<div class="p-6 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 sticky bottom-0">
+<div class="flex flex-col gap-3">
+<button class="w-full btn-brand text-white font-bold py-3 rounded-xl flex items-center justify-center gap-3 shadow-lg hover:shadow-primary/20 transition-all">
+<span class="material-symbols-outlined">rocket</span>
+                        Deploy to Tenant
+                    </button>
+<button class="w-full bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold py-3 rounded-xl hover:bg-slate-200 transition-colors">
+                        Save as Draft
+                    </button>
+<p class="text-[10px] text-center text-slate-400 font-medium">Last autosaved 2 minutes ago</p>
+</div>
+</div>
+</aside>
+</main>
+<!-- Floating Feedback or Help Button -->
+<div class="fixed bottom-8 left-8">
+<button class="w-12 h-12 bg-white dark:bg-slate-800 shadow-xl rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</body></html>

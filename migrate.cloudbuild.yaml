@@ -1,0 +1,13 @@
+steps:
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['install']
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['run', 'prisma:migrate:deploy']
+  env:
+  - 'DATABASE_URL=postgresql://ipro-admin:ipro-admin-pass-123456@/iprocore?host=/cloudsql/iprocore:us-central1:ipro-staging-db'
+options:
+  volumes:
+  - name: 'cloudsql'
+    path: '/cloudsql'
+  env:
+  - 'CLOUD_SQL_INSTANCES=iprocore:us-central1:ipro-staging-db'

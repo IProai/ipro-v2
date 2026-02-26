@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jad-Connector Marketplace Hub | Intellect ProActive</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Sans+Arabic:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ad2bee",
+                        "accent-blue": "#4f46e5",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#1c1022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "IBM Plex Sans Arabic", "sans-serif"],
+                        "sans": ["Inter", "IBM Plex Sans Arabic", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "1.5rem", // 24px as requested
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .luxury-shadow {
+            box-shadow: 0 10px 30px -10px rgba(173, 43, 238, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .gradient-btn {
+            background: linear-gradient(135deg, #ad2bee 0%, #4f46e5 100%);
+        }
+        .card-hover:hover .quick-connect {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 lg:px-12 py-4">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-symbols-outlined text-2xl">hub</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-xl font-bold leading-none tracking-tight">Intellect ProActive</h1>
+<span class="text-[10px] uppercase tracking-widest text-primary font-bold">Marketplace Hub</span>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-400">
+<a class="text-primary border-b-2 border-primary pb-1" href="#">Marketplace</a>
+<a class="hover:text-primary transition-colors" href="#">My Connectors</a>
+<a class="hover:text-primary transition-colors" href="#">Analytics</a>
+<a class="hover:text-primary transition-colors" href="#">Developer Portal</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-slate-100 dark:bg-slate-800 rounded-full px-4 py-2 w-64">
+<span class="material-symbols-outlined text-slate-400 text-lg">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-400" placeholder="Global search..." type="text"/>
+</div>
+<div class="flex items-center gap-3 border-l border-slate-200 dark:border-slate-800 pl-6">
+<button class="relative text-slate-600 dark:text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full border-2 border-white dark:border-background-dark"></span>
+</button>
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border-2 border-primary/20">
+<img alt="Profile" data-alt="User profile avatar circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwabPGgrdFnKD6AVNE3ORuM_DQxNl8DlmCZ1yFhzyeYyttIS4wdRWddEeMZzd4qLVA5OaPKlwl3MR0RJVRCoF0yZM6ShMAXmQmlRwxWXtZHuy7-4zvl-SAt6V-RTurVgEbfmFL_CIJxrQ-vE1tK8c_BkUzxuSz2aMWUHXK8voq7RrxAYt7zL9_qadDjMY4CE3dDBOxoNQYTa7s0qlxmgpwV5BP9wOv_USDhlekkEqUEQMqc8yr4HZXWi_B4O5sXfC0XwYNgWoHM28"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-6 lg:px-12 py-8">
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Main Content Area -->
+<div class="flex-1">
+<!-- Hero Section -->
+<section class="relative rounded-2xl overflow-hidden mb-10 h-[380px] flex flex-col items-center justify-center text-center p-8 bg-slate-900 shadow-2xl">
+<div class="absolute inset-0 opacity-40">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/40 to-accent-blue/40"></div>
+<img alt="Hero background" class="w-full h-full object-cover" data-alt="Futuristic digital network abstract background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ8DVRrtii7w9BYXE0RAYYAo2p_kMZMA9Eb7cDcjdqf2FGJnCPw4H7aExwqjPPgnvH7tdIWjSKWwr0C_OFm8UD3PQBOgY5_Xq18MIYZme0cYKpiaoukC7cQJvQaVR7wvbKAfgif-W-selNYIE2v-d-fyPMKp96RUHO_eZQ29MQgSNnTbQWlLAnwWC6q7hKBCuzOtZ6RV2PnqQZU1L5FmL5OmZH_pOn40fPFueun0qCdFhe_9vQH6e9z3chIBcOAZ0x7zYw0PuiRZQ"/>
+</div>
+<div class="relative z-10 max-w-2xl">
+<span class="inline-block px-4 py-1.5 rounded-full bg-primary/20 backdrop-blur-md text-white text-xs font-bold uppercase tracking-widest mb-6 border border-white/20">
+                            The Jad-Connector Ecosystem
+                        </span>
+<h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
+                            High-Fidelity Integrations <br/> <span class="text-primary italic">Optimized</span> for Enterprise
+                        </h2>
+<p class="text-slate-200 text-lg mb-10 font-light">Connect your existing workflows to the Intellect ProActive core in seconds.</p>
+<!-- Glassmorphic Search Bar -->
+<div class="glass-morphism rounded-2xl p-2 flex items-center shadow-2xl max-w-xl mx-auto">
+<div class="flex-1 flex items-center px-4">
+<span class="material-symbols-outlined text-white/70 mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-white placeholder:text-white/50 w-full py-3" placeholder="Search WhatsApp, SAP, Stripe..." type="text"/>
+</div>
+<button class="gradient-btn text-white px-8 py-3 rounded-xl font-bold transition-transform hover:scale-105">
+                                Explore
+                            </button>
+</div>
+</div>
+</section>
+<!-- Filters -->
+<div class="flex flex-wrap items-center gap-3 mb-8">
+<button class="px-6 py-2.5 rounded-full bg-primary text-white font-semibold text-sm shadow-lg shadow-primary/20">All Connectors</button>
+<button class="px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium text-sm border border-slate-200 dark:border-slate-700 hover:border-primary transition-all">Communication</button>
+<button class="px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium text-sm border border-slate-200 dark:border-slate-700 hover:border-primary transition-all">Payments</button>
+<button class="px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium text-sm border border-slate-200 dark:border-slate-700 hover:border-primary transition-all">ERP Systems</button>
+<button class="px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium text-sm border border-slate-200 dark:border-slate-700 hover:border-primary transition-all">AI &amp; ML</button>
+<button class="px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium text-sm border border-slate-200 dark:border-slate-700 hover:border-primary transition-all">Social Media</button>
+</div>
+<!-- Main Marketplace Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Connector Card 1: WhatsApp -->
+<div class="card-hover relative group bg-white dark:bg-slate-900 rounded-2xl p-6 luxury-shadow border border-slate-100 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-6">
+<div class="size-14 rounded-xl bg-green-50 flex items-center justify-center p-2.5">
+<img alt="WhatsApp" data-alt="WhatsApp official color logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkE3IBJOJ80XLBdr2e3jmYnEWB1lTmz6Sfpyhif84gcWybR738c-AdPIF10nAa7HbcsWoQPpRzuhrb_lrQ5fAiI0GMCj_q6En82gp2URUEXNlKRZBc3gRi3x-AhXzqnNoPWUeZ9Ea6Vldz0uazmmj59uBzhl3W5GoNIXXLrX7L0RjO_SLPehC6EpZ7kWbeG0kEW8lVw_sIKxLAatxymsEJX_tN6Od63WSvlaAxpRx6yzRFnbkad6UdJ67KpDYZcnt6R56tDICNzLg"/>
+</div>
+<div class="flex flex-col items-end">
+<span class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase border border-amber-200">Certified by IPR-O</span>
+<div class="flex items-center gap-1 mt-2 text-amber-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">4.9 (2k+)</span>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">WhatsApp Business</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            Full two-way communication channel with automated message templates and media support.
+                        </p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-primary px-3 py-1 bg-primary/10 rounded-lg">Communication</span>
+<span class="text-xs font-medium text-slate-400">v2.4.1</span>
+</div>
+<!-- Hover Action -->
+<div class="quick-connect absolute inset-0 bg-white/95 dark:bg-slate-900/95 flex flex-col items-center justify-center p-6 rounded-2xl opacity-0 translate-y-4 transition-all duration-300">
+<button class="gradient-btn w-full py-4 text-white font-bold rounded-xl mb-3 shadow-lg shadow-primary/25">Quick Connect</button>
+<button class="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold rounded-xl transition-colors hover:bg-slate-200">View Documentation</button>
+</div>
+</div>
+<!-- Connector Card 2: Stripe -->
+<div class="card-hover relative group bg-white dark:bg-slate-900 rounded-2xl p-6 luxury-shadow border border-slate-100 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-6">
+<div class="size-14 rounded-xl bg-indigo-50 flex items-center justify-center p-2.5">
+<img alt="Stripe" data-alt="Stripe payment gateway logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoBPRlH0C35acs7ONQ6xSaR9W2i_5xfbsDSBHLNY6DjQBCzZ0OAKW9gfBcc0CpLbewFE93VvxAxrZPqXQMjxsxblV5dly_705A_3cwgFGK6zlDKYAw9asomFdKf-v4ZEy9qEF4lqSobOWlVYFv8E5Ek09rIGLric4gqBKylunV0lOD2-LDKJmxPQFwZ8SfMkF6MYsUE5q4rn-3xeYjxurbGtNOXuHN90jFkORnuJRiY1bhDFSIv8ywDSSoxv-RkRulowfScBs7xJk"/>
+</div>
+<div class="flex flex-col items-end">
+<span class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase border border-amber-200">Certified by IPR-O</span>
+<div class="flex items-center gap-1 mt-2 text-amber-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">4.8 (1.2k)</span>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">Stripe Global</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            Process payments, manage subscriptions, and sync billing data directly to your ERP core.
+                        </p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-indigo-500 px-3 py-1 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg">Payments</span>
+<span class="text-xs font-medium text-slate-400">v3.1.0</span>
+</div>
+<div class="quick-connect absolute inset-0 bg-white/95 dark:bg-slate-900/95 flex flex-col items-center justify-center p-6 rounded-2xl opacity-0 translate-y-4 transition-all duration-300">
+<button class="gradient-btn w-full py-4 text-white font-bold rounded-xl mb-3">Quick Connect</button>
+<button class="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold rounded-xl">View Documentation</button>
+</div>
+</div>
+<!-- Connector Card 3: SAP -->
+<div class="card-hover relative group bg-white dark:bg-slate-900 rounded-2xl p-6 luxury-shadow border border-slate-100 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-6">
+<div class="size-14 rounded-xl bg-blue-50 flex items-center justify-center p-2.5">
+<img alt="SAP" data-alt="SAP corporate enterprise software logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmK-gd7x72CuLnDBd5gz7Fz9Q94PYOQLPWwTKa9Prz5QY1C6jT4EO1y2f6JRty480UAgx6FihbaqagG2c7vYbqBWHcjBY3x9mNwZ3syoh4xyInFpItx4k77XgKMNHnlVsBKOi84vYs5g3S8VZb-Xy7SyUV1IV63zn1jDQWpjBDnu1yPb4WrrHr7zETpX1qpd72kuW-AlEG-uCPFkuF0Vv2UoSPeewifRo3MKCPg561jHIIHUq8foazYsjUPbbzZUqE6h2stQxGb_8"/>
+</div>
+<div class="flex flex-col items-end">
+<span class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase border border-amber-200">Certified by IPR-O</span>
+<div class="flex items-center gap-1 mt-2 text-amber-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">4.7 (800)</span>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">SAP ERP Core</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            Direct high-fidelity data bridge for SAP S/4HANA environments and legacy R/3 systems.
+                        </p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-blue-500 px-3 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-lg">ERP</span>
+<span class="text-xs font-medium text-slate-400">v5.0.4</span>
+</div>
+<div class="quick-connect absolute inset-0 bg-white/95 dark:bg-slate-900/95 flex flex-col items-center justify-center p-6 rounded-2xl opacity-0 translate-y-4 transition-all duration-300">
+<button class="gradient-btn w-full py-4 text-white font-bold rounded-xl mb-3">Quick Connect</button>
+<button class="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold rounded-xl">View Documentation</button>
+</div>
+</div>
+<!-- Connector Card 4: OpenAI -->
+<div class="card-hover relative group bg-white dark:bg-slate-900 rounded-2xl p-6 luxury-shadow border border-slate-100 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-6">
+<div class="size-14 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-2.5">
+<img alt="OpenAI" class="dark:invert" data-alt="OpenAI brand logo black and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoJ1tl974pfYtIH9cFlkIMxlj9z5cB8-7rKthPXPnRynIbb4zgMspAJSiW1HuQ2L6irHWmbvqYtaWAgjkfmd39b7uvOg7QRf6cAoG-8VgE_qmK8ayCUayKJ95eKur_5Ui8GdkXOz9kEThW5LDNVqDAZKeBS-N95Ehc3SbqKkYgNLeaOqdIEnqnJldIy9xTSN9cO7CLNzSyr_-8lmGd44hPc5QSWbbP53ObwHbf5IZEcYpu3cOeqYxAgBZ7xcJ0RuBibhUYn_OEF8g"/>
+</div>
+<div class="flex flex-col items-end">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded uppercase border border-primary/20">Official Partner</span>
+<div class="flex items-center gap-1 mt-2 text-amber-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">5.0 (5k+)</span>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">OpenAI GPT-4o</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            Native AI inference and prompt chaining directly within your business process flows.
+                        </p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-teal-500 px-3 py-1 bg-teal-50 dark:bg-teal-900/20 rounded-lg">AI &amp; ML</span>
+<span class="text-xs font-medium text-slate-400">v1.2.9</span>
+</div>
+<div class="quick-connect absolute inset-0 bg-white/95 dark:bg-slate-900/95 flex flex-col items-center justify-center p-6 rounded-2xl opacity-0 translate-y-4 transition-all duration-300">
+<button class="gradient-btn w-full py-4 text-white font-bold rounded-xl mb-3">Quick Connect</button>
+<button class="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold rounded-xl">View Documentation</button>
+</div>
+</div>
+<!-- Connector Card 5: Slack -->
+<div class="card-hover relative group bg-white dark:bg-slate-900 rounded-2xl p-6 luxury-shadow border border-slate-100 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-6">
+<div class="size-14 rounded-xl bg-slate-50 flex items-center justify-center p-2.5">
+<img alt="Slack" data-alt="Slack colorful company logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDixWEReTW3XFVUzZO3r4Ich8BzlsE82BcvWJWmdrwSzOasIQ1KSsOBBk26TdJ_FWyOTFCuLI0Crr5L6fHjs05kEh6vErktvYcUR-f9k2cj3ksg2zupwUaU3HhcLdylLUr7EVGwp45shzdquCzoxQyEQjoV0WHPK0bFMfNxMHLSvGXUWd7aCUxlo2RrVc6rmykQooorMK2mDpD5_T2WJ1w4wv1P5Yz26L_92dN2Lijsqc06ZIj7ZMqhcKmCQGfaQiN4e0x63igPL8c"/>
+</div>
+<div class="flex flex-col items-end">
+<span class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase border border-amber-200">Certified by IPR-O</span>
+<div class="flex items-center gap-1 mt-2 text-amber-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">4.9 (1.8k)</span>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">Slack Enterprise</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            Automated notification routing and interactive slash command integration.
+                        </p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-primary px-3 py-1 bg-primary/10 rounded-lg">Communication</span>
+<span class="text-xs font-medium text-slate-400">v2.1.0</span>
+</div>
+<div class="quick-connect absolute inset-0 bg-white/95 dark:bg-slate-900/95 flex flex-col items-center justify-center p-6 rounded-2xl opacity-0 translate-y-4 transition-all duration-300">
+<button class="gradient-btn w-full py-4 text-white font-bold rounded-xl mb-3">Quick Connect</button>
+<button class="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold rounded-xl">View Documentation</button>
+</div>
+</div>
+<!-- Connector Card 6: Oracle -->
+<div class="card-hover relative group bg-white dark:bg-slate-900 rounded-2xl p-6 luxury-shadow border border-slate-100 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-6">
+<div class="size-14 rounded-xl bg-red-50 flex items-center justify-center p-2.5">
+<img alt="Oracle" data-alt="Oracle logo branding for enterprise systems" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSdTvcMV72OXnSu9FcNf7hp2CrpDsLMGWIK_Y4QN0qDoZOjrLOx4r4-wff7OmRtlIEbZ9M8D2PMmA0RTtPFXEJ2Gs9tOUohccFZ_7T_hxbC0eREqgMjDBISKt25vBsr4QCdSoj0ShdaT1BbkHyX4NfAWiR5zbQo-DwmXjEE1TgtKVsgDeinIpkEQKg4wULQlsypr5GxycEGY3YlYbl6ZS7ruFE6ov5vSzY9uEM-HifsJKxCcKXyPDr1PluXusWjpjcvy6vTwnBn8U"/>
+</div>
+<div class="flex flex-col items-end">
+<span class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase border border-amber-200">Certified by IPR-O</span>
+<div class="flex items-center gap-1 mt-2 text-amber-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">4.6 (500)</span>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">Oracle NetSuite</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                            Unified cloud business management suite integration for finance and inventory.
+                        </p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-red-500 px-3 py-1 bg-red-50 dark:bg-red-900/20 rounded-lg">ERP</span>
+<span class="text-xs font-medium text-slate-400">v4.4.2</span>
+</div>
+<div class="quick-connect absolute inset-0 bg-white/95 dark:bg-slate-900/95 flex flex-col items-center justify-center p-6 rounded-2xl opacity-0 translate-y-4 transition-all duration-300">
+<button class="gradient-btn w-full py-4 text-white font-bold rounded-xl mb-3">Quick Connect</button>
+<button class="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold rounded-xl">View Documentation</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Management Pane -->
+<aside class="w-full lg:w-80 flex flex-col gap-6">
+<!-- Summary Stats -->
+<div class="bg-white dark:bg-slate-900 rounded-2xl p-6 luxury-shadow border border-slate-100 dark:border-slate-800">
+<h4 class="text-lg font-bold mb-4">Management Pane</h4>
+<div class="flex items-center justify-between mb-2">
+<span class="text-slate-500 dark:text-slate-400 text-sm">Active Connectors</span>
+<span class="font-bold text-primary">12</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 mb-4">
+<div class="bg-primary h-1.5 rounded-full" style="width: 75%;"></div>
+</div>
+<div class="flex items-center gap-2 text-xs font-medium text-green-600 bg-green-50 dark:bg-green-900/20 px-3 py-2 rounded-lg">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                        All systems operational
+                    </div>
+</div>
+<!-- Installed & Updates -->
+<div class="bg-white dark:bg-slate-900 rounded-2xl luxury-shadow border border-slate-100 dark:border-slate-800 overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800">
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-400">Updates Available (2)</h4>
+</div>
+<div class="p-4 space-y-4">
+<!-- Update Item 1 -->
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="size-10 rounded-lg bg-green-50 flex items-center justify-center p-1.5 shrink-0">
+<img alt="WhatsApp" data-alt="WhatsApp small icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-qc_6x8LqR_L2Rx6Uap6v4LH3gbjSt_9w4RlwmvwvllPiQl30J6G73Q-FqAtEIyZ4NMGLzJQZPqfIhiuPXME9DRQn-ptqrmUdU-cnz59OIWQKuw18TDiEsPZfJpjoan-uA2pM30cOFfbgAobwpDITUzuk3xy05moR0reZNs2IBNcNead5YjW1H2uSMKrg084w7etnTGq9ZK5i9pkqfu2XU9koOO9_SU_GCdr5zh4cloemDnrM6xxl4echpfPfLnjETUAE8VGzFgA"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">WhatsApp Biz</p>
+<p class="text-[10px] text-slate-400">New v2.4.2 available</p>
+</div>
+<button class="text-primary hover:underline text-xs font-bold">Update</button>
+</div>
+<!-- Update Item 2 -->
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="size-10 rounded-lg bg-blue-50 flex items-center justify-center p-1.5 shrink-0">
+<img alt="SAP" data-alt="SAP small icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARM82DzmkWIIELna0lU7jzC9kq1M3juzyQXfyyYDSsrAN4mHVk34PRKIdasRNV70v8WqRGZ4mtoDLq4WrHfXNYRZAC1PaS_X4rzyVT7YaNkNsZKNu2DDodNfUSlmhEghgxI0ce-QDL5HU4l9kOy9uUf4x9TZDfQkaDwjhEVc-onP7giwq60_kW15RiUrGdejXc8UvdX3cfVvVbOLSDXA74uspfOD86oeLZjGmTkan1XjKVF9yrCl3s2aNniLWfRroUgnY3vE_xPhA"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">SAP Core Bridge</p>
+<p class="text-[10px] text-slate-400">Major security patch</p>
+</div>
+<button class="text-primary hover:underline text-xs font-bold">Update</button>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50">
+<button class="w-full py-2.5 bg-primary text-white rounded-xl text-sm font-bold shadow-lg shadow-primary/20">Update All Connectors</button>
+</div>
+</div>
+<!-- Active List -->
+<div class="bg-white dark:bg-slate-900 rounded-2xl luxury-shadow border border-slate-100 dark:border-slate-800">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-400">Active Connectors</h4>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary">more_horiz</span>
+</div>
+<div class="p-4 space-y-2 max-h-[400px] overflow-y-auto">
+<div class="flex items-center gap-4 p-3">
+<div class="size-2 bg-green-500 rounded-full animate-pulse shrink-0"></div>
+<span class="text-sm font-medium">OpenAI GPT-4o</span>
+</div>
+<div class="flex items-center gap-4 p-3">
+<div class="size-2 bg-green-500 rounded-full shrink-0"></div>
+<span class="text-sm font-medium">Stripe Payment Core</span>
+</div>
+<div class="flex items-center gap-4 p-3">
+<div class="size-2 bg-green-500 rounded-full shrink-0"></div>
+<span class="text-sm font-medium">Slack Notifications</span>
+</div>
+<div class="flex items-center gap-4 p-3">
+<div class="size-2 bg-green-500 rounded-full shrink-0"></div>
+<span class="text-sm font-medium">Microsoft Dynamics</span>
+</div>
+<div class="flex items-center gap-4 p-3">
+<div class="size-2 bg-slate-300 rounded-full shrink-0"></div>
+<span class="text-sm font-medium text-slate-400 italic">Midjourney AI (Paused)</span>
+</div>
+</div>
+</div>
+<!-- Featured Dev Section -->
+<div class="bg-gradient-to-br from-slate-900 to-primary rounded-2xl p-6 text-white relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="text-lg font-bold mb-2">Build Your Own</h4>
+<p class="text-white/70 text-sm mb-6 font-light leading-relaxed">Access our high-fidelity SDK to create custom Jad-Connectors.</p>
+<button class="w-full py-3 bg-white text-primary font-bold rounded-xl hover:bg-slate-100 transition-colors">Start Building</button>
+</div>
+<span class="material-symbols-outlined absolute -bottom-6 -right-6 text-[120px] opacity-10 rotate-12">developer_mode</span>
+</div>
+</aside>
+</div>
+</main>
+<footer class="max-w-[1440px] mx-auto px-6 lg:px-12 py-12 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="bg-slate-200 dark:bg-slate-800 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-slate-500">hub</span>
+</div>
+<p class="text-slate-400 text-sm">© 2024 Intellect ProActive. Premium Jad-Connector Solutions.</p>
+</div>
+<div class="flex gap-10 text-slate-400 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Architecture</a>
+<a class="hover:text-primary transition-colors" href="#">Global Support</a>
+</div>
+</footer>
+</body></html>

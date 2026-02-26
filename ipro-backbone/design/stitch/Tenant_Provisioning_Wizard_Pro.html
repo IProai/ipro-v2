@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tenant Provisioning Wizard Pro | Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#8B5CF6",
+                        "primary-dark": "#6D28D9",
+                        "accent-neon": "#10B981",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0B0F1A",
+                    },
+                    fontFamily: {
+                        display: ["Space Grotesk", "sans-serif"],
+                        sans: ["Plus Jakarta Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                        "xl": "20px",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-light {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .neon-pulse {
+            box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+        }
+        .gradient-bg {
+            background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.15), transparent),
+                        radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.1), transparent);
+        }
+        .ipr-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .ipr-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(139, 92, 246, 0.5);
+            background: rgba(139, 92, 246, 0.05);
+        }
+        .step-line {
+            background: linear-gradient(90deg, #8B5CF6 0%, #10B981 100%);
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-900 dark:text-slate-100 bg-background-light dark:bg-background-dark min-h-screen selection:bg-primary selection:text-white">
+<div class="fixed inset-0 gradient-bg -z-10"></div>
+<nav class="w-full px-8 py-4 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 glass-light dark:glass sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-indigo-600 rounded-lg flex items-center justify-center">
+<img alt="Intellect ProActive Logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw3PvRgbUfy4eaypxFXkiktgdHe5-nPhm7mOCyMFbUA88XEzEHQs6SxRnceFrgI3ky0VStnLlgj4SNelHB03hqEnGuFVXhifVduUSOiA1nFGE4bsM4NRxZ2mTFqGMHN1-RSEMn3PS5fMdOGfE9TEqu9w4ayQugQhGMonFhKhaWytitNAb_rxZ86DoNpJ-Dekn6BSvSDjlYHPPNk5r70khgDVk5bJ-SAP3p6rpV7_hZaxcknxYjG_AU85lG9PL6eeH3uXGtv2W_mdI"/>
+</div>
+<div>
+<h1 class="font-display font-bold text-lg leading-none">Intellect ProActive</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Enterprise Command Center</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right hidden md:block">
+<p class="text-xs text-slate-400">Environment</p>
+<p class="text-sm font-semibold text-accent-neon">Production • GCC-North-1</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-slate-400">notifications</span>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-6 py-12">
+<div class="grid grid-cols-12 gap-8">
+<div class="col-span-12 lg:col-span-3">
+<div class="sticky top-32 space-y-12">
+<div class="space-y-8">
+<div class="flex gap-4 items-start group">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full flex items-center justify-center border-2 border-primary text-primary font-bold bg-primary/10 transition-all duration-300">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<div class="w-0.5 h-12 step-line"></div>
+</div>
+<div class="pt-1">
+<h3 class="font-display font-bold text-slate-400">Basic Info</h3>
+<p class="text-xs text-slate-500">Company &amp; Entity profile</p>
+</div>
+</div>
+<div class="flex gap-4 items-start group">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full flex items-center justify-center border-2 border-primary bg-primary text-white font-bold neon-pulse relative">
+                                    2
+                                </div>
+<div class="w-0.5 h-12 bg-slate-200 dark:bg-slate-800"></div>
+</div>
+<div class="pt-1">
+<h3 class="font-display font-bold text-primary">Engines</h3>
+<p class="text-xs text-slate-400">Modular selection</p>
+</div>
+</div>
+<div class="flex gap-4 items-start group opacity-40">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full flex items-center justify-center border-2 border-slate-300 dark:border-slate-700 font-bold">
+                                    3
+                                </div>
+</div>
+<div class="pt-1">
+<h3 class="font-display font-bold">Admin Roles</h3>
+<p class="text-xs text-slate-500">Access &amp; permissions</p>
+</div>
+</div>
+</div>
+<div class="glass-light dark:glass rounded-xl p-6 border border-primary/20 bg-primary/5">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-lg">monitoring</span>
+<h4 class="font-bold text-sm tracking-wide uppercase">Real-time Estimate</h4>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Base Platform</span>
+<span class="font-mono">$2,400</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Core Engine (IPR-O)</span>
+<span class="font-mono text-accent-neon">+$850</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Cognitive Hub</span>
+<span class="font-mono text-accent-neon">+$420</span>
+</div>
+<div class="pt-3 border-t border-slate-200 dark:border-slate-800 mt-2">
+<div class="flex justify-between items-baseline">
+<span class="font-bold">Total Monthly</span>
+<span class="text-2xl font-display font-extrabold text-primary">$3,670</span>
+</div>
+<p class="text-[10px] text-slate-500 mt-1 uppercase tracking-tighter">* Billed per consumption unit</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-9">
+<div class="glass-light dark:glass rounded-2xl border border-slate-200 dark:border-slate-800 p-8 md:p-12 shadow-2xl">
+<header class="mb-10">
+<h2 class="text-3xl font-display font-bold mb-2">Configure Engines &amp; Modules</h2>
+<p class="text-slate-500 dark:text-slate-400 max-w-2xl">Select the proactive intelligence engines to deploy for this tenant. Each module is fully isolated and follows enterprise-grade security protocols.</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+<div class="ipr-card glass-light dark:glass rounded-xl border-2 border-primary p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3">
+<div class="bg-primary/20 text-primary rounded-full p-1">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+</div>
+</div>
+<div class="flex items-start gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+<img alt="IPR-O Branding" class="w-8 h-8 opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRgOCaT2caKaP_5HGxvfJLGzXM_1ijwzlYnFpk7TdHQuDeWXwSZY3fpl_SlJF91p-tyJ0M67BQML_1L5c9xCyOZRNexhWzG0PN7dd75YokJhrt7qiuqW2EVSwwukbBqwh4-VPr6zoWgfGA-ADKSo6sNJsICj-kMOafSw69VoArrnLSyKDtC38piCaaQA5VxHyXU0AZSThw_giggpO3b_FNp4TAJlnHmqlwnmxVJRMq5jaQ7c0rHk2cUMiFp9fgiPJGyG_3rYDn-Mw"/>
+</div>
+<div>
+<h3 class="font-display font-bold text-lg">IPR-O Core Engine</h3>
+<span class="text-[10px] bg-accent-neon/20 text-accent-neon px-2 py-0.5 rounded uppercase font-bold tracking-widest">Active Standard</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Main proactive orchestration layer. Manages real-time data flows and autonomous decision loops across the cluster.</p>
+<div class="flex items-center justify-between">
+<div class="text-xs font-mono text-slate-400">v4.2.0-LTS</div>
+<button class="text-sm font-bold text-primary flex items-center gap-1">
+                                    Settings <span class="material-symbols-outlined text-sm">settings</span>
+</button>
+</div>
+</div>
+<div class="ipr-card glass-light dark:glass rounded-xl border border-slate-200 dark:border-slate-800 p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3">
+<div class="w-6 h-6 border-2 border-slate-300 dark:border-slate-700 rounded-full"></div>
+</div>
+<div class="flex items-start gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-indigo-500/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-indigo-500 text-3xl">psychology</span>
+</div>
+<div>
+<h3 class="font-display font-bold text-lg text-slate-700 dark:text-slate-200">Cognitive Hub</h3>
+<span class="text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-500 px-2 py-0.5 rounded uppercase font-bold tracking-widest">Optional Add-on</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Neural processing unit for advanced predictive analytics and natural language intent classification.</p>
+<div class="flex items-center justify-between">
+<div class="text-xs font-mono text-slate-400">v2.1.4-beta</div>
+<button class="text-sm font-bold text-slate-400 hover:text-primary transition-colors">Select Engine</button>
+</div>
+</div>
+<div class="ipr-card glass-light dark:glass rounded-xl border border-slate-200 dark:border-slate-800 p-6 relative overflow-hidden group opacity-80 hover:opacity-100">
+<div class="absolute top-0 right-0 p-3">
+<div class="w-6 h-6 border-2 border-slate-300 dark:border-slate-700 rounded-full"></div>
+</div>
+<div class="flex items-start gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-accent-neon/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-accent-neon text-3xl">shield</span>
+</div>
+<div>
+<h3 class="font-display font-bold text-lg text-slate-700 dark:text-slate-200">Sentinel Sentry</h3>
+<span class="text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-500 px-2 py-0.5 rounded uppercase font-bold tracking-widest">Security</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Automated threat detection and compliance monitoring engine with zero-trust architecture.</p>
+<div class="flex items-center justify-between">
+<div class="text-xs font-mono text-slate-400">v1.0.8</div>
+<button class="text-sm font-bold text-slate-400 hover:text-primary transition-colors">Select Engine</button>
+</div>
+</div>
+<div class="glass-light dark:glass rounded-xl border border-dashed border-slate-300 dark:border-slate-700 p-6 relative group bg-slate-50/50 dark:bg-slate-900/50">
+<div class="absolute inset-0 flex items-center justify-center bg-background-light/40 dark:bg-background-dark/40 backdrop-blur-[2px] z-10 rounded-xl">
+<div class="bg-slate-800 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">lock</span> Enterprise Plan Only
+                                </div>
+</div>
+<div class="flex items-start gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-slate-400/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-slate-400 text-3xl">cloud_sync</span>
+</div>
+<div>
+<h3 class="font-display font-bold text-lg text-slate-400">Legacy Connector</h3>
+<span class="text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-400 px-2 py-0.5 rounded uppercase font-bold tracking-widest">Integration</span>
+</div>
+</div>
+<p class="text-sm text-slate-400 mb-6">Sync with legacy mainframes and on-premise ERP databases via encrypted tunnels.</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-8 border-t border-slate-200 dark:border-slate-800">
+<button class="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+<span class="material-symbols-outlined">arrow_back</span>
+                            Back to Basic Info
+                        </button>
+<div class="flex gap-4">
+<button class="px-6 py-3 rounded-xl font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                                Save Draft
+                            </button>
+<button class="group relative px-8 py-3 bg-primary text-white font-bold rounded-xl overflow-hidden hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all">
+<div class="relative z-10 flex items-center gap-2">
+                                    Continue to Roles
+                                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+<div class="flex gap-4">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-accent-neon"></span> API Gateway Online</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-accent-neon"></span> Cloud DB Synchronized</span>
+</div>
+<div class="flex items-center gap-4">
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+<span class="w-1 h-1 rounded-full bg-slate-700"></span>
+<a class="hover:text-primary transition-colors" href="#">Support Portal</a>
+<span class="w-1 h-1 rounded-full bg-slate-700"></span>
+<span>Request ID: <span class="font-mono">PRV-2849-001X</span></span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] -z-20 pointer-events-none opacity-50"></div>
+<div class="fixed bottom-0 right-0 w-[400px] h-[400px] bg-accent-neon/10 rounded-full blur-[100px] -z-20 pointer-events-none opacity-30"></div>
+<script>
+        // Simple light/dark toggle simulation for preview if needed
+        // (The system handles it via classes, but we can add a listener)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+
+</body></html>

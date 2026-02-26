@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Provisioning: Engine Selection View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#0f0814",
+                        "surface-dark": "#1a1122",
+                        "border-dark": "#362348",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .neon-pulse {
+            box-shadow: 0 0 15px rgba(127, 19, 236, 0.4);
+        }
+        .glass-panel {
+            background: rgba(26, 17, 34, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #362348;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-border-dark bg-background-dark/80 backdrop-blur-md px-8 py-4">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight">Intellect ProActive</h2>
+</div>
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium text-primary" href="#">Provisioning</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="p-2 rounded-full bg-surface-dark border border-border-dark text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center text-primary font-bold overflow-hidden">
+<img alt="User profile" class="size-full object-cover" data-alt="User profile avatar with a friendly face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEig0uNE7Xo-BPNaLmmZP5BswzsLG3n0Nw16ccmCR9gHM7HrFN1SbDYhGVbU37uXNWYpsk7Gw6K4aWXrpDVFQ_Hv8jZmIviOqkIw1yJL-FU5UHpV8rr__vySkBN4qae57j4QFlIiH5JlGeeqSvlRHBzXnBSZJcrjD51HlmF_7y1Jo_RogiYie2gZb8-PwvohfhIiotDnM7jCElJ0mxgsi3sNQIhU-9qVsODLH99SF4bjb04K-WcC49_RiE9nep43BrqrdOpKNwfPw"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex h-[calc(100vh-73px)]">
+<!-- Main Selection Area -->
+<section class="flex-1 flex flex-col overflow-y-auto custom-scrollbar p-8">
+<!-- Progress Stepper -->
+<div class="max-w-5xl w-full mx-auto mb-10">
+<div class="flex items-center justify-between mb-4 px-2">
+<span class="text-xs font-bold uppercase tracking-widest text-primary">Step 2: Engine Selection</span>
+<span class="text-xs font-medium text-slate-500">40% Complete</span>
+</div>
+<div class="relative h-2 w-full bg-surface-dark rounded-full overflow-hidden border border-border-dark">
+<div class="absolute top-0 left-0 h-full bg-primary w-[40%] neon-pulse transition-all duration-500"></div>
+</div>
+<div class="flex justify-between mt-3 px-1">
+<div class="flex flex-col items-center opacity-50">
+<span class="material-symbols-outlined text-sm text-primary mb-1">check_circle</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Identity</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-sm text-primary mb-1">radio_button_checked</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter text-primary">Engines</span>
+</div>
+<div class="flex flex-col items-center opacity-30">
+<span class="material-symbols-outlined text-sm mb-1">radio_button_unchecked</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Config</span>
+</div>
+<div class="flex flex-col items-center opacity-30">
+<span class="material-symbols-outlined text-sm mb-1">radio_button_unchecked</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Resources</span>
+</div>
+<div class="flex flex-col items-center opacity-30">
+<span class="material-symbols-outlined text-sm mb-1">radio_button_unchecked</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Review</span>
+</div>
+</div>
+</div>
+<!-- Page Header -->
+<div class="max-w-5xl w-full mx-auto mb-8">
+<h1 class="text-4xl font-bold mb-2">Core Engines</h1>
+<p class="text-slate-400 max-w-2xl">Select the modular capabilities for your tenant. Each engine provides specific API endpoints and specialized logic layers.</p>
+</div>
+<!-- Grid of Engines -->
+<div class="max-w-5xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
+<!-- Engine Tile 1: AI & Logic -->
+<div class="group relative p-6 rounded-lg bg-surface-dark border-2 border-primary shadow-2xl transition-all hover:translate-y-[-4px]">
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">psychology</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-green-500">Enabled</span>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                        AI &amp; Logic Core
+                        <span class="material-symbols-outlined text-slate-500 text-sm cursor-help hover:text-white transition-colors">info</span>
+</h3>
+<p class="text-sm text-slate-400 mb-6 leading-relaxed">Neural processing unit for automated workflows, predictive analytics, and LLM integration.</p>
+<button class="w-full py-2.5 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-widest hover:brightness-110 transition-all">
+                        Active Selection
+                    </button>
+</div>
+<!-- Engine Tile 2: Billing & Fintech -->
+<div class="group relative p-6 rounded-lg bg-surface-dark border-2 border-border-dark hover:border-primary/50 transition-all hover:translate-y-[-4px]">
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 rounded-xl bg-slate-800 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Disabled</span>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                        Global Billing
+                        <span class="material-symbols-outlined text-slate-500 text-sm cursor-help hover:text-white transition-colors">info</span>
+</h3>
+<p class="text-sm text-slate-400 mb-6 leading-relaxed">Multi-currency ledger, subscription management, and tax compliance automation suite.</p>
+<button class="w-full py-2.5 rounded-full bg-slate-800 text-slate-300 text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+                        Enable Engine
+                    </button>
+</div>
+<!-- Engine Tile 3: E-Sign & Doc -->
+<div class="group relative p-6 rounded-lg bg-surface-dark border-2 border-primary shadow-2xl transition-all hover:translate-y-[-4px]">
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">draw</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-green-500">Enabled</span>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                        TrustSign Engine
+                        <span class="material-symbols-outlined text-slate-500 text-sm cursor-help hover:text-white transition-colors">info</span>
+</h3>
+<p class="text-sm text-slate-400 mb-6 leading-relaxed">Legally binding e-signatures with biometric verification and encrypted document vaults.</p>
+<button class="w-full py-2.5 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-widest hover:brightness-110 transition-all">
+                        Active Selection
+                    </button>
+</div>
+<!-- Engine Tile 4: Identity -->
+<div class="group relative p-6 rounded-lg bg-surface-dark border-2 border-border-dark hover:border-primary/50 transition-all hover:translate-y-[-4px]">
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 rounded-xl bg-slate-800 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">fingerprint</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Disabled</span>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                        Identity Nexus
+                        <span class="material-symbols-outlined text-slate-500 text-sm cursor-help hover:text-white transition-colors">info</span>
+</h3>
+<p class="text-sm text-slate-400 mb-6 leading-relaxed">Advanced RBAC, SSO integrations, and behavioral MFA for enterprise-grade security.</p>
+<button class="w-full py-2.5 rounded-full bg-slate-800 text-slate-300 text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+                        Enable Engine
+                    </button>
+</div>
+<!-- Engine Tile 5: Audit Trail -->
+<div class="group relative p-6 rounded-lg bg-surface-dark border-2 border-border-dark hover:border-primary/50 transition-all hover:translate-y-[-4px]">
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 rounded-xl bg-slate-800 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">history_edu</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Disabled</span>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                        Immutable Ledger
+                        <span class="material-symbols-outlined text-slate-500 text-sm cursor-help hover:text-white transition-colors">info</span>
+</h3>
+<p class="text-sm text-slate-400 mb-6 leading-relaxed">Blockchain-backed audit logs for tamper-proof regulatory compliance reporting.</p>
+<button class="w-full py-2.5 rounded-full bg-slate-800 text-slate-300 text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+                        Enable Engine
+                    </button>
+</div>
+<!-- Engine Tile 6: API Gateway -->
+<div class="group relative p-6 rounded-lg bg-surface-dark border-2 border-border-dark hover:border-primary/50 transition-all hover:translate-y-[-4px]">
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 rounded-xl bg-slate-800 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">hub</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Disabled</span>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2 flex items-center gap-2">
+                        Nexus Connect
+                        <span class="material-symbols-outlined text-slate-500 text-sm cursor-help hover:text-white transition-colors">info</span>
+</h3>
+<p class="text-sm text-slate-400 mb-6 leading-relaxed">Unified GraphQL and REST gateway with dynamic rate limiting and caching.</p>
+<button class="w-full py-2.5 rounded-full bg-slate-800 text-slate-300 text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+                        Enable Engine
+                    </button>
+</div>
+</div>
+<!-- Sticky Footer Controls -->
+<div class="fixed bottom-0 left-0 right-[350px] p-6 bg-gradient-to-t from-background-dark to-transparent pointer-events-none">
+<div class="max-w-5xl mx-auto flex justify-between items-center pointer-events-auto bg-surface-dark/60 backdrop-blur-xl border border-border-dark p-4 rounded-xl shadow-2xl">
+<button class="flex items-center gap-2 px-6 py-2 rounded-full border border-border-dark text-sm font-bold uppercase tracking-widest hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                        Back
+                    </button>
+<div class="flex items-center gap-4">
+<span class="text-xs text-slate-400 hidden lg:inline">Auto-saving selection...</span>
+<button class="flex items-center gap-2 px-8 py-3 rounded-full bg-primary text-white text-sm font-bold uppercase tracking-widest hover:brightness-110 shadow-lg shadow-primary/20 transition-all">
+                            Next: Configuration
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar: Build Summary -->
+<aside class="w-[350px] border-l border-border-dark bg-surface-dark flex flex-col relative overflow-hidden">
+<!-- IPR-O Watermark Background -->
+<div class="absolute inset-0 pointer-events-none opacity-[0.03] flex items-center justify-center">
+<div class="scale-[3] rotate-[-15deg]">
+<svg fill="white" height="400" viewbox="0 0 48 48" width="400">
+<path d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"></path>
+</svg>
+</div>
+</div>
+<div class="relative z-10 p-8 flex flex-col h-full">
+<div class="mb-8">
+<h2 class="text-xl font-bold mb-1">Build Summary</h2>
+<p class="text-xs text-slate-400 uppercase tracking-widest">Real-time configuration</p>
+</div>
+<div class="space-y-6 flex-1 overflow-y-auto custom-scrollbar pr-2">
+<!-- Section: Base -->
+<div>
+<h3 class="text-[10px] font-bold text-primary uppercase tracking-widest mb-3">Core Instance</h3>
+<div class="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
+<span class="material-symbols-outlined text-primary">cloud_done</span>
+<div class="flex flex-col">
+<span class="text-xs font-bold">Standard SaaS Tenant</span>
+<span class="text-[10px] text-slate-500">Multi-region deployment active</span>
+</div>
+</div>
+</div>
+<!-- Section: Selected Engines -->
+<div>
+<h3 class="text-[10px] font-bold text-primary uppercase tracking-widest mb-3">Selected Engines (2)</h3>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 rounded-lg bg-primary/10 border border-primary/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-primary">psychology</span>
+<span class="text-xs font-medium">AI &amp; Logic Core</span>
+</div>
+<span class="text-[10px] text-slate-500">+$249/mo</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-primary/10 border border-primary/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-primary">draw</span>
+<span class="text-xs font-medium">TrustSign Engine</span>
+</div>
+<span class="text-[10px] text-slate-500">+$120/mo</span>
+</div>
+</div>
+</div>
+<!-- Section: Estimates -->
+<div>
+<h3 class="text-[10px] font-bold text-primary uppercase tracking-widest mb-3">Resource Estimate</h3>
+<div class="p-4 rounded-lg bg-white/5 border border-white/10 space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-[10px] text-slate-400 uppercase">Compute Load</span>
+<div class="h-1.5 w-24 bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-green-500 w-[35%]"></div>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[10px] text-slate-400 uppercase">Latency Impact</span>
+<span class="text-[10px] font-bold text-green-500">&lt; 40ms</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[10px] text-slate-400 uppercase">Base License</span>
+<span class="text-[10px] font-bold">$1,200/mo</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Summary -->
+<div class="pt-6 border-t border-border-dark mt-auto">
+<div class="flex justify-between items-end mb-4">
+<div>
+<p class="text-[10px] text-slate-400 uppercase tracking-widest">Total Monthly</p>
+<p class="text-2xl font-bold">$1,569</p>
+</div>
+<span class="text-[10px] text-slate-500">USD</span>
+</div>
+<div class="flex items-center gap-2 text-[10px] text-slate-500 bg-white/5 p-2 rounded-md">
+<span class="material-symbols-outlined text-xs">info</span>
+                        Neon pulse active: real-time updates
+                    </div>
+</div>
+</div>
+</aside>
+</main>
+</body></html>

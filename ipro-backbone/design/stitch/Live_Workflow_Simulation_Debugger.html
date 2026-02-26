@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Live Workflow Simulation &amp; Debugger | Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ad2bee",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#0B0E14",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0B0E14;
+        }
+        .glass-panel {
+            background: rgba(28, 16, 34, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(173, 43, 238, 0.2);
+        }
+        .node-pulse-amber {
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+            border-color: rgba(245, 158, 11, 0.6);
+        }
+        .node-pulse-emerald {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            border-color: rgba(16, 185, 129, 0.6);
+        }
+        .data-packet {
+            filter: drop-shadow(0 0 8px #ad2bee);
+        }
+        .workflow-canvas {
+            background-image: radial-gradient(rgba(173, 43, 238, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(11, 14, 20, 1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(173, 43, 238, 0.3);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-slate-100 overflow-hidden select-none">
+<div class="relative flex h-screen w-full flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between h-16 px-6 border-b border-white/10 bg-background-dark/80 backdrop-blur-md z-50">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 flex items-center justify-center rounded-lg bg-primary/10">
+<span class="material-symbols-outlined text-primary">hub</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">Intellect <span class="text-white font-light">ProActive</span></h2>
+</div>
+<div class="h-6 w-px bg-white/10 mx-2"></div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-400 hover:text-white transition-colors" href="#">Projects</a>
+<a class="text-sm font-medium text-white flex items-center gap-2" href="#">
+<span class="size-2 rounded-full bg-primary animate-pulse"></span>
+                        Live Simulation
+                    </a>
+<a class="text-sm font-medium text-slate-400 hover:text-white transition-colors" href="#">Logs</a>
+</nav>
+</div>
+<!-- Playback Controls (Centerish) -->
+<div class="glass-panel rounded-full px-4 py-1.5 flex items-center gap-2 border-white/5 shadow-2xl">
+<button class="p-1.5 hover:bg-white/10 rounded-full text-slate-400 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">restart_alt</span>
+</button>
+<div class="h-4 w-px bg-white/10 mx-1"></div>
+<button class="size-8 flex items-center justify-center bg-primary hover:bg-primary/80 text-white rounded-full shadow-lg shadow-primary/20 transition-all active:scale-90">
+<span class="material-symbols-outlined text-[20px] fill-1">pause</span>
+</button>
+<button class="p-1.5 hover:bg-white/10 rounded-full text-slate-400 transition-all">
+<span class="material-symbols-outlined text-[20px]">skip_next</span>
+</button>
+<div class="h-4 w-px bg-white/10 mx-1"></div>
+<div class="flex items-center gap-3 px-2">
+<span class="text-[11px] font-mono text-slate-500 uppercase tracking-widest">Speed</span>
+<div class="flex gap-1 bg-white/5 rounded p-0.5">
+<span class="px-2 py-0.5 text-[10px] font-bold rounded cursor-pointer hover:bg-white/10">1x</span>
+<span class="px-2 py-0.5 text-[10px] font-bold rounded bg-primary text-white">2x</span>
+<span class="px-2 py-0.5 text-[10px] font-bold rounded cursor-pointer hover:bg-white/10">5x</span>
+</div>
+</div>
+<div class="h-4 w-px bg-white/10 mx-1"></div>
+<div class="px-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">schedule</span>
+<span class="text-sm font-mono text-primary font-bold">00:12.42</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 transition-all">
+<span class="material-symbols-outlined text-slate-300">notifications</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 transition-all">
+<span class="material-symbols-outlined text-slate-300">settings</span>
+</button>
+</div>
+<div class="h-10 w-10 rounded-lg overflow-hidden border border-white/20">
+<img class="w-full h-full object-cover" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeFy9WQvneA2rhDxOA7BtyAQttz6dVpnCS8mMrIbE7-dPaqV6qzcIEnoyKfdHBm7LcfyuCeIQ-KtGlYdk56FVww-3Hv5BU1EbnYtsFgeLwFXx3iWfE39OfcONBYWG-WdMwF55gFcZ2GKH998vF7Vy1So3YHZV0Zkkm69yFOAt6UnIxt4G1UybbX1uPeRW1koMgLXUjlnAwKZeyLGhAhzp7fmFmP__avZ8DYOuvQC_lVK3KkdMceJ56nQ8_OkBMEJHSSBHa5Im3oeo"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Sidebar Navigation (Slim) -->
+<aside class="w-16 border-r border-white/5 flex flex-col items-center py-6 gap-6 bg-background-dark">
+<div class="p-2 rounded-xl bg-primary/20 text-primary border border-primary/30 cursor-pointer">
+<span class="material-symbols-outlined">account_tree</span>
+</div>
+<div class="p-2 rounded-xl text-slate-500 hover:text-white hover:bg-white/5 cursor-pointer transition-all">
+<span class="material-symbols-outlined">data_object</span>
+</div>
+<div class="p-2 rounded-xl text-slate-500 hover:text-white hover:bg-white/5 cursor-pointer transition-all">
+<span class="material-symbols-outlined">monitoring</span>
+</div>
+<div class="p-2 rounded-xl text-slate-500 hover:text-white hover:bg-white/5 cursor-pointer transition-all">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+<div class="mt-auto p-2 rounded-xl text-slate-500 hover:text-white hover:bg-white/5 cursor-pointer transition-all">
+<span class="material-symbols-outlined">help</span>
+</div>
+</aside>
+<!-- Workflow Canvas -->
+<section class="flex-1 relative workflow-canvas overflow-hidden">
+<div class="absolute top-6 left-6 z-10">
+<div class="bg-background-dark/80 backdrop-blur-md border border-white/10 rounded-lg p-3">
+<h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Current Workflow</h3>
+<p class="text-sm font-medium text-white">Dubai Luxury Property Closing</p>
+</div>
+</div>
+<!-- Simulation Canvas Layers (Representational Nodes) -->
+<div class="absolute inset-0 flex items-center justify-center gap-24">
+<!-- Node 1: Trigger -->
+<div class="relative flex flex-col items-center">
+<div class="w-48 p-4 glass-panel rounded-xl border border-emerald-500/40 node-pulse-emerald bg-emerald-500/5 transition-all">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-emerald-400">bolt</span>
+<span class="text-xs font-bold text-white tracking-wide">Webhook Trigger</span>
+</div>
+<div class="text-[11px] text-slate-400 font-mono">ID: node_001</div>
+<div class="mt-2 flex items-center gap-2 text-[10px] text-emerald-400">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                Received 200 OK
+                            </div>
+</div>
+<!-- Connection Line -->
+<div class="absolute left-full top-1/2 w-24 h-[2px] bg-emerald-500/20">
+<div class="absolute top-[-9px] left-1/2 data-packet">
+<span class="material-symbols-outlined text-primary text-[20px] bg-background-dark rounded-full">token</span>
+</div>
+</div>
+</div>
+<!-- Node 2: AI Engine (Active) -->
+<div class="relative flex flex-col items-center">
+<div class="w-48 p-4 glass-panel rounded-xl border-amber-500/60 node-pulse-amber bg-amber-500/10 animate-pulse">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-amber-400">psychology</span>
+<span class="text-xs font-bold text-white tracking-wide">AI Analyzer</span>
+</div>
+<div class="h-1 w-full bg-white/10 rounded-full overflow-hidden mb-2">
+<div class="h-full bg-amber-400 w-3/4 animate-shimmer"></div>
+</div>
+<div class="text-[10px] text-amber-400 font-medium">Processing Contract Details...</div>
+</div>
+<!-- Connection Line (Dimmed) -->
+<div class="absolute left-full top-1/2 w-24 h-[2px] bg-white/5"></div>
+</div>
+<!-- Node 3: Logic Branch -->
+<div class="relative flex flex-col items-center">
+<div class="w-48 p-4 glass-panel rounded-xl border border-white/10 opacity-50">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-slate-400">call_split</span>
+<span class="text-xs font-bold text-white tracking-wide">Region Validator</span>
+</div>
+<div class="text-[11px] text-slate-500 font-mono italic">Awaiting input...</div>
+</div>
+<!-- Connection Lines to Two Future Nodes -->
+<div class="absolute left-full top-1/2 w-24 h-[100px] border-t border-r border-white/5 rounded-tr-2xl"></div>
+<div class="absolute left-full top-1/2 w-24 h-[100px] border-b border-r border-white/5 rounded-br-2xl"></div>
+</div>
+<!-- Node 4: eSign -->
+<div class="absolute right-24 top-1/4">
+<div class="w-48 p-4 glass-panel rounded-xl border border-white/10 opacity-30">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-slate-400">draw</span>
+<span class="text-xs font-bold text-white tracking-wide">eSign Gateway</span>
+</div>
+</div>
+</div>
+<!-- Node 5: Database -->
+<div class="absolute right-24 bottom-1/4">
+<div class="w-48 p-4 glass-panel rounded-xl border border-white/10 opacity-30">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-slate-400">database</span>
+<span class="text-xs font-bold text-white tracking-wide">PostgreSQL Sink</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Step-by-Step Debugger Drawer -->
+<div class="absolute bottom-0 left-0 right-0 h-64 glass-panel border-t border-white/10 flex flex-col z-20">
+<div class="flex items-center justify-between px-6 py-2 border-b border-white/5 bg-white/5">
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 text-xs font-bold text-white border-b-2 border-primary py-2">
+<span class="material-symbols-outlined text-sm">terminal</span> EXECUTION LOGS
+                            </button>
+<button class="flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-300 py-2 transition-all">
+<span class="material-symbols-outlined text-sm">data_object</span> PAYLOAD TRACE
+                            </button>
+<button class="flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-300 py-2 transition-all">
+<span class="material-symbols-outlined text-sm">network_check</span> NETWORK
+                            </button>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono">
+<span class="size-2 rounded-full bg-emerald-500"></span> 12 Nodes Healthy
+                             </div>
+<button class="p-1 hover:bg-white/10 rounded">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<div class="flex-1 flex overflow-hidden">
+<!-- Left: Raw JSON View -->
+<div class="flex-1 border-r border-white/5 p-4 bg-[#080a0f] overflow-y-auto">
+<pre class="text-[12px] font-mono leading-relaxed"><span class="text-purple-400">"node_id"</span>: <span class="text-amber-300">"ai_analyzer_002"</span>,
+<span class="text-purple-400">"status"</span>: <span class="text-amber-300">"processing"</span>,
+<span class="text-purple-400">"input_data"</span>: {
+  <span class="text-purple-400">"document_type"</span>: <span class="text-emerald-300">"luxury_lease_agreement"</span>,
+  <span class="text-purple-400">"region"</span>: <span class="text-emerald-300">"Dubai_UAE"</span>,
+  <span class="text-purple-400">"parties"</span>: [<span class="text-emerald-300">"Buyer_0x34"</span>, <span class="text-emerald-300">"Seller_0x12"</span>],
+  <span class="text-purple-400">"metadata"</span>: {
+    <span class="text-purple-400">"encryption"</span>: <span class="text-emerald-300">"AES-256"</span>
+  }
+},
+<span class="text-purple-400">"timestamp"</span>: <span class="text-blue-300">170452342342</span></pre>
+</div>
+<!-- Right: Execution Logs -->
+<div class="w-2/5 p-4 bg-background-dark/30 overflow-y-auto space-y-2">
+<div class="flex gap-3 text-[11px] font-mono">
+<span class="text-slate-500">[12:00:10]</span>
+<span class="text-emerald-400">SUCCESS</span>
+<span class="text-slate-300">Webhook 'Property_Trigger' received data packet #420</span>
+</div>
+<div class="flex gap-3 text-[11px] font-mono">
+<span class="text-slate-500">[12:00:11]</span>
+<span class="text-primary">TRACE</span>
+<span class="text-slate-300">Routing payload to AI Analyzer [DC-01]</span>
+</div>
+<div class="flex gap-3 text-[11px] font-mono bg-amber-500/10 p-1 rounded">
+<span class="text-slate-500">[12:00:12]</span>
+<span class="text-amber-400">PENDING</span>
+<span class="text-slate-300">AI Analyzer: Extracting entities (0.84s elapsed)</span>
+</div>
+<div class="flex gap-3 text-[11px] font-mono opacity-50">
+<span class="text-slate-500">[--:--:--]</span>
+<span class="text-slate-500">AWAITING</span>
+<span class="text-slate-500">Region Validator queue...</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar: Simulation Variables -->
+<aside class="w-80 glass-panel border-l border-white/10 flex flex-col p-6 z-30">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-lg font-bold text-white">Simulation Vars</h2>
+<p class="text-xs text-slate-500">Inject test data in real-time</p>
+</div>
+<button class="size-8 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div class="space-y-6 flex-1 overflow-y-auto pr-2">
+<!-- Variable Set 1 -->
+<div class="space-y-3">
+<label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Global Auth</label>
+<div class="space-y-2">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+<span>user_id</span>
+<span class="text-[10px] font-mono text-primary/60">UUID</span>
+</div>
+<input class="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-sm font-mono text-white focus:ring-1 focus:ring-primary focus:border-primary transition-all" type="text" value="usr_8823_luxury_dev"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+<span>access_token</span>
+<span class="text-[10px] font-mono text-primary/60">SECRET</span>
+</div>
+<input class="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-sm font-mono text-white focus:ring-1 focus:ring-primary focus:border-primary transition-all" type="password" value="••••••••••••••••"/>
+</div>
+</div>
+</div>
+<!-- Variable Set 2 -->
+<div class="space-y-3">
+<label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Payload Overrides</label>
+<div class="p-3 bg-white/5 rounded-xl border border-white/5 space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-300">Force Cache Miss</span>
+<button class="relative inline-flex h-5 w-9 items-center rounded-full bg-slate-700">
+<span class="inline-block h-4 w-4 transform rounded-full bg-white translate-x-1 transition-transform"></span>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-300">Strict Validation</span>
+<button class="relative inline-flex h-5 w-9 items-center rounded-full bg-primary">
+<span class="inline-block h-4 w-4 transform rounded-full bg-white translate-x-4 transition-transform"></span>
+</button>
+</div>
+<div class="pt-2">
+<span class="text-[11px] text-slate-500 block mb-2">Simulated Latency (ms)</span>
+<input class="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<div class="flex justify-between text-[10px] text-slate-500 mt-1">
+<span>0ms</span>
+<span>500ms</span>
+<span>2000ms</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-white/10">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">send</span>
+                        Inject Data Changes
+                    </button>
+<p class="text-[10px] text-center text-slate-500 mt-3 italic">Hot-reloading simulation on save...</p>
+</div>
+</aside>
+</main>
+<!-- Floating Quick View Toast -->
+<div class="absolute top-20 right-84 z-40 bg-background-dark/90 border border-primary/40 rounded-lg px-4 py-2 shadow-2xl flex items-center gap-3 animate-pulse">
+<div class="size-2 rounded-full bg-primary"></div>
+<span class="text-xs font-medium text-slate-100">Packet #421 flowing to node_002</span>
+</div>
+</div>
+</body></html>

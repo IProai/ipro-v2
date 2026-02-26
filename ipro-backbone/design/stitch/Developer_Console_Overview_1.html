@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intellect ProActive — Developer Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366f1",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                        "card-dark": "#1e293b",
+                        "border-dark": "#334155",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "8px",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+        .glass-panel { backdrop-filter: blur(12px); background: rgba(30, 41, 59, 0.7); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased min-h-screen flex">
+<aside class="w-64 border-r border-slate-200 dark:border-border-dark flex flex-col sticky top-0 h-screen bg-white dark:bg-card-dark">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-icons-round text-xl">hub</span>
+</div>
+<span class="font-bold text-lg tracking-tight">Intellect ProActive</span>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto custom-scrollbar">
+<div class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2 mb-2">Main</div>
+<a class="flex items-center gap-3 px-3 py-2 text-primary bg-indigo-50 dark:bg-indigo-900/20 rounded-lg" href="#">
+<span class="material-icons-round text-[20px]">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-icons-round text-[20px]">layers</span>
+<span class="text-sm font-medium">Environments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-icons-round text-[20px]">auto_awesome</span>
+<span class="text-sm font-medium">Deployments</span>
+</a>
+<div class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-2 mb-2 mt-6">Technical</div>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-icons-round text-[20px]">api</span>
+<span class="text-sm font-medium">API Gateway</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-icons-round text-[20px]">stream</span>
+<span class="text-sm font-medium">Event Streams</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-icons-round text-[20px]">terminal</span>
+<span class="text-sm font-medium">Functions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-icons-round text-[20px]">security</span>
+<span class="text-sm font-medium">Secrets &amp; IAM</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-border-dark">
+<div class="flex items-center gap-3 p-2 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-purple-500 overflow-hidden">
+<img alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlEMULumKwFT60k2Fhilv0AnC0fRfdsfKDppXwML8ofWqWoebI6W4reWaRuBwS-QBSDok9UYnr10WGAZlc9mCi5QabTgWxbEtJWcqtdT33BJSeW1MBJv_1Eni-hrvlsmOszi8jOtP2L5Su1x7iMh4AkzFlmoE_nUQhPASoqG2VqBjFCBvubgb7GLMwXAcRvOU0jbT_BmfHxRqu1jbpIFBg3JDel1wzwadztyxTpJWUrpAZQgTcD1M1EyHKM5VPEedzIFAXR0-9e2s"/>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-semibold truncate">admin_dev_01</p>
+<p class="text-[10px] text-slate-500 truncate">Enterprise Tenant</p>
+</div>
+<span class="material-icons-round text-slate-400 text-sm">settings</span>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<header class="h-16 border-b border-slate-200 dark:border-border-dark flex items-center justify-between px-8 bg-white dark:bg-card-dark z-10">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-96">
+<span class="material-icons-round absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-1.5 text-sm bg-slate-100 dark:bg-slate-800 border-none rounded-md focus:ring-1 focus:ring-primary dark:text-slate-200 placeholder:text-slate-500" placeholder="Search logs, events, or resources..." type="text"/>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    All Engines Active
+                </div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-8 h-8 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-icons-round">notifications</span>
+</button>
+<button class="flex items-center justify-center w-8 h-8 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-round">dark_mode</span>
+</button>
+<div class="h-6 w-px bg-slate-200 dark:border-border-dark"></div>
+<button class="bg-primary text-white px-4 py-1.5 rounded-md text-sm font-medium hover:opacity-90 transition-opacity">Deploy New</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+<div class="mb-8">
+<h1 class="text-2xl font-bold mb-1">Developer Console Overview</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Real-time health monitoring and resource allocation across your infrastructure.</p>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+<div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark p-5 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Environment</span>
+<h3 class="text-lg font-bold">Dev-Stage-01</h3>
+</div>
+<span class="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold rounded uppercase">Sandbox</span>
+</div>
+<div class="flex items-end gap-1 mb-4 h-12">
+<div class="flex-1 bg-primary/20 rounded-t h-[40%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[60%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[30%]"></div>
+<div class="flex-1 bg-primary rounded-t h-[80%]"></div>
+<div class="flex-1 bg-primary rounded-t h-[70%]"></div>
+<div class="flex-1 bg-primary rounded-t h-[90%]"></div>
+<div class="flex-1 bg-primary rounded-t h-[55%]"></div>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-slate-100 dark:border-border-dark pt-4">
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">API Latency</p>
+<p class="text-lg font-mono">142<span class="text-xs ml-1">ms</span></p>
+</div>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Error Rate</p>
+<p class="text-lg font-mono text-green-500">0.04%</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark p-5 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Environment</span>
+<h3 class="text-lg font-bold">QA-Internal-A</h3>
+</div>
+<span class="px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 text-[10px] font-bold rounded uppercase">Staging</span>
+</div>
+<div class="flex items-end gap-1 mb-4 h-12">
+<div class="flex-1 bg-yellow-500/20 rounded-t h-[20%]"></div>
+<div class="flex-1 bg-yellow-500/20 rounded-t h-[40%]"></div>
+<div class="flex-1 bg-yellow-500/20 rounded-t h-[50%]"></div>
+<div class="flex-1 bg-yellow-500 rounded-t h-[30%]"></div>
+<div class="flex-1 bg-yellow-500 rounded-t h-[40%]"></div>
+<div class="flex-1 bg-yellow-500 rounded-t h-[60%]"></div>
+<div class="flex-1 bg-yellow-500 rounded-t h-[55%]"></div>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-slate-100 dark:border-border-dark pt-4">
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">API Latency</p>
+<p class="text-lg font-mono">189<span class="text-xs ml-1">ms</span></p>
+</div>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Error Rate</p>
+<p class="text-lg font-mono text-yellow-500">1.2%</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark p-5 rounded-xl shadow-sm relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Environment</span>
+<h3 class="text-lg font-bold">Cluster-Global-Prod</h3>
+</div>
+<span class="px-2 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[10px] font-bold rounded uppercase">Production</span>
+</div>
+<div class="flex items-end gap-1 mb-4 h-12 relative z-10">
+<div class="flex-1 bg-indigo-500/20 rounded-t h-[80%]"></div>
+<div class="flex-1 bg-indigo-500/20 rounded-t h-[85%]"></div>
+<div class="flex-1 bg-indigo-500/20 rounded-t h-[75%]"></div>
+<div class="flex-1 bg-indigo-500 rounded-t h-[95%]"></div>
+<div class="flex-1 bg-indigo-500 rounded-t h-[92%]"></div>
+<div class="flex-1 bg-indigo-500 rounded-t h-[98%]"></div>
+<div class="flex-1 bg-indigo-500 rounded-t h-[96%]"></div>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-slate-100 dark:border-border-dark pt-4 relative z-10">
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">API Latency</p>
+<p class="text-lg font-mono">42<span class="text-xs ml-1">ms</span></p>
+</div>
+<div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Error Rate</p>
+<p class="text-lg font-mono text-green-500">0.00%</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-sm flex flex-col h-[500px]">
+<div class="p-4 border-b border-slate-100 dark:border-border-dark flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-icons-round text-primary">analytics</span>
+<h2 class="font-bold">Event Explorer Feed</h2>
+</div>
+<div class="flex gap-2">
+<button class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded uppercase">Live</button>
+<button class="text-[10px] font-bold px-2 py-1 text-slate-400 uppercase">History</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar font-mono text-[11px]">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-800/50 sticky top-0 text-slate-400 uppercase">
+<tr>
+<th class="px-4 py-2 font-bold">Timestamp</th>
+<th class="px-4 py-2 font-bold">Event Type</th>
+<th class="px-4 py-2 font-bold">Stream ID</th>
+<th class="px-4 py-2 font-bold">Action</th>
+<th class="px-4 py-2 font-bold">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-border-dark">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer group">
+<td class="px-4 py-2 text-slate-500">2024-05-20 14:22:01</td>
+<td class="px-4 py-2 font-semibold">order.payment_verified</td>
+<td class="px-4 py-2">str_0493821</td>
+<td class="px-4 py-2 text-indigo-400">Consumed</td>
+<td class="px-4 py-2"><span class="px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">OK</span></td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer bg-slate-50/30 dark:bg-slate-800/10">
+<td class="px-4 py-2 text-slate-500">2024-05-20 14:22:00</td>
+<td class="px-4 py-2 font-semibold text-amber-500">user.auth_retry</td>
+<td class="px-4 py-2">str_auth_99</td>
+<td class="px-4 py-2 text-indigo-400">Published</td>
+<td class="px-4 py-2"><span class="px-1.5 py-0.5 rounded-full bg-yellow-500/10 text-yellow-500 border border-yellow-500/20">WARN</span></td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+<td class="px-4 py-2 text-slate-500">2024-05-20 14:21:58</td>
+<td class="px-4 py-2 font-semibold">sys.cache_invalidate</td>
+<td class="px-4 py-2">global_cache_1</td>
+<td class="px-4 py-2 text-indigo-400">Consumed</td>
+<td class="px-4 py-2"><span class="px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">OK</span></td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+<td class="px-4 py-2 text-slate-500">2024-05-20 14:21:45</td>
+<td class="px-4 py-2 font-semibold">invoice.created</td>
+<td class="px-4 py-2">str_inv_882</td>
+<td class="px-4 py-2 text-indigo-400">Published</td>
+<td class="px-4 py-2"><span class="px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">OK</span></td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+<td class="px-4 py-2 text-slate-500">2024-05-20 14:21:40</td>
+<td class="px-4 py-2 font-semibold text-red-500">db.query_timeout</td>
+<td class="px-4 py-2">pg_cluster_01</td>
+<td class="px-4 py-2 text-indigo-400">Consumed</td>
+<td class="px-4 py-2"><span class="px-1.5 py-0.5 rounded-full bg-red-500/10 text-red-500 border border-red-500/20">ERR</span></td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer"><td class="px-4 py-2 text-slate-500">2024-05-20 14:21:35</td><td class="px-4 py-2 font-semibold">worker.heartbeat</td><td class="px-4 py-2">node_v4_7</td><td class="px-4 py-2 text-indigo-400">Published</td><td class="px-4 py-2 text-green-500">OK</td></tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer"><td class="px-4 py-2 text-slate-500">2024-05-20 14:21:30</td><td class="px-4 py-2 font-semibold">worker.heartbeat</td><td class="px-4 py-2">node_v4_8</td><td class="px-4 py-2 text-indigo-400">Published</td><td class="px-4 py-2 text-green-500">OK</td></tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer"><td class="px-4 py-2 text-slate-500">2024-05-20 14:21:25</td><td class="px-4 py-2 font-semibold">api.request_trace</td><td class="px-4 py-2">gw_ext_0</td><td class="px-4 py-2 text-indigo-400">Consumed</td><td class="px-4 py-2 text-green-500">OK</td></tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer"><td class="px-4 py-2 text-slate-500">2024-05-20 14:21:20</td><td class="px-4 py-2 font-semibold">api.request_trace</td><td class="px-4 py-2">gw_ext_1</td><td class="px-4 py-2 text-indigo-400">Consumed</td><td class="px-4 py-2 text-green-500">OK</td></tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer"><td class="px-4 py-2 text-slate-500">2024-05-20 14:21:15</td><td class="px-4 py-2 font-semibold">order.updated</td><td class="px-4 py-2">str_0493821</td><td class="px-4 py-2 text-indigo-400">Published</td><td class="px-4 py-2 text-green-500">OK</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-sm flex flex-col h-[500px]">
+<div class="p-4 border-b border-slate-100 dark:border-border-dark flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-icons-round text-primary">history</span>
+<h2 class="font-bold text-sm">Deployment Status</h2>
+</div>
+<button class="text-xs text-primary font-semibold hover:underline">View All</button>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+<div class="flex gap-4 p-3 rounded-lg border border-slate-100 dark:border-border-dark hover:shadow-sm transition-shadow">
+<div class="w-8 h-8 rounded bg-green-500/10 flex items-center justify-center text-green-500 shrink-0">
+<span class="material-icons-round text-lg">check_circle</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-xs font-bold truncate uppercase tracking-tight">V3.4.1 — Hotfix 2</h4>
+<span class="text-[10px] text-slate-400">14m ago</span>
+</div>
+<p class="text-[11px] text-slate-500 mb-2 leading-relaxed">Fix: Authentication token refresh logic for legacy clients.</p>
+<div class="flex items-center gap-3">
+<div class="flex -space-x-1.5">
+<img alt="dev" class="w-5 h-5 rounded-full border border-white dark:border-card-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4aFRig8Xijkth4DDkf0PU_6mApT0FOSTcWvtXZlzYGw1K1CYSd-UihX7u5tkhXq-WPjqYHh5wzKlsOXBshWFgLMLck02FijQbyD8m87nssjBV040VMFeW4xWk37k3_jpoAHvPvh_CtShPbvJOyy6w0npMW6F0Zz5yIcVUMOAhCO7t-EWtZKZ7q8iQ1fzAXJ51cwoeGUFT4fPci2GNMN7swLon3NT2aFk8hJiEmtPaW47dsVsD1rDePr9Q6RLF1PpyFCd19gNkx20"/>
+<img alt="dev" class="w-5 h-5 rounded-full border border-white dark:border-card-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnctIbBWjZ_ZbYHttySv8dSavcAG842oH6x9pqYJvpYDqDM-0cGrgweX_Xe_mCTxiXEI1NfsGfRldAhg4plmKJm_a1T-YOLuxaADqvQ1EOblhgR3aARjGi4f7Ge8lasxudQjyGeOytbjfwZtxp1HDt-kIX6rU2NBLWJm5qagx9fYyMqalfyRd-xFtGZYg8XTDEZ15iTQd1sCeUlX2dIGr6mC9lz6-xWARDE6TtCSXjXQElXtSSka-kjKVdJRALvL2h0jobw7sXCfE"/>
+</div>
+<div class="h-1 w-1 rounded-full bg-slate-300"></div>
+<span class="text-[10px] text-slate-400 font-mono">#deploy-9942</span>
+</div>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-lg border border-primary/20 bg-primary/5">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary shrink-0 relative">
+<span class="material-icons-round text-lg animate-spin">refresh</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-xs font-bold truncate uppercase tracking-tight">V3.5.0 — RC1</h4>
+<span class="text-[10px] text-primary animate-pulse font-bold">Deploying...</span>
+</div>
+<p class="text-[11px] text-slate-500 mb-2 leading-relaxed">Feature: Multi-region event streaming support.</p>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%] rounded-full animate-pulse"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-lg border border-red-500/10 bg-red-500/[0.02]">
+<div class="w-8 h-8 rounded bg-red-500/10 flex items-center justify-center text-red-500 shrink-0">
+<span class="material-icons-round text-lg">error_outline</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-xs font-bold truncate uppercase tracking-tight">V3.4.0 — Rollback</h4>
+<span class="text-[10px] text-slate-400">2h ago</span>
+</div>
+<p class="text-[11px] text-slate-500 mb-2 leading-relaxed">Failed: Postgres migration timed out on cluster B.</p>
+<button class="text-[10px] font-bold text-red-500 border border-red-500/20 px-2 py-0.5 rounded hover:bg-red-500/10">Retry Migration</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-6 right-6">
+<button class="bg-primary hover:bg-indigo-700 text-white w-12 h-12 rounded-full shadow-lg shadow-primary/30 flex items-center justify-center transition-all hover:scale-105 active:scale-95 group">
+<span class="material-icons-round">terminal</span>
+<span class="absolute right-full mr-3 bg-slate-900 text-white text-[10px] font-bold py-1.5 px-3 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">Open Cloud Shell</span>
+</button>
+</div>
+
+</body></html>

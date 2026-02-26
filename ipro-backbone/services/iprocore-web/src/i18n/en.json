@@ -1,0 +1,232 @@
+{
+    "login": {
+        "title": "Welcome to IProCore",
+        "subtitle": "Sign in to the control plane",
+        "email": "Email address",
+        "password": "Password",
+        "tenantSlug": "Organisation ID",
+        "submit": "Sign in",
+        "forgotPassword": "Forgot password?",
+        "loading": "Signing in..."
+    },
+    "dashboard": {
+        "title": "Ecosystem Dashboard",
+        "welcome": "Welcome back, {{name}}",
+        "subtitle": "Your IProCore control plane",
+        "tiles": {
+            "empty": "No published products yet. Go to Control Tower to publish one.",
+            "launch": "Launch",
+            "version": "v{{version}}"
+        },
+        "security": {
+            "title": "Security Badge",
+            "twoFa": "2FA",
+            "enabled": "Enabled",
+            "disabled": "Disabled",
+            "sessions": "{{count}} active session(s)",
+            "lastLogin": "Last login: {{date}}",
+            "neverLoggedIn": "First session"
+        },
+        "jadBadge": {
+            "title": "JAD Connector",
+            "status": "Not Connected",
+            "hint": "Coming in Phase 04"
+        },
+        "onboardingWidget": {
+            "title": "Onboarding Progress",
+            "complete": "{{pct}}% complete",
+            "viewChecklist": "View Checklist"
+        },
+        "helpWidget": {
+            "title": "Help & Support",
+            "openTicket": "Open Ticket",
+            "viewKB": "Knowledge Base"
+        }
+    },
+    "portfolio": {
+        "title": "Portfolio Registry",
+        "subtitle": "Manage your ecosystem's products, engines and platforms",
+        "add": "Add Item",
+        "noItems": "No portfolio items yet. Add your first product.",
+        "status": {
+            "draft": "Draft",
+            "published": "Published",
+            "disabled": "Disabled"
+        },
+        "form": {
+            "name": "Name",
+            "type": "Type",
+            "descriptionEn": "Description (EN)",
+            "descriptionAr": "Description (AR)",
+            "status": "Status",
+            "save": "Save",
+            "cancel": "Cancel"
+        },
+        "launch": {
+            "failed": "Unable to launch product — check entitlements or contact your admin",
+            "blocked": "This product is not available for your plan",
+            "killed": "This product is temporarily unavailable"
+        }
+    },
+    "controlTower": {
+        "title": "Control Tower",
+        "portfolio": {
+            "title": "Portfolio Management",
+            "subtitle": "Publish, disable, and manage all ecosystem products",
+            "name": "Name",
+            "type": "Type",
+            "version": "Version",
+            "status": "Status",
+            "rollout": "Rollout Mode",
+            "rolloutAll": "All Tenants",
+            "rolloutTenants": "Allowlist Tenants",
+            "rolloutPlans": "Allowlist Plans",
+            "killSwitch": "Kill Switch",
+            "killSwitchActive": "HIDDEN",
+            "killSwitchInactive": "Live",
+            "killSwitchConfirm": "Activate kill switch? This will immediately hide the product from all dashboards.",
+            "activate": "Activate Kill Switch",
+            "actions": "Actions",
+            "clickToEdit": "Click to edit version"
+        }
+    },
+    "onboarding": {
+        "title": "Onboarding",
+        "checklist": {
+            "title": "Setup Checklist",
+            "subtitle": "Complete these steps to get started",
+            "complete": "Mark Complete",
+            "done": "Done",
+            "progress": "{{completed}} of {{total}} completed"
+        },
+        "wizard": {
+            "title": "Setup Wizard",
+            "next": "Next",
+            "back": "Back",
+            "finish": "Finish",
+            "steps": {
+                "welcome": "Welcome",
+                "portfolio": "Add Product",
+                "team": "Invite Team",
+                "connect": "Connect Product"
+            }
+        }
+    },
+    "help": {
+        "title": "Help & Support",
+        "tabs": {
+            "kb": "Knowledge Base",
+            "tutorials": "Tutorials",
+            "tickets": "Support Tickets"
+        },
+        "articles": {
+            "empty": "No articles available yet.",
+            "category": "Category: {{category}}"
+        },
+        "tutorials": {
+            "comingSoon": "Interactive content coming in Phase 05"
+        },
+        "tickets": {
+            "new": "New Ticket",
+            "subject": "Subject",
+            "body": "Description",
+            "submit": "Submit Ticket",
+            "submitSuccess": "Ticket submitted successfully.",
+            "historyTitle": "Your Tickets",
+            "empty": "No tickets yet.",
+            "status": {
+                "open": "Open",
+                "in_progress": "In Progress",
+                "closed": "Closed"
+            },
+            "aiSuggest": "AI Suggest Reply"
+        }
+    },
+    "ai": {
+        "title": "AI Assist",
+        "tabs": {
+            "suggestions": "Suggestions",
+            "activity": "Activity Log",
+            "playbooks": "Playbooks"
+        },
+        "suggestions": {
+            "title": "AI Suggestions",
+            "subtitle": "Human-in-the-loop governance for AI drafts",
+            "empty": "No pending suggestions. Suggestions are valid for 48h.",
+            "type": "Type",
+            "context": "Context Summary",
+            "status": "Status",
+            "expires": "Expires",
+            "actions": "Actions",
+            "view": "View & Confirm",
+            "confirmed": "Confirmed",
+            "dismissed": "Dismissed",
+            "expired": "Expired"
+        },
+        "activity": {
+            "title": "AI Activity Log",
+            "subtitle": "Immutable audit trail for all AI interactions",
+            "empty": "No AI activity recorded yet.",
+            "action": "Action",
+            "actor": "Actor",
+            "trigger": "Trigger",
+            "timestamp": "Timestamp"
+        },
+        "playbooks": {
+            "title": "AI Playbooks",
+            "subtitle": "Assistive workflow suggestions from your portfolio",
+            "empty": "No playbook suggestions found for your published portfolio.",
+            "source": "Source",
+            "label": "Playbook",
+            "description": "Description"
+        },
+        "confirmation": {
+            "title": "AI Confirmation Gate",
+            "subtitle": "Strict Mode A: Explicit approval required before JAD execution",
+            "draftLabel": "AI Generated Draft",
+            "contextLabel": "Context & Redaction Summary",
+            "confirm": "Confirm & Execute via JAD",
+            "dismiss": "Dismiss Suggestion",
+            "executing": "Executing...",
+            "success": "Execution dispatched successfully. JAD Run ID: {{id}}",
+            "error": "Execution failed: {{error}}",
+            "governanceNote": "Note: AI has no access to secrets. This execution uses your permissions."
+        }
+    },
+    "nav": {
+        "dashboard": "Dashboard",
+        "portfolio": "Portfolio",
+        "controlTower": "Control Tower",
+        "onboarding": "Onboarding",
+        "help": "Help & Support",
+        "ai": "AI Assist",
+        "security": "Security",
+        "logout": "Sign out",
+        "toggleLang": "عربي"
+    },
+    "security": {
+        "founderOnly": "Founder Only",
+        "roleSimulator": {
+            "title": "Role Simulator",
+            "subtitle": "Simulate permission checks without performing real actions",
+            "simulate": "Simulate a Permission Check",
+            "targetUser": "Target User",
+            "selectUser": "Select a user",
+            "permission": "Permission Key",
+            "selectPerm": "Select a permission",
+            "runCheck": "Run Check",
+            "checking": "Checking…",
+            "checkChain": "Check Chain",
+            "hasMembership": "Active Membership",
+            "role": "Role",
+            "implicitGrant": "Implicit Grant (owner/admin)",
+            "allPerms": "All Role Permissions",
+            "requestId": "Request ID"
+        }
+    },
+    "errors": {
+        "invalidCredentials": "Invalid email or password",
+        "networkError": "Network error — please try again",
+        "forbidden": "You do not have permission to view this page"
+    }
+}

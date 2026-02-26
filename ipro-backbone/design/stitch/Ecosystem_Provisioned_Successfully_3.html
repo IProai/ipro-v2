@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ecosystem Provisioned Successfully - Intellect ProActive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,FILL@0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "secondary-blue": "#3b82f6",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#0a0510",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(25, 16, 34, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(127, 19, 236, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+        .neon-glow {
+            filter: drop-shadow(0 0 8px rgba(127, 19, 236, 0.6));
+        }
+        .bg-mesh {
+            background-color: #0a0510;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(127, 19, 236, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.15) 0px, transparent 50%);
+        }
+        .confetti-shape {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen overflow-hidden flex flex-col">
+<!-- Background Layer (Blurred Dashboard Simulation) -->
+<div class="fixed inset-0 z-0 bg-mesh">
+<div class="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
+<!-- Simulated background content to provide depth -->
+<div class="grid grid-cols-4 gap-8 p-20">
+<div class="h-64 bg-primary/10 rounded-xl border border-primary/20"></div>
+<div class="h-64 bg-primary/10 rounded-xl border border-primary/20"></div>
+<div class="h-64 bg-primary/10 rounded-xl border border-primary/20"></div>
+<div class="h-64 bg-primary/10 rounded-xl border border-primary/20"></div>
+</div>
+</div>
+<!-- Neon Confetti Shapes -->
+<div class="confetti-shape top-20 left-[10%] w-4 h-4 rounded-full bg-primary blur-sm"></div>
+<div class="confetti-shape top-40 right-[15%] w-6 h-6 rotate-45 bg-secondary-blue blur-sm"></div>
+<div class="confetti-shape bottom-20 left-[20%] w-3 h-3 bg-primary blur-sm"></div>
+<div class="confetti-shape bottom-40 right-[5%] w-8 h-8 rounded-full bg-secondary-blue/40 blur-md"></div>
+<div class="confetti-shape top-1/2 left-[5%] w-10 h-1 bg-primary/60 rotate-12 blur-sm"></div>
+</div>
+<!-- Navigation (Reduced for Modal Focus) -->
+<header class="relative z-20 flex items-center justify-between px-10 py-6">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary neon-glow">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight">Intellect ProActive</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-slate-400 text-sm font-medium mr-4">Step 4 of 4: Deployment Complete</div>
+<div class="size-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User avatar of the system administrator" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5lK-i-vsKgTk9jnvT5uW59KsFwsELsTwB4guHb-FF7SaUJxuXGoRe1VqquVs43UP_DkyXXIt6OPuMANZLarQQwpwV82Iu6FOUEdrR4OKRAnsOGerEwhdDnUv53MRR9IlSpEcUorOHViAgIzDdd93cysJtsVdBrsl-9oErj15CqZBH2p7nCoH2l1-9j4MUoOMOPZcicWGVeaD3YTv7OkpD_l3CyZ8zWyh9n8ze9VI1ZhPoEMYovehLLMYW3-AtvF6RkDztAP7Rinw"/>
+</div>
+</div>
+</header>
+<!-- Main Success Modal Container -->
+<main class="relative z-10 flex-1 flex items-center justify-center px-4 pb-20">
+<div class="glass-panel w-full max-w-3xl rounded-2xl p-12 text-center relative overflow-hidden">
+<!-- Hero Animation Simulation Area -->
+<div class="relative w-48 h-48 mx-auto mb-10 flex items-center justify-center">
+<!-- Outer Ring -->
+<div class="absolute inset-0 rounded-full border-2 border-primary/30 border-dashed animate-spin-slow"></div>
+<!-- Inner Glow -->
+<div class="absolute inset-4 rounded-full bg-gradient-to-tr from-primary to-secondary-blue opacity-20 blur-xl"></div>
+<!-- Icon Core -->
+<div class="relative z-10 bg-background-dark/80 size-32 rounded-full border border-primary/50 flex items-center justify-center shadow-[0_0_40px_rgba(127,19,236,0.3)]">
+<span class="material-symbols-outlined text-6xl text-white neon-glow">
+                        verified_user
+                    </span>
+</div>
+<!-- Floating Orbits -->
+<div class="absolute -top-2 -right-2 size-8 bg-secondary-blue rounded-full border-2 border-background-dark flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-sm text-white">bolt</span>
+</div>
+</div>
+<!-- Heading & Description -->
+<h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                Ecosystem Provisioned <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-blue">Successfully</span>
+</h1>
+<p class="text-slate-400 text-lg max-w-xl mx-auto mb-12">
+                Your high-performance digital environment is now live, secured, and ready to scale. Intellect ProActive has completed all 142 node deployments.
+            </p>
+<!-- Active Engines Receipt Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14 text-left">
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-xl">psychology</span>
+<div class="size-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+</div>
+<div class="text-xs font-bold uppercase tracking-widest text-slate-500">AI Core</div>
+<div class="text-sm font-semibold text-white">Active</div>
+</div>
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-xl">account_balance_wallet</span>
+<div class="size-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+</div>
+<div class="text-xs font-bold uppercase tracking-widest text-slate-500">Billing Engine</div>
+<div class="text-sm font-semibold text-white">Optimized</div>
+</div>
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-xl">shield</span>
+<div class="size-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+</div>
+<div class="text-xs font-bold uppercase tracking-widest text-slate-500">Security Layer</div>
+<div class="text-sm font-semibold text-white">Hardened</div>
+</div>
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-xl">group</span>
+<div class="size-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+</div>
+<div class="text-xs font-bold uppercase tracking-widest text-slate-500">Team Sync</div>
+<div class="text-sm font-semibold text-white">Ready</div>
+</div>
+</div>
+<!-- CTA Buttons -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="w-full sm:w-auto px-10 py-4 rounded-xl bg-gradient-to-r from-primary to-secondary-blue text-white font-bold text-lg hover:opacity-90 transition-all shadow-[0_0_20px_rgba(127,19,236,0.4)] flex items-center justify-center gap-2">
+<span>Enter Control Tower</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="w-full sm:w-auto px-10 py-4 rounded-xl border border-primary/30 text-white font-semibold text-lg hover:bg-primary/10 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">person_add</span>
+<span>Invite Your Team</span>
+</button>
+</div>
+<!-- Footer Small Link -->
+<div class="mt-10">
+<a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Download Provisioning Manifest (PDF)</a>
+</div>
+</div>
+</main>
+<!-- Background Decoration Overlay -->
+<div class="fixed bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background-dark to-transparent z-0 pointer-events-none"></div>
+<style>
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+    </style>
+</body></html>

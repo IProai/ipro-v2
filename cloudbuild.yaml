@@ -1,0 +1,11 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/iprocore/ipro-registry/iprocore-api:latest', '-f', 'ipro-backbone/services/iprocore-api/Dockerfile', 'ipro-backbone/services/iprocore-api']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/iprocore/ipro-registry/iprocore-web:latest', '-f', 'ipro-backbone/services/iprocore-web/Dockerfile', 'ipro-backbone/services/iprocore-web']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/iprocore/ipro-registry/jad-runtime:latest', '-f', 'ipro-backbone/services/jad-runtime/Dockerfile', 'ipro-backbone/services/jad-runtime']
+images:
+- 'us-central1-docker.pkg.dev/iprocore/ipro-registry/iprocore-api:latest'
+- 'us-central1-docker.pkg.dev/iprocore/ipro-registry/iprocore-web:latest'
+- 'us-central1-docker.pkg.dev/iprocore/ipro-registry/jad-runtime:latest'
