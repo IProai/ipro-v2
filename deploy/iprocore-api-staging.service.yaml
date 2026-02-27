@@ -1,0 +1,148 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# IProCore API — Cloud Run Service
+#
+# Deploy:   gcloud run services replace deploy/iprocore-api-staging.service.yaml \
+#               --region=me-central1 --project=iprocore
+#
+# All secrets come from Secret Manager — no hardcoded values anywhere.
+# Cloud SQL socket: iprocore:me-central1:iprocore-pg
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: iprocore-api-staging
+  labels:
+    app: iprocore-api
+    env: staging
+  annotations:
+    # Allow unauthenticated traffic (JWT-protected at the app layer)
+    run.googleapis.com/ingress: all
+
+spec:
+  template:
+    metadata:
+      annotations:
+        # Cloud SQL Auth Proxy — connects via Unix socket (no TCP, no VPC connector)
+        run.googleapis.com/cloudsql-instances: iprocore:me-central1:iprocore-pg
+
+        # Scaling — 1 warm instance to avoid cold-start on health probes
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "5"
+
+        # Startup probe gives the app time to complete bootstrap before traffic
+        run.googleapis.com/startup-cpu-boost: "true"
+
+    spec:
+      # Dedicated service account — least privilege
+      serviceAccountName: iprocore-api-sa@iprocore.iam.gserviceaccount.com
+
+      # Cloud Run max request timeout
+      timeoutSeconds: 30
+
+      containers:
+        - image: me-central1-docker.pkg.dev/iprocore/ipro-registry/iprocore-api:latest
+          name: iprocore-api-staging
+
+          ports:
+            - name: http1
+              containerPort: 8080
+
+          # ─── Plain env vars (not secrets) ─────────────────────────────────
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "8080"
+            # TTL defaults — override here if needed
+            - name: ACCESS_TOKEN_TTL_SECONDS
+              value: "900"
+            - name: REFRESH_TOKEN_TTL_DAYS
+              value: "7"
+            # Frontend origin — no trailing slash
+            # Moved to secrets as per request
+            # JAD Runtime URL (optional — gracefully degraded if service is down)
+            - name: JAD_RUNTIME_URL
+              value: "https://jad-runtime-985916133958.us-central1.run.app"
+
+            # ─── Secrets from Secret Manager ──────────────────────────────
+            # Format: projects/PROJECT_NUMBER/secrets/SECRET_NAME/versions/latest
+            # Using shorthand (Secret Manager resolves project from SA)
+
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: DATABASE_URL
+                  key: latest
+
+            - name: ALLOWED_ORIGINS
+              valueFrom:
+                secretKeyRef:
+                  name: ALLOWED_ORIGINS
+                  key: latest
+
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: SESSION_SECRET
+                  key: latest
+
+            - name: ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: ACCESS_TOKEN_SECRET
+                  key: latest
+
+            - name: REFRESH_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: REFRESH_TOKEN_SECRET
+                  key: latest
+
+            - name: SSO_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: SSO_TOKEN_SECRET
+                  key: latest
+
+            # ─── Bootstrap (optional — only needed first deploy) ──────────
+            - name: BOOTSTRAP_ADMIN_EMAIL
+              value: "almoutlakomar@gmail.com"
+
+            - name: BOOTSTRAP_TENANT_SLUG
+              value: "ipro-system"
+
+            - name: BOOTSTRAP_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: BOOTSTRAP_ADMIN_PASSWORD
+                  key: latest
+
+          # ─── Resource limits ─────────────────────────────────────────────
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512Mi
+
+          # ─── Health probes ────────────────────────────────────────────────
+          # Liveness: restart if unresponsive
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            failureThreshold: 3
+
+          # Startup: wait up to 60s for bootstrap + DB connection on cold start
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 12
+
+  traffic:
+    - percent: 100
+      latestRevision: true

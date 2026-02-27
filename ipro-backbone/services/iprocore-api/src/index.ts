@@ -1,5 +1,6 @@
 import './lib/env'; // Validates env at startup — exits if invalid (Skill 04)
 import express from 'express';
+import { bootstrapAdmin } from './lib/bootstrap';
 import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -66,8 +67,20 @@ app.use(errorHandler);
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 if (require.main === module) {
-    app.listen(env.PORT, () => {
-        console.log(`✅ IProCore API running on port ${env.PORT} [${env.NODE_ENV}]`);
+    // Import shared DB singleton for bootstrap (avoids creating a second PrismaClient)
+    const { prisma } = require('./lib/db');
+
+    // Run bootstrap before binding port — idempotent, non-fatal
+    bootstrapAdmin(prisma).then(() => {
+        app.listen(env.PORT, () => {
+            console.log(`✅ IProCore API running on port ${env.PORT} [${env.NODE_ENV}]`);
+        });
+    }).catch((err: unknown) => {
+        // bootstrapAdmin already catches internally; this is a last-resort guard
+        console.error('[STARTUP] Unexpected error during bootstrap:', err);
+        app.listen(env.PORT, () => {
+            console.log(`✅ IProCore API running on port ${env.PORT} [${env.NODE_ENV}]`);
+        });
     });
 }
 

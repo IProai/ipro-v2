@@ -1,0 +1,77 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# IProCore — Prisma Migration Cloud Run Job
+#
+# Runs: npm run db:migrate:deploy  (prisma migrate deploy)
+# Uses the SAME image as the API service — no separate build needed.
+#
+# Run BEFORE deploying the API service on every release:
+#
+#   # Apply / update job definition:
+#   gcloud run jobs replace deploy/iprocore-migrate.job.yaml \
+#       --region=me-central1 --project=iprocore
+#
+#   # Execute and wait for completion:
+#   gcloud run jobs execute iprocore-migrate \
+#       --region=me-central1 --project=iprocore --wait
+#
+# Success: "Execution ... completed successfully"
+# Failure: job exits non-zero → investigate logs before deploying API
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: iprocore-migrate
+  labels:
+    app: iprocore
+    component: migration
+    env: production
+
+spec:
+  template:
+    spec:
+      # One attempt only — if migration fails, stop immediately, log, investigate
+      # Do NOT retry migrations blindly (partial migration state is dangerous)
+      taskCount: 1
+
+      template:
+        metadata:
+          annotations:
+            # Same Cloud SQL instance as the API service
+            run.googleapis.com/cloudsql-instances: iprocore:me-central1:iprocore-pg
+
+        spec:
+          # Dedicated service account — same as API (needs Cloud SQL Client + Secret Accessor)
+          serviceAccountName: iprocore-api-sa@iprocore.iam.gserviceaccount.com
+
+          # Never retry — migration must be deterministic
+          restartPolicy: Never
+
+          # Job timeout — migrations should complete well within 5 minutes
+          timeoutSeconds: 300
+
+          containers:
+            - image: me-central1-docker.pkg.dev/iprocore/ipro-registry/iprocore-api:latest
+              name: migrate
+              # Use the canonical migration entrypoint defined in package.json
+              command: ["npm", "run", "db:migrate:prod"]
+              
+              # env vars and secrets...
+              env:
+                - name: NODE_ENV
+                  value: production
+
+                # Only DATABASE_URL is needed for migrations
+                - name: DATABASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: DATABASE_URL
+                      key: latest
+
+                # Prisma uses DATABASE_URL — schema path resolved automatically
+                # from prisma/schema.prisma copied into the image at /app/prisma/schema.prisma
+
+              resources:
+                limits:
+                  cpu: "1"
+                  memory: 512Mi

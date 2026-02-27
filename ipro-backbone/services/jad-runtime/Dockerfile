@@ -1,5 +1,5 @@
 # Multi-stage build for JAD Runtime
-FROM node:20-alpine AS builder
+FROM node:20 AS builder
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ COPY . .
 RUN npx prisma generate
 
 # Final image
-FROM node:20-alpine
+FROM node:20
 
 WORKDIR /app
 
