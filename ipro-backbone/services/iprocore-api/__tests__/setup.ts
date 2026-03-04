@@ -12,6 +12,20 @@ process.env.SSO_TOKEN_SECRET =
 process.env.ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS ?? 'http://localhost:5173';
 process.env.SESSION_SECRET = process.env.SESSION_SECRET ?? 'test-session-secret-minimum-32-characters-long-for-tests';
 
+const fetchMock = jest.fn<
+    Promise<Response>,
+    [input: unknown, init?: unknown]
+>().mockImplementation(async () => {
+    return {
+        ok: false,
+        status: 503,
+        json: async () => ({ error: 'mocked_jad_unavailable' }),
+    } as unknown as Response;
+});
+
+(globalThis as typeof globalThis & { fetch: typeof fetch }).fetch = fetchMock as unknown as typeof fetch;
+(globalThis as typeof globalThis & { __iprocoreFetchMock?: typeof fetchMock }).__iprocoreFetchMock = fetchMock;
+
 type PrismaOperation = jest.Mock<unknown, unknown[]>;
 
 const createModelMock = (): Record<string, PrismaOperation> => {
