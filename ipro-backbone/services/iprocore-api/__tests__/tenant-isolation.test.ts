@@ -35,6 +35,9 @@ jest.mock('../src/lib/db', () => ({
         membership: {
             findMany: jest.fn(),
         },
+        userRole: {
+            findMany: jest.fn(),
+        },
         auditLog: {
             create: jest.fn(),
         },
@@ -75,6 +78,7 @@ function mockTenantLookup(tenantId: string, tenantName: string) {
     (prisma.onboardingStep.count as jest.Mock).mockResolvedValue(0);
     (prisma.refreshToken.count as jest.Mock).mockResolvedValue(1);
     (prisma.membership.findMany as jest.Mock).mockResolvedValue([]);
+    (prisma.userRole.findMany as jest.Mock).mockResolvedValue([]);
 }
 
 describe('IProCore Tenant Isolation — Control Plane (Blueprint §Tenant isolation)', () => {
