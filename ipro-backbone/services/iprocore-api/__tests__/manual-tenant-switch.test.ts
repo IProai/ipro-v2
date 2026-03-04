@@ -36,13 +36,13 @@ describe('Explicit Tenant Switch Isolation (Functional Flow)', () => {
         jest.clearAllMocks();
 
         // Mock tenant resolution successfully
-        (prisma.tenant.findUnique as jest.Mock).mockResolvedValue({
-            id: 'mocked-tenant',
-            slug: 'mocked',
+        (prisma.tenant.findUnique as jest.Mock).mockImplementation(async ({ where }) => ({
+            id: where.id,
+            slug: where.id,
             name: 'Mocked Tenant',
             plan: 'starter',
             isActive: true,
-        });
+        }));
 
         // Mock membership exists
         (prisma.membership.findUnique as jest.Mock).mockResolvedValue({ memberRole: 'owner' });
