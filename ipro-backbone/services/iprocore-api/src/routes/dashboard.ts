@@ -20,7 +20,7 @@ router.use(requireAuth, tenantResolver);
  */
 router.get('/summary', async (req, res, next) => {
     try {
-        const { tenantId, userId } = req.auth!;
+        const { activeTenantId: tenantId, userId } = req.auth!;
 
         let portfolioTiles = [];
         let totalSteps = 0;
@@ -29,6 +29,7 @@ router.get('/summary', async (req, res, next) => {
         let tenant: any = null;
         let sessionCount = 0;
         let memberships: any[] = [];
+        let userRolesAll: any[] = [];
         let jadReadiness: any = { status: 'mocked' };
 
         try {
@@ -66,53 +67,44 @@ router.get('/summary', async (req, res, next) => {
             memberships = await prisma.membership.findMany({
                 where: { userId },
                 select: {
-                    memberRole: true,
                     tenant: { select: { id: true, slug: true, name: true, plan: true } },
                 },
+            });
+
+            // Fetch all roles across all tenants for this user
+            userRolesAll = await prisma.userRole.findMany({
+                where: { userId },
+                include: { role: { select: { name: true } } }
             });
 
             // 6) JAD Readiness
             const requestId = (res.locals as { requestId?: string }).requestId ?? 'none';
             jadReadiness = await getJadReadiness(requestId);
         } catch (dbErr) {
-            // FALLBACK FOR DEMO
-            if (tenantId === 'demo-tenant-uuid') {
-                user = { id: userId, email: 'admin@iprocore.demo', locale: 'en', twoFaEnabled: false, lastLoginAt: new Date() };
-                tenant = { id: tenantId, slug: 'demo', name: 'Demo Corporation', plan: 'enterprise' };
-                portfolioTiles = [
-                    {
-                        id: 'demo-p-1',
-                        name: 'Core Spine',
-                        type: 'platform',
-                        icon: 'Activity',
-                        descriptionEn: 'Intellect ProActive Core platform foundation.',
-                        descriptionAr: 'أساس منصة Intellect ProActive Core.',
-                        launchUrlProd: '/console/dashboard',
-                        ssoMode: 'handoff',
-                        version: '1.0.0'
-                    }
-                ];
-                totalSteps = 5;
-                completedSteps = 3;
-                sessionCount = 1;
-                memberships = [{ memberRole: 'admin', tenant: { id: tenantId, slug: 'demo', name: 'Demo Corporation', plan: 'enterprise' } }];
-                jadReadiness = { status: 'mocked', message: 'Demo mode active' };
-            } else {
-                throw dbErr;
-            }
+            throw dbErr;
         }
 
         return res.json({
             user,
             tenant,
-            tenantMemberships: memberships.map((m: any) => ({
-                tenantId: m.tenant.id,
-                tenantSlug: m.tenant.slug,
-                tenantName: m.tenant.name,
-                plan: m.tenant.plan,
-                role: m.memberRole,
-                isCurrent: m.tenant.id === tenantId,
-            })),
+            tenantMemberships: memberships.map((m: any) => {
+                const tenantRoles = userRolesAll
+                    .filter((ur: any) => ur.tenantId === m.tenant.id)
+                    .map((ur: any) => ur.role.name);
+
+                let computedRole = 'member';
+                if (tenantRoles.includes('owner')) computedRole = 'owner';
+                else if (tenantRoles.includes('admin')) computedRole = 'admin';
+
+                return {
+                    tenantId: m.tenant.id,
+                    tenantSlug: m.tenant.slug,
+                    tenantName: m.tenant.name,
+                    plan: m.tenant.plan,
+                    role: computedRole,
+                    isCurrent: m.tenant.id === tenantId,
+                };
+            }),
             portfolioTiles,
             onboardingProgress: {
                 total: totalSteps,

@@ -3,7 +3,7 @@
  *
  * Phase 03 / Blueprint §11 Route Constitution: /console/security/role-simulator
  *
- * Founder-only: memberRole = 'owner'.
+ * Founder-only: UserRole 'owner'.
  * Purpose: simulate whether a given user+permission would be ALLOWED or DENIED,
  * without performing the actual action.
  *
@@ -30,11 +30,10 @@ async function assertFounder(
     tenantId: string,
     next: NextFunction,
 ): Promise<boolean> {
-    const membership = await prisma.membership.findUnique({
-        where: { userId_tenantId: { userId, tenantId } },
-        select: { memberRole: true },
+    const userRole = await prisma.userRole.findFirst({
+        where: { userId, tenantId, role: { name: 'owner' } },
     });
-    if (!membership || membership.memberRole !== 'owner') {
+    if (!userRole) {
         next(createError(403, 'Founder-only: role simulator is restricted'));
         return false;
     }
@@ -48,7 +47,7 @@ router.get(
     ...authPipeline,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const { userId, tenantId } = req.auth!;
+            const { userId, activeTenantId: tenantId } = req.auth!;
             if (!(await assertFounder(userId, tenantId, next))) return;
 
             // Return all permission keys + all tenant roles for the UI selects
@@ -63,7 +62,12 @@ router.get(
                     orderBy: { name: 'asc' },
                 }),
                 prisma.user.findMany({
-                    where: { tenantId, isActive: true },
+                    where: {
+                        memberships: {
+                            some: { tenantId }
+                        },
+                        isActive: true
+                    },
                     select: { id: true, email: true },
                     orderBy: { email: 'asc' },
                 }),
@@ -93,7 +97,7 @@ router.post(
     ...authPipeline,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const requestId = req.headers['x-request-id'] as string;
-        const { userId, tenantId } = req.auth!;
+        const { userId, activeTenantId: tenantId } = req.auth!;
 
         if (!(await assertFounder(userId, tenantId, next))) return;
 
@@ -106,24 +110,23 @@ router.post(
         try {
             const { targetUserId, permissionKey } = parsed.data;
 
-            // Verify targetUser belongs to this tenant
+            // Verify targetUser exists and has membership
             const targetUser = await prisma.user.findFirst({
-                where: { id: targetUserId, tenantId, isActive: true },
+                where: { email: targetUserId },
                 select: { id: true, email: true },
             });
             if (!targetUser) {
-                next(createError(404, 'Target user not found in this tenant'));
+                next(createError(404, 'Target user not found globally'));
                 return;
             }
 
-            // Resolve membership role
-            const membership = await prisma.membership.findUnique({
-                where: { userId_tenantId: { userId: targetUserId, tenantId } },
-                select: { memberRole: true },
+            const userRolesRow = await prisma.userRole.findMany({
+                where: { userId: targetUser.id, tenantId },
+                include: { role: { select: { name: true } } }
             });
-            const memberRole = membership?.memberRole ?? null;
+            const userRoles = userRolesRow.map((ur: any) => ur.role.name);
 
-            if (!memberRole) {
+            if (userRoles.length === 0) {
                 res.json({
                     requestId,
                     targetUser,
@@ -136,39 +139,41 @@ router.post(
             }
 
             // owner/admin: always allowed
-            if (memberRole === 'owner' || memberRole === 'admin') {
+            if (userRoles.includes('owner') || userRoles.includes('admin')) {
                 res.json({
                     requestId,
                     targetUser,
                     permissionKey,
                     allowed: true,
-                    reason: `Role '${memberRole}' has implicit full access`,
-                    checks: { hasMembership: true, memberRole, implicitGrant: true },
+                    reason: `Roles [${userRoles.join(', ')}] have implicit full access`,
+                    checks: { hasMembership: true, userRoles, implicitGrant: true },
                 });
                 return;
             }
 
-            // Check explicit permissions via Role → RolePermission → Permission
-            const permRow = await prisma.$queryRaw<{ key: string }[]>`
+            // Check explicit permissions via UserRole → Role → RolePermission → Permission
+            const permRows = await prisma.$queryRaw<{ key: string }[]>`
                 SELECT DISTINCT p.key
-                FROM   "RolePermission" rp
-                JOIN   "Role"           r  ON r.id = rp."roleId"
+                FROM   "UserRole" ur
+                JOIN   "Role"           r  ON r.id = ur."roleId"
+                JOIN   "RolePermission" rp ON r.id = rp."roleId"
                 JOIN   "Permission"     p  ON p.id = rp."permissionId"
-                WHERE  r."tenantId" = ${tenantId}
-                  AND  r.name = ${memberRole}
-                  AND  p.key  = ${permissionKey}
+                WHERE  ur."tenantId" = ${tenantId}
+                  AND  ur."userId"   = ${targetUser.id}
+                  AND  p.key         = ${permissionKey}
             `;
 
-            const allowed = permRow.length > 0;
+            const allowed = permRows.length > 0;
 
-            // Also collect all perms this role has for transparency
+            // Also collect all perms this user has via assigned roles
             const allRolePerms = await prisma.$queryRaw<{ key: string }[]>`
                 SELECT DISTINCT p.key
-                FROM   "RolePermission" rp
-                JOIN   "Role"           r  ON r.id = rp."roleId"
+                FROM   "UserRole" ur
+                JOIN   "Role"           r  ON r.id = ur."roleId"
+                JOIN   "RolePermission" rp ON r.id = rp."roleId"
                 JOIN   "Permission"     p  ON p.id = rp."permissionId"
-                WHERE  r."tenantId" = ${tenantId}
-                  AND  r.name = ${memberRole}
+                WHERE  ur."tenantId" = ${tenantId}
+                  AND  ur."userId"   = ${targetUser.id}
             `;
 
             res.json({
@@ -177,11 +182,11 @@ router.post(
                 permissionKey,
                 allowed,
                 reason: allowed
-                    ? `Role '${memberRole}' has explicit '${permissionKey}' permission`
-                    : `Role '${memberRole}' does NOT have '${permissionKey}' permission`,
+                    ? `User is assigned a role with explicit '${permissionKey}' permission`
+                    : `User is NOT assigned any role with '${permissionKey}' permission`,
                 checks: {
                     hasMembership: true,
-                    memberRole,
+                    userRoles,
                     implicitGrant: false,
                     permissionFound: allowed,
                     allRolePermissions: allRolePerms.map((p) => p.key),

@@ -21,11 +21,7 @@ export function requirePerm(permKey: string) {
         const { id: tenantId } = req.tenant;
 
         try {
-            // --- DEMO MODE BYPASS ---
-            if (tenantId === 'demo-tenant-uuid') {
-                next();
-                return;
-            }
+
 
             // Find membership to get the member's role name
             const membership = await prisma.membership.findUnique({
@@ -37,28 +33,30 @@ export function requirePerm(permKey: string) {
                 return;
             }
 
-            // Owners bypass permission checks (they have all permissions)
-            if (membership.memberRole === 'owner') {
-                next();
-                return;
-            }
 
-            // Lookup role by membership.memberRole within this tenant
-            const role = await prisma.role.findUnique({
-                where: { tenantId_name: { tenantId, name: membership.memberRole } },
+
+            // Lookup roles assigned to this user via UserRole binding
+            const userRoles = await prisma.userRole.findMany({
+                where: { tenantId, userId },
                 include: {
-                    rolePermissions: {
-                        include: { permission: true },
-                    },
-                },
+                    role: {
+                        include: {
+                            rolePermissions: {
+                                include: { permission: true },
+                            },
+                        },
+                    }
+                }
             });
 
-            if (!role) {
-                res.status(403).json({ error: 'Forbidden: role not found' });
+            if (!userRoles || userRoles.length === 0) {
+                res.status(403).json({ error: 'Forbidden: no assigned roles' });
                 return;
             }
 
-            const hasPerm = role.rolePermissions.some((rp) => rp.permission.key === permKey);
+            const hasPerm = userRoles.some((ur: any) =>
+                ur.role.rolePermissions.some((rp: any) => rp.permission.key === permKey)
+            );
 
             if (!hasPerm) {
                 res.status(403).json({ error: 'Forbidden: insufficient permissions' });

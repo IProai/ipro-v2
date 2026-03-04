@@ -26,10 +26,9 @@ async function main() {
 
     // 2. Create Founder User
     const founder = await prisma.user.upsert({
-        where: { tenantId_email: { tenantId: tenant.id, email: founderEmail } },
+        where: { email: founderEmail },
         update: { passwordHash },
         create: {
-            tenantId: tenant.id,
             email: founderEmail,
             passwordHash,
             isActive: true,
@@ -41,12 +40,23 @@ async function main() {
     // 3. Create Membership (Owner/Founder)
     await prisma.membership.upsert({
         where: { userId_tenantId: { userId: founder.id, tenantId: tenant.id } },
-        update: { memberRole: 'owner' },
+        update: {},
         create: {
             userId: founder.id,
             tenantId: tenant.id,
-            memberRole: 'owner',
         },
+    });
+
+    const ownerRole = await prisma.role.upsert({
+        where: { tenantId_name: { tenantId: tenant.id, name: 'owner' } },
+        update: {},
+        create: { tenantId: tenant.id, name: 'owner', description: 'Tenant Owner', isSystem: true }
+    });
+
+    await prisma.userRole.upsert({
+        where: { tenantId_userId_roleId: { tenantId: tenant.id, userId: founder.id, roleId: ownerRole.id } },
+        update: {},
+        create: { tenantId: tenant.id, userId: founder.id, roleId: ownerRole.id }
     });
 
     // 4. Create Baseline Portfolio Item (Core Spine)

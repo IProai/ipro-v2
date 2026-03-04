@@ -109,7 +109,7 @@ function generateDraft(type: string, contextSummary: string): string {
  */
 router.post('/suggestions', async (req, res, next) => {
     try {
-        const { tenantId, userId } = req.auth!;
+        const { activeTenantId: tenantId, userId } = req.auth!;
         const requestId = res.locals.requestId as string;
 
         const parsed = createSuggestionSchema.safeParse(req.body);
@@ -149,19 +149,7 @@ router.post('/suggestions', async (req, res, next) => {
                 },
             });
         } catch (dbErr) {
-            if (tenantId === 'demo-tenant-uuid') {
-                suggestion = {
-                    id: `demo-suggest-${Date.now()}`,
-                    suggestionType,
-                    contextSummary,
-                    suggestionText,
-                    status: 'pending',
-                    expiresAt,
-                    createdAt: new Date(),
-                };
-            } else {
-                throw dbErr;
-            }
+            throw dbErr;
         }
 
         // AI Activity Log
@@ -202,7 +190,7 @@ router.post('/suggestions', async (req, res, next) => {
  */
 router.get('/suggestions', async (req, res, next) => {
     try {
-        const { tenantId } = req.auth!;
+        const { activeTenantId: tenantId } = req.auth!;
 
         let suggestions = [];
         try {
@@ -226,21 +214,7 @@ router.get('/suggestions', async (req, res, next) => {
                 },
             });
         } catch (dbErr) {
-            if (tenantId === 'demo-tenant-uuid') {
-                suggestions = [
-                    {
-                        id: 'demo-s-1',
-                        suggestionType: 'workflow_draft',
-                        contextSummary: 'Setup backup for Alpha tenant',
-                        suggestionText: '[AI Draft] Schedule daily snapshots via JAD.',
-                        status: 'pending',
-                        expiresAt: new Date(Date.now() + 86400000),
-                        createdAt: new Date(),
-                    }
-                ];
-            } else {
-                throw dbErr;
-            }
+            throw dbErr;
         }
 
         return res.json({ suggestions });
@@ -265,7 +239,7 @@ router.get('/suggestions', async (req, res, next) => {
  */
 router.post('/suggestions/:id/confirm', async (req, res, next) => {
     try {
-        const { tenantId, userId } = req.auth!;
+        const { activeTenantId: tenantId, userId } = req.auth!;
         const requestId = res.locals.requestId as string;
         const { id: suggestionId } = req.params;
 
@@ -287,19 +261,7 @@ router.post('/suggestions/:id/confirm', async (req, res, next) => {
                 },
             });
         } catch (dbErr) {
-            // FALLBACK FOR DEMO
-            if (tenantId === 'demo-tenant-uuid') {
-                suggestion = {
-                    id: suggestionId,
-                    tenantId,
-                    requestingUserId: userId,
-                    suggestionType: 'help_reply',
-                    status: 'pending',
-                    expiresAt: new Date(Date.now() + 86400000),
-                };
-            } else {
-                throw dbErr;
-            }
+            throw dbErr;
         }
 
         if (!suggestion) {
@@ -321,8 +283,7 @@ router.post('/suggestions/:id/confirm', async (req, res, next) => {
                 },
             });
         } catch (dbErr) {
-            if (tenantId !== 'demo-tenant-uuid') throw dbErr;
-            // otherwise just proceed for demo
+            throw dbErr;
         }
 
         let workflowRunId: string | null = null;
@@ -382,7 +343,7 @@ router.post('/suggestions/:id/confirm', async (req, res, next) => {
                     },
                 });
             } catch (dbErr) {
-                if (tenantId !== 'demo-tenant-uuid') throw dbErr;
+                throw dbErr;
             }
         } else {
             // Dismiss
@@ -392,7 +353,7 @@ router.post('/suggestions/:id/confirm', async (req, res, next) => {
                     data: { status: 'dismissed' },
                 });
             } catch (dbErr) {
-                if (tenantId !== 'demo-tenant-uuid') throw dbErr;
+                throw dbErr;
             }
         }
 
@@ -419,7 +380,7 @@ router.post('/suggestions/:id/confirm', async (req, res, next) => {
                 },
             });
         } catch (dbErr) {
-            if (tenantId !== 'demo-tenant-uuid') throw dbErr;
+            throw dbErr;
         }
 
         // IProCore standard audit (with full AI governance fields)
@@ -458,7 +419,7 @@ router.post('/suggestions/:id/confirm', async (req, res, next) => {
  */
 router.get('/activity', async (req, res, next) => {
     try {
-        const { tenantId } = req.auth!;
+        const { activeTenantId: tenantId } = req.auth!;
         const limit = Math.min(Number(req.query.limit) || 50, 200);
 
         let activity = [];
@@ -480,21 +441,7 @@ router.get('/activity', async (req, res, next) => {
                 },
             });
         } catch (dbErr) {
-            if (tenantId === 'demo-tenant-uuid') {
-                activity = [
-                    {
-                        id: 'demo-log-1',
-                        actorId: 'demo-user-uuid',
-                        action: 'ai.suggestion.created',
-                        suggestionId: 'demo-s-1',
-                        triggerSource: 'AI',
-                        createdAt: new Date(),
-                        meta: { suggestionType: 'workflow_draft' },
-                    }
-                ];
-            } else {
-                throw dbErr;
-            }
+            throw dbErr;
         }
 
         return res.json({ activity });
@@ -513,7 +460,7 @@ router.get('/activity', async (req, res, next) => {
  */
 router.post('/playbooks', async (req, res, next) => {
     try {
-        const { tenantId, userId } = req.auth!;
+        const { activeTenantId: tenantId, userId } = req.auth!;
         const requestId = res.locals.requestId as string;
 
         // Read tenant's published portfolio items — suggestedPlaybooks is an array of labels

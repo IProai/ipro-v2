@@ -4,7 +4,7 @@ import { env } from '../lib/env';
 
 export interface AuthPayload {
     userId: string;
-    tenantId: string;
+    activeTenantId: string;
     email: string;
     iat?: number;
     exp?: number;

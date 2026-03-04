@@ -78,31 +78,6 @@ router.post(
         const { email, password, tenantSlug } = parsed.data;
 
         try {
-            // --- DEMO MODE BYPASS ---
-            if (email === 'admin@iprocore.demo' && password === 'password123' && tenantSlug === 'demo') {
-                const demoUser = {
-                    id: 'demo-user-uuid',
-                    tenantId: 'demo-tenant-uuid',
-                    email: 'admin@iprocore.demo',
-                    locale: 'en',
-                    dir: 'ltr',
-                    twoFaEnabled: false,
-                    lastLoginAt: new Date(),
-                };
-                const accessToken = issueAccessToken({
-                    userId: demoUser.id,
-                    tenantId: demoUser.tenantId,
-                    email: demoUser.email,
-                });
-                // Note: Refresh token normally needs DB, skipping for demo cookie
-                res.json({
-                    accessToken,
-                    user: { ...demoUser, lastLoginAt: demoUser.lastLoginAt.toISOString() },
-                });
-                return;
-            }
-
-            // Resolve tenant by slug
             const tenant = await prisma.tenant.findUnique({ where: { slug: tenantSlug } });
             if (!tenant || !tenant.isActive) {
                 // Same error for invalid tenant — no enumeration
@@ -110,21 +85,26 @@ router.post(
                 return;
             }
 
-            // Find user within this tenant
+            // Find user globally by email
             const user = await prisma.user.findUnique({
-                where: { tenantId_email: { tenantId: tenant.id, email } },
+                where: { email },
             });
+
+            // Check if user has membership in this tenant
+            const membership = user ? await prisma.membership.findUnique({
+                where: { userId_tenantId: { userId: user.id, tenantId: tenant.id } }
+            }) : null;
 
             // Always compare hashes to prevent timing attacks
             const validPassword = user ? await bcrypt.compare(password, user.passwordHash) : false;
-            if (!user || !validPassword || !user.isActive) {
+            if (!user || !validPassword || !user.isActive || !membership) {
                 res.status(401).json({ error: 'Invalid credentials' });
                 return;
             }
 
             const accessToken = issueAccessToken({
                 userId: user.id,
-                tenantId: tenant.id,
+                activeTenantId: tenant.id,
                 email: user.email,
             });
 
@@ -226,7 +206,7 @@ router.post(
 
             const accessToken = issueAccessToken({
                 userId: user.id,
-                tenantId: membership?.tenantId ?? '',
+                activeTenantId: membership?.tenantId ?? '',
                 email: user.email,
             });
 
@@ -269,7 +249,7 @@ router.post(
             res.clearCookie('refresh_token', { path: '/api/auth' });
 
             await writeAudit({
-                tenantId: req.auth!.tenantId,
+                tenantId: req.auth!.activeTenantId,
                 actorId: req.auth!.userId,
                 action: 'auth.logout',
                 resource: 'User',

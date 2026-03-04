@@ -7,6 +7,7 @@ import { requireAuth } from '../middleware/requireAuth';
 import { tenantResolver } from '../middleware/tenantResolver';
 import { requirePerm } from '../middleware/requirePerm';
 import { requirePolicy } from '../middleware/requirePolicy';
+import { requireRole } from '../middleware/requireRole';
 import { createError } from '../middleware/errorHandler';
 
 const router = Router();
@@ -55,23 +56,7 @@ router.get(
                     orderBy: [{ sortOrder: 'asc' }, { name: 'asc' }],
                 });
             } catch (dbErr) {
-                if (tenantId === 'demo-tenant-uuid') {
-                    items = [
-                        {
-                            id: 'demo-p-1',
-                            name: 'Core Spine',
-                            type: 'platform',
-                            icon: 'Activity',
-                            descriptionEn: 'Intellect ProActive Core platform foundation.',
-                            descriptionAr: 'أساس منصة Intellect ProActive Core.',
-                            launchUrlProd: '/console/dashboard',
-                            ssoMode: 'handoff',
-                            version: '1.0.0'
-                        }
-                    ];
-                } else {
-                    throw dbErr;
-                }
+                throw dbErr;
             }
             res.json({ items });
         } catch (err) {
@@ -239,6 +224,7 @@ const statusSchema = z.object({
 router.patch(
     '/:id/status',
     ...authPipeline,
+    requireRole('owner'),
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const requestId = req.headers['x-request-id'] as string;
         const parsed = statusSchema.safeParse(req.body);
@@ -249,14 +235,6 @@ router.patch(
         }
 
         try {
-            // Blueprint §7: Founder-only — membership.memberRole must be 'owner'
-            const membership = await prisma.membership.findUnique({
-                where: { userId_tenantId: { userId: req.auth!.userId, tenantId: req.tenant!.id } },
-            });
-            if (!membership || membership.memberRole !== 'owner') {
-                next(createError(403, 'Founder-only: cannot change portfolio status'));
-                return;
-            }
 
             const existing = await prisma.portfolioItem.findFirst({
                 where: { id: req.params.id, tenantId: req.tenant!.id },
@@ -290,18 +268,11 @@ router.patch(
 router.patch(
     '/:id/kill-switch',
     ...authPipeline,
+    requireRole('owner'),
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const requestId = req.headers['x-request-id'] as string;
 
         try {
-            // Blueprint §7: Founder-only kill-switch
-            const membership = await prisma.membership.findUnique({
-                where: { userId_tenantId: { userId: req.auth!.userId, tenantId: req.tenant!.id } },
-            });
-            if (!membership || membership.memberRole !== 'owner') {
-                next(createError(403, 'Founder-only: kill-switch access denied'));
-                return;
-            }
 
             const existing = await prisma.portfolioItem.findFirst({
                 where: { id: req.params.id, tenantId: req.tenant!.id },
@@ -342,6 +313,7 @@ const rolloutSchema = z.object({
 router.patch(
     '/:id/rollout',
     ...authPipeline,
+    requireRole('owner'),
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const requestId = req.headers['x-request-id'] as string;
         const parsed = rolloutSchema.safeParse(req.body);
@@ -352,14 +324,6 @@ router.patch(
         }
 
         try {
-            // Blueprint §7: Founder-only
-            const membership = await prisma.membership.findUnique({
-                where: { userId_tenantId: { userId: req.auth!.userId, tenantId: req.tenant!.id } },
-            });
-            if (!membership || membership.memberRole !== 'owner') {
-                next(createError(403, 'Founder-only: cannot change rollout mode'));
-                return;
-            }
 
             const existing = await prisma.portfolioItem.findFirst({
                 where: { id: req.params.id, tenantId: req.tenant!.id },

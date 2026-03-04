@@ -13,69 +13,53 @@ datasource db {
 // ─── TENANCY ─────────────────────────────────────────────────────────────────
 
 model Tenant {
-  id        String   @id @default(uuid())
-  slug      String   @unique
-  name      String
-  plan      String   @default("starter") // starter | pro | enterprise
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  plan        String   @default("starter") // starter | pro | enterprise
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  memberships     Membership[]
-  userRoles       UserRole[]
-  roles           Role[]
-  auditLogs       AuditLog[]
-  portfolioItems  PortfolioItem[]
-  onboardingSteps OnboardingStep[]
-  helpTickets     HelpTicket[]
-  aiSuggestions   AiSuggestion[] // Phase 05
-  aiActivityLogs  AiActivityLog[] // Phase 05
-  subscription    Subscription?
-  usageCounters   UsageCounter[]
-  stripeCustomer  StripeCustomer?
+  users            User[]
+  memberships      Membership[]
+  roles            Role[]
+  auditLogs        AuditLog[]
+  portfolioItems   PortfolioItem[]
+  onboardingSteps  OnboardingStep[]
+  helpTickets      HelpTicket[]
+  aiSuggestions    AiSuggestion[]   // Phase 05
+  aiActivityLogs   AiActivityLog[]  // Phase 05
 }
 
 // ─── IDENTITY ────────────────────────────────────────────────────────────────
 
 model User {
-  id           String    @id @default(uuid())
-  email        String    @unique
+  id           String   @id @default(uuid())
+  tenantId     String
+  email        String
   passwordHash String
-  locale       String    @default("en") // en | ar
-  dir          String    @default("ltr") // ltr | rtl
+  locale       String   @default("en") // en | ar
+  dir          String   @default("ltr") // ltr | rtl
   twoFaEnabled Boolean   @default(false)
-  lastLoginAt  DateTime? // Set on each successful login — security badge
+  lastLoginAt  DateTime?               // Set on each successful login — security badge
   isActive     Boolean   @default(true)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
-  memberships    Membership[]
-  userRoles      UserRole[]
-  auditLogs      AuditLog[]      @relation("ActorAuditLogs")
-  refreshTokens  RefreshToken[]
-  helpTickets    HelpTicket[]    @relation("UserHelpTickets")
-  aiSuggestions  AiSuggestion[]  @relation("RequesterSuggestions") // Phase 05
-  aiActivityLogs AiActivityLog[] @relation("ActorAiActivityLogs") // Phase 05
+  tenant        Tenant       @relation(fields: [tenantId], references: [id])
+  memberships   Membership[]
+  auditLogs     AuditLog[]   @relation("ActorAuditLogs")
+  refreshTokens RefreshToken[]
+  helpTickets   HelpTicket[] @relation("UserHelpTickets")
+  aiSuggestions   AiSuggestion[]  @relation("RequesterSuggestions")  // Phase 05
+  aiActivityLogs  AiActivityLog[] @relation("ActorAiActivityLogs")  // Phase 05
+
+  @@unique([tenantId, email])
+  @@index([tenantId])
 }
 
 // ─── RBAC ─────────────────────────────────────────────────────────────────────
-
-model UserRole {
-  id        String   @id @default(uuid())
-  tenantId  String
-  userId    String
-  roleId    String
-  createdAt DateTime @default(now())
-
-  tenant Tenant @relation(fields: [tenantId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-  role   Role   @relation(fields: [roleId], references: [id])
-
-  @@unique([tenantId, userId, roleId])
-  @@index([tenantId])
-  @@index([userId])
-  @@index([roleId])
-}
 
 model Membership {
   id         String   @id @default(uuid())
@@ -101,7 +85,6 @@ model Role {
 
   tenant          Tenant           @relation(fields: [tenantId], references: [id])
   rolePermissions RolePermission[]
-  userRoles       UserRole[]
 
   @@unique([tenantId, name])
   @@index([tenantId])
@@ -129,13 +112,13 @@ model RolePermission {
 // ─── AUTH ─────────────────────────────────────────────────────────────────────
 
 model RefreshToken {
-  id        String    @id @default(uuid())
-  userId    String
-  tokenHash String    @unique // bcrypt hash of the raw refresh token
-  family    String // same family = rotate together, reuse = revoke all
-  expiresAt DateTime
-  revokedAt DateTime?
-  createdAt DateTime  @default(now())
+  id         String    @id @default(uuid())
+  userId     String
+  tokenHash  String    @unique // bcrypt hash of the raw refresh token
+  family     String    // same family = rotate together, reuse = revoke all
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
 
   user User @relation(fields: [userId], references: [id])
 
@@ -148,11 +131,11 @@ model RefreshToken {
 model AuditLog {
   id         String   @id @default(uuid())
   tenantId   String
-  actorId    String // userId
-  action     String // e.g. "portfolio.create", "auth.login", "user.role_change"
-  resource   String // e.g. "PortfolioItem"
+  actorId    String   // userId
+  action     String   // e.g. "portfolio.create", "auth.login", "user.role_change"
+  resource   String   // e.g. "PortfolioItem"
   resourceId String?
-  meta       Json? // additional context — NO SECRETS
+  meta       Json?    // additional context — NO SECRETS
   requestId  String?
   createdAt  DateTime @default(now())
 
@@ -167,29 +150,29 @@ model AuditLog {
 // ─── PORTFOLIO REGISTRY ───────────────────────────────────────────────────────
 
 model PortfolioItem {
-  id                     String   @id @default(uuid())
-  tenantId               String // null = global (system items visible to all tenants)
-  name                   String
-  type                   String // product | engine | platform
-  icon                   String?
-  descriptionEn          String
-  descriptionAr          String
-  launchUrlProd          String?
-  launchUrlStage         String?
-  ssoMode                String   @default("handoff") // handoff | oidc
-  requiredPermissions    String[] @default([])
-  requiredConnectors     String[] @default([])
-  suggestedPlaybooks     String[] @default([])
+  id                  String   @id @default(uuid())
+  tenantId            String   // null = global (system items visible to all tenants)
+  name                String
+  type                String   // product | engine | platform
+  icon                String?
+  descriptionEn       String
+  descriptionAr       String
+  launchUrlProd       String?
+  launchUrlStage      String?
+  ssoMode             String   @default("handoff") // handoff | oidc
+  requiredPermissions String[] @default([])
+  requiredConnectors  String[] @default([])
+  suggestedPlaybooks  String[] @default([])
   defaultPlansVisibility String[] @default([]) // plan slugs
-  version                String   @default("1.0.0")
-  status                 String   @default("draft") // draft | published | disabled
-  rolloutMode            String   @default("all") // all | allowlistTenants | allowlistPlans
-  allowlistTenants       String[] @default([])
-  allowlistPlans         String[] @default([])
-  killSwitch             Boolean  @default(false)
-  sortOrder              Int      @default(0)
-  createdAt              DateTime @default(now())
-  updatedAt              DateTime @updatedAt
+  version             String   @default("1.0.0")
+  status              String   @default("draft") // draft | published | disabled
+  rolloutMode         String   @default("all") // all | allowlistTenants | allowlistPlans
+  allowlistTenants    String[] @default([])
+  allowlistPlans      String[] @default([])
+  killSwitch          Boolean  @default(false)
+  sortOrder           Int      @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 
   tenant Tenant @relation(fields: [tenantId], references: [id])
 
@@ -201,7 +184,7 @@ model PortfolioItem {
 model OnboardingStep {
   id          String    @id @default(uuid())
   tenantId    String
-  key         String // unique step identifier e.g. "setup_profile"
+  key         String    // unique step identifier e.g. "setup_profile"
   titleEn     String
   titleAr     String
   descEn      String?
@@ -241,7 +224,7 @@ model HelpTicket {
 
 model KBArticle {
   id        String   @id @default(uuid())
-  tenantId  String? // null = global article visible to all tenants
+  tenantId  String?  // null = global article visible to all tenants
   titleEn   String
   titleAr   String
   bodyEn    String
@@ -255,6 +238,7 @@ model KBArticle {
   @@index([published])
 }
 
+
 // ─── AI ASSIST LAYER (PHASE 05) ───────────────────────────────────────────────
 //
 // Rules (Blueprint §9 + Founder governance order):
@@ -267,23 +251,23 @@ model KBArticle {
 /// AI-generated suggestion draft.
 /// contextSummary and suggestionText contain sanitised text — credentials NEVER stored.
 model AiSuggestion {
-  id                String    @id @default(uuid())
-  tenantId          String
-  requestingUserId  String
-  suggestionType    String // workflow_draft | onboarding_draft | help_reply | integration_suggestion
-  contextSummary    String // what context was given to AI — secrets redacted before storage
-  suggestionText    String // the draft output — assistive only
-  status            String    @default("pending") // pending | confirmed | dismissed | expired
-  confirmedAt       DateTime?
-  confirmedByUserId String? // null until confirmed
-  workflowRunId     String? // JAD WorkflowRun ID if executed (triggerSource='AI')
-  requestId         String? // propagated X-Request-ID
-  expiresAt         DateTime // 48h TTL — auto-expiry enforced at service layer
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  id                   String    @id @default(uuid())
+  tenantId             String
+  requestingUserId     String
+  suggestionType       String    // workflow_draft | onboarding_draft | help_reply | integration_suggestion
+  contextSummary       String    // what context was given to AI — secrets redacted before storage
+  suggestionText       String    // the draft output — assistive only
+  status               String    @default("pending") // pending | confirmed | dismissed | expired
+  confirmedAt          DateTime?
+  confirmedByUserId    String?   // null until confirmed
+  workflowRunId        String?   // JAD WorkflowRun ID if executed (triggerSource='AI')
+  requestId            String?   // propagated X-Request-ID
+  expiresAt            DateTime  // 48h TTL — auto-expiry enforced at service layer
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 
-  tenant        Tenant           @relation(fields: [tenantId], references: [id])
-  requester     User             @relation("RequesterSuggestions", fields: [requestingUserId], references: [id])
+  tenant        Tenant  @relation(fields: [tenantId], references: [id])
+  requester     User    @relation("RequesterSuggestions", fields: [requestingUserId], references: [id])
   confirmations AiConfirmation[]
 
   @@index([tenantId])
@@ -295,14 +279,14 @@ model AiSuggestion {
 /// Created when a user confirms or dismisses an AiSuggestion via the server API.
 /// UI modal alone is insufficient — this record is the authoritative gate.
 model AiConfirmation {
-  id                 String   @id @default(uuid())
-  tenantId           String
-  suggestionId       String
-  requestingUserId   String // must match AiSuggestion.requestingUserId
-  approvedByUserId   String // the confirming user (same as requesting in Phase 05)
-  confirmationAction String // confirm | dismiss
-  requestId          String?
-  createdAt          DateTime @default(now())
+  id                String   @id @default(uuid())
+  tenantId          String
+  suggestionId      String
+  requestingUserId  String   // must match AiSuggestion.requestingUserId
+  approvedByUserId  String   // the confirming user (same as requesting in Phase 05)
+  confirmationAction String  // confirm | dismiss
+  requestId         String?
+  createdAt         DateTime @default(now())
 
   suggestion AiSuggestion @relation(fields: [suggestionId], references: [id])
 
@@ -314,16 +298,16 @@ model AiConfirmation {
 /// Records all AI interactions: suggestion created, confirmed, dispatched to JAD.
 /// triggerSource is always 'AI'. No update/delete allowed at service layer.
 model AiActivityLog {
-  id            String   @id @default(uuid())
-  tenantId      String
-  actorId       String // userId
-  action        String // ai.suggestion.created | ai.confirmation.approved | ai.execution.dispatched | ai.help.suggested
-  suggestionId  String? // nullable — not all AI actions have a suggestion
-  workflowRunId String? // JAD WorkflowRun ID when execution dispatched
-  triggerSource String   @default("AI") // ALWAYS 'AI' for this model
-  requestId     String?
-  meta          Json? // summary only — NO secrets, NO OAuth tokens, NO credentialRef
-  createdAt     DateTime @default(now())
+  id              String   @id @default(uuid())
+  tenantId        String
+  actorId         String   // userId
+  action          String   // ai.suggestion.created | ai.confirmation.approved | ai.execution.dispatched | ai.help.suggested
+  suggestionId    String?  // nullable — not all AI actions have a suggestion
+  workflowRunId   String?  // JAD WorkflowRun ID when execution dispatched
+  triggerSource   String   @default("AI") // ALWAYS 'AI' for this model
+  requestId       String?
+  meta            Json?    // summary only — NO secrets, NO OAuth tokens, NO credentialRef
+  createdAt       DateTime @default(now())
 
   tenant Tenant @relation(fields: [tenantId], references: [id])
   actor  User   @relation("ActorAiActivityLogs", fields: [actorId], references: [id])
@@ -331,50 +315,4 @@ model AiActivityLog {
   @@index([tenantId])
   @@index([actorId])
   @@index([action])
-}
-
-// ─── BILLING & ENTITLEMENTS ───────────────────────────────────────────────────
-
-model Subscription {
-  id                     String    @id @default(uuid())
-  tenantId               String    @unique
-  provider               String // "STRIPE" | "MANUAL"
-  providerSubscriptionId String?
-  plan                   String
-  status                 String // "ACTIVE" | "PAST_DUE" | "CANCELED" | "TRIAL"
-  currentPeriodEnd       DateTime?
-  createdAt              DateTime  @default(now())
-  updatedAt              DateTime  @updatedAt
-
-  tenant Tenant @relation(fields: [tenantId], references: [id])
-}
-
-model Entitlement {
-  id         String @id @default(uuid())
-  plan       String
-  featureKey String
-  limit      Int? // null = unlimited
-
-  @@unique([plan, featureKey])
-  @@index([plan])
-}
-
-model UsageCounter {
-  id         String @id @default(uuid())
-  tenantId   String
-  featureKey String
-  used       Int    @default(0)
-
-  tenant Tenant @relation(fields: [tenantId], references: [id])
-
-  @@unique([tenantId, featureKey])
-  @@index([tenantId])
-}
-
-model StripeCustomer {
-  id               String @id @default(uuid())
-  tenantId         String @unique
-  stripeCustomerId String
-
-  tenant Tenant @relation(fields: [tenantId], references: [id])
 }

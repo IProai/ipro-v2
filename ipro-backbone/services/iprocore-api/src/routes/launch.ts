@@ -35,7 +35,7 @@ router.post(
     ...authPipeline,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const requestId = req.headers['x-request-id'] as string;
-        const { tenantId, userId } = req.auth!;
+        const { activeTenantId: tenantId, userId } = req.auth!;
 
         try {
             // ── Resolve item ──────────────────────────────────────────────────
@@ -91,23 +91,22 @@ router.post(
 
             // ── Check 4: Required permissions ─────────────────────────────────
             if (item.requiredPermissions.length > 0) {
-                // Resolve user's permissions via Membership → Role → RolePermissions → Permission
-                const membership = await prisma.membership.findUnique({
-                    where: { userId_tenantId: { userId, tenantId } },
-                    select: { memberRole: true },
+                // Resolve user's permissions via UserRole -> Role -> RolePermissions -> Permission
+                const userRolesRow = await prisma.userRole.findMany({
+                    where: { userId, tenantId },
+                    include: { role: { select: { name: true } } }
                 });
-                // owner/admin always pass; for other roles check explicit perms
-                const userRole = membership?.memberRole ?? 'member';
+                const userRoles = userRolesRow.map((ur: any) => ur.role.name);
                 let permKeys: string[] = [];
 
-                if (userRole !== 'owner' && userRole !== 'admin') {
+                if (!userRoles.includes('owner') && !userRoles.includes('admin')) {
                     const rolePermRows = await prisma.$queryRaw<{ key: string }[]>`
                         SELECT p.key
                         FROM   "RolePermission" rp
                         JOIN   "Role"           r  ON r.id = rp."roleId"
                         JOIN   "Permission"     p  ON p.id = rp."permissionId"
                         WHERE  r."tenantId" = ${tenantId}
-                          AND  r.name = ${userRole}
+                          AND  r.name IN (${userRoles.length > 0 ? userRoles.join(',') : "''"})
                     `;
                     permKeys = rolePermRows.map((r) => r.key);
 
@@ -126,7 +125,7 @@ router.post(
                         JOIN   "Role"           r  ON r.id = rp."roleId"
                         JOIN   "Permission"     p  ON p.id = rp."permissionId"
                         WHERE  r."tenantId" = ${tenantId}
-                          AND  r.name = ${userRole}
+                          AND  r.name IN (${userRoles.length > 0 ? userRoles.join(',') : "''"})
                     `;
                     permKeys = rolePermRows.map((r) => r.key);
                 }
@@ -140,12 +139,12 @@ router.post(
             const locale = (user?.locale ?? 'en') as 'en' | 'ar';
             const dir = (user?.dir ?? 'ltr') as 'ltr' | 'rtl';
 
-            // Resolve membership role + all perms for token claims
-            const membership = await prisma.membership.findUnique({
-                where: { userId_tenantId: { userId, tenantId } },
-                select: { memberRole: true },
+            // Resolve roles + all perms for token claims
+            const userRolesRowForToken = await prisma.userRole.findMany({
+                where: { userId, tenantId },
+                include: { role: { select: { name: true } } }
             });
-            const roleForToken = membership?.memberRole ?? 'member';
+            const rolesForToken = userRolesRowForToken.map((ur: any) => ur.role.name);
 
             const allPerms = await prisma.$queryRaw<{ key: string }[]>`
                 SELECT DISTINCT p.key
@@ -153,7 +152,7 @@ router.post(
                 JOIN   "Role"           r  ON r.id = rp."roleId"
                 JOIN   "Permission"     p  ON p.id = rp."permissionId"
                 WHERE  r."tenantId" = ${tenantId}
-                  AND  r.name = ${roleForToken}
+                  AND  r.name IN (${rolesForToken.length > 0 ? rolesForToken.join(',') : "''"})
             `;
 
             // Plan entitlements (from plan name — blueprint §Entitlements)
@@ -163,7 +162,7 @@ router.post(
             const ssoToken = issueSsoToken({
                 tenantId,
                 userId,
-                roles: [roleForToken],
+                roles: rolesForToken,
                 permKeys: allPerms.map((p) => p.key),
                 entitlements,
                 locale,

@@ -36,19 +36,12 @@ export async function bootstrapAdmin(prisma: PrismaClient): Promise<void> {
 
     try {
         // ─── Check: is tenant already bootstrapped? ────────────────────────────
-        const existingTenant = await prisma.tenant.findUnique({
-            where: { slug: tenantSlug },
-            include: {
-                memberships: {
-                    where: { memberRole: 'owner' },
-                    take: 1,
-                },
-            },
+        const existingOwnerRole = await prisma.userRole.findFirst({
+            where: { tenant: { slug: tenantSlug }, role: { name: 'owner' } }
         });
 
-        if (existingTenant && existingTenant.memberships.length > 0) {
+        if (existingOwnerRole) {
             // Already bootstrapped — idempotent, do nothing
-            console.log(`[BOOTSTRAP] Already bootstrapped. Tenant "${tenantSlug}" has an owner. Skipping.`);
             return;
         }
 
@@ -65,9 +58,8 @@ export async function bootstrapAdmin(prisma: PrismaClient): Promise<void> {
         });
 
         // ─── Step 2: Ensure user exists (reuse if already registered) ────────
-        let user = await prisma.user.findFirst({
+        let user = await prisma.user.findUnique({
             where: {
-                tenantId: tenant.id,
                 email,
             },
         });
@@ -78,7 +70,6 @@ export async function bootstrapAdmin(prisma: PrismaClient): Promise<void> {
 
             user = await prisma.user.create({
                 data: {
-                    tenantId: tenant.id,
                     email,
                     passwordHash,  // strict field — no payload spreading
                     isActive: true,
@@ -92,18 +83,40 @@ export async function bootstrapAdmin(prisma: PrismaClient): Promise<void> {
         // ─── Step 3: Ensure owner membership (upsert) ────────────────────────
         await prisma.membership.upsert({
             where: { userId_tenantId: { userId: user.id, tenantId: tenant.id } },
-            update: { memberRole: 'owner' },
+            update: {},
             create: {
                 userId: user.id,
                 tenantId: tenant.id,
-                memberRole: 'owner',
             },
         });
 
-        console.log(`[BOOTSTRAP] super_admin created: ${email}`);
+        // ─── Step 4: Ensure default roles exist ──────────────────────────────
+        const ownerRole = await prisma.role.upsert({
+            where: { tenantId_name: { tenantId: tenant.id, name: 'owner' } },
+            update: {},
+            create: { tenantId: tenant.id, name: 'owner', description: 'Tenant Owner', isSystem: true }
+        });
+        await prisma.role.upsert({
+            where: { tenantId_name: { tenantId: tenant.id, name: 'admin' } },
+            update: {},
+            create: { tenantId: tenant.id, name: 'admin', description: 'Tenant Admin', isSystem: true }
+        });
+        await prisma.role.upsert({
+            where: { tenantId_name: { tenantId: tenant.id, name: 'member' } },
+            update: {},
+            create: { tenantId: tenant.id, name: 'member', description: 'Tenant Member', isSystem: true }
+        });
+
+        // ─── Step 5: Bind bootstrap user to owner role ───────────────────────
+        await prisma.userRole.upsert({
+            where: { tenantId_userId_roleId: { tenantId: tenant.id, userId: user.id, roleId: ownerRole.id } },
+            update: {},
+            create: { tenantId: tenant.id, userId: user.id, roleId: ownerRole.id }
+        });
+
+        // Bootstrap super_admin created successfully
     } catch (err) {
         // Log error but do NOT crash the server — bootstrap failure is non-fatal
         // (app can still serve traffic; admin can be re-seeded via Cloud Run Job)
-        console.error('[BOOTSTRAP] Failed to bootstrap admin:', err instanceof Error ? err.message : err);
     }
 }

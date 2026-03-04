@@ -20,7 +20,7 @@ const router = Router();
 router.get('/articles', async (req, res, next) => {
     try {
         // Determine tenantId from JWT if present, otherwise global only
-        const tenantId = (req as any).auth?.tenantId ?? null;
+        const tenantId = (req as any).auth?.activeTenantId ?? null;
         const category = typeof req.query.category === 'string' ? req.query.category : undefined;
 
         const articles = await prisma.kBArticle.findMany({
@@ -64,7 +64,7 @@ const createTicketSchema = z.object({
  */
 router.post('/tickets', async (req, res, next) => {
     try {
-        const { tenantId, userId } = req.auth!;
+        const { activeTenantId: tenantId, userId } = req.auth!;
         const parsed = createTicketSchema.safeParse(req.body);
         if (!parsed.success) return res.status(400).json({ error: 'Invalid ticket', details: parsed.error.issues });
 
@@ -96,7 +96,7 @@ router.post('/tickets', async (req, res, next) => {
  */
 router.get('/tickets', async (req, res, next) => {
     try {
-        const { tenantId } = req.auth!;
+        const { activeTenantId: tenantId } = req.auth!;
 
         let tickets = [];
         try {
@@ -113,29 +113,7 @@ router.get('/tickets', async (req, res, next) => {
                 },
             });
         } catch (dbErr) {
-            // FALLBACK FOR DEMO
-            if (tenantId === 'demo-tenant-uuid') {
-                tickets = [
-                    {
-                        id: 'demo-ticket-1',
-                        subject: 'How to configure JAD connectors?',
-                        status: 'open',
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        user: { email: 'admin@iprocore.demo' },
-                    },
-                    {
-                        id: 'demo-ticket-2',
-                        subject: 'Problem with 2FA setup',
-                        status: 'closed',
-                        createdAt: new Date(Date.now() - 86400000),
-                        updatedAt: new Date(Date.now() - 43200000),
-                        user: { email: 'admin@iprocore.demo' },
-                    },
-                ];
-            } else {
-                throw dbErr;
-            }
+            throw dbErr;
         }
 
         return res.json({ tickets });
@@ -156,7 +134,7 @@ router.get('/tickets', async (req, res, next) => {
  */
 router.get('/tickets/:ticketId/ai-suggest', async (req, res, next) => {
     try {
-        const { tenantId, userId } = req.auth!;
+        const { activeTenantId: tenantId, userId } = req.auth!;
         const requestId = res.locals.requestId as string;
         const { ticketId } = req.params;
 
@@ -168,16 +146,7 @@ router.get('/tickets/:ticketId/ai-suggest', async (req, res, next) => {
                 select: { id: true, subject: true, body: true, status: true },
             });
         } catch (dbErr) {
-            if (tenantId === 'demo-tenant-uuid') {
-                ticket = {
-                    id: ticketId,
-                    subject: 'Demo Ticket Subject',
-                    body: 'This is a demo ticket body to test AI suggestions.',
-                    status: 'open'
-                };
-            } else {
-                throw dbErr;
-            }
+            throw dbErr;
         }
 
         if (!ticket) {
@@ -228,19 +197,7 @@ router.get('/tickets/:ticketId/ai-suggest', async (req, res, next) => {
                 },
             });
         } catch (dbErr) {
-            if (tenantId === 'demo-tenant-uuid') {
-                suggestion = {
-                    id: `demo-suggestion-${Date.now()}`,
-                    suggestionType: 'help_reply',
-                    contextSummary,
-                    suggestionText,
-                    status: 'pending',
-                    expiresAt,
-                    createdAt: new Date(),
-                };
-            } else {
-                throw dbErr;
-            }
+            throw dbErr;
         }
 
         // AI Activity Log

@@ -16,6 +16,8 @@ import onboardingRouter from './routes/onboarding';
 import helpRouter from './routes/help';
 import securityRouter from './routes/security';    // Phase 03: role simulator
 import aiRouter from './routes/ai';                // Phase 05: AI Assist
+import { tenancyRouter } from './routes/tenancy';  // ✅ NEW: tenancy switching
+import billingRouter from './routes/billing';      // Skill 04: entitlements
 
 const app = express();
 
@@ -48,6 +50,10 @@ app.use(requestId);
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
+
+// ✅ NEW: Tenancy endpoints
+app.use('/api/tenancy', tenancyRouter);
+
 app.use('/api/portfolio', portfolioRouter);
 app.use('/api/portfolio', launchRouter);  // Phase 03: POST /:id/launch alongside portfolio routes
 app.use('/api/dashboard', dashboardRouter);
@@ -55,6 +61,7 @@ app.use('/api/onboarding', onboardingRouter);
 app.use('/api/help', helpRouter);
 app.use('/api/security', securityRouter);  // Phase 03: role simulator
 app.use('/api/ai', aiRouter);             // Phase 05: AI Assist + Playbooks
+app.use('/api/billing', billingRouter);
 
 // 404 catch-all — no route leakage
 app.use((_req, res) => {
@@ -71,15 +78,11 @@ if (require.main === module) {
     const { prisma } = require('./lib/db');
 
     // Run bootstrap before binding port — idempotent, non-fatal
-    bootstrapAdmin(prisma).then(() => {
+    bootstrapAdmin(prisma).catch(() => {
+        // Silent catch for bootstrap
+    }).finally(() => {
         app.listen(env.PORT, () => {
-            console.log(`✅ IProCore API running on port ${env.PORT} [${env.NODE_ENV}]`);
-        });
-    }).catch((err: unknown) => {
-        // bootstrapAdmin already catches internally; this is a last-resort guard
-        console.error('[STARTUP] Unexpected error during bootstrap:', err);
-        app.listen(env.PORT, () => {
-            console.log(`✅ IProCore API running on port ${env.PORT} [${env.NODE_ENV}]`);
+            // Server started
         });
     });
 }

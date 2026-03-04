@@ -28,10 +28,9 @@ async function main() {
 
     // 2. Create User
     const user = await prisma.user.upsert({
-        where: { tenantId_email: { tenantId: tenant.id, email } },
+        where: { email },
         update: { passwordHash },
         create: {
-            tenantId: tenant.id,
             email,
             passwordHash,
             isActive: true,
@@ -47,8 +46,19 @@ async function main() {
         create: {
             userId: user.id,
             tenantId: tenant.id,
-            memberRole: 'admin',
         }
+    });
+
+    const adminRole = await prisma.role.upsert({
+        where: { tenantId_name: { tenantId: tenant.id, name: 'admin' } },
+        update: {},
+        create: { tenantId: tenant.id, name: 'admin', description: 'Tenant Admin', isSystem: true }
+    });
+
+    await prisma.userRole.upsert({
+        where: { tenantId_userId_roleId: { tenantId: tenant.id, userId: user.id, roleId: adminRole.id } },
+        update: {},
+        create: { tenantId: tenant.id, userId: user.id, roleId: adminRole.id }
     });
 
     console.log('✅ Test user created successfully!');

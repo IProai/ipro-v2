@@ -33,22 +33,13 @@ export async function tenantResolver(
     }
 
     // tenantId sourced from verified JWT — not from body or query params
-    const tenantId = req.auth.tenantId;
+    const tenantId = req.auth.activeTenantId;
 
+    if (!tenantId) {
+        res.status(401).json({ error: 'Unauthorized: No active tenant specified in token' });
+        return;
+    }
     try {
-        // --- DEMO MODE BYPASS ---
-        if (tenantId === 'demo-tenant-uuid') {
-            req.tenant = {
-                id: 'demo-tenant-uuid',
-                slug: 'demo',
-                name: 'Demo Corporation',
-                plan: 'enterprise',
-                isActive: true,
-            };
-            next();
-            return;
-        }
-
         const tenant = await prisma.tenant.findUnique({
             where: { id: tenantId },
             select: { id: true, slug: true, name: true, plan: true, isActive: true },

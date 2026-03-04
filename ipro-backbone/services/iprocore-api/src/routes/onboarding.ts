@@ -23,7 +23,7 @@ const DEFAULT_STEPS = [
  */
 router.get('/steps', async (req, res, next) => {
     try {
-        const { tenantId } = req.auth!;
+        const { activeTenantId: tenantId } = req.auth!;
 
         let steps = await prisma.onboardingStep.findMany({
             where: { tenantId },
@@ -59,7 +59,7 @@ const completeSchema = z.object({
 
 router.post('/steps/:key/complete', async (req, res, next) => {
     try {
-        const { tenantId, userId } = req.auth!;
+        const { activeTenantId: tenantId, userId } = req.auth!;
         const parsed = completeSchema.safeParse({ key: req.params.key });
         if (!parsed.success) return res.status(400).json({ error: 'Invalid step key' });
 
@@ -102,7 +102,7 @@ router.post('/steps/:key/complete', async (req, res, next) => {
  */
 router.get('/wizard', async (req, res, next) => {
     try {
-        const { tenantId } = req.auth!;
+        const { activeTenantId: tenantId } = req.auth!;
 
         const steps = await prisma.onboardingStep.findMany({
             where: { tenantId },

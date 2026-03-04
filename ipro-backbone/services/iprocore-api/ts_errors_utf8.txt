@@ -1,0 +1,14 @@
+﻿src/routes/ai.ts(112,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/ai.ts(205,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/ai.ts(268,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/ai.ts(461,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/ai.ts(516,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/dashboard.ts(23,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/help.ts(67,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/help.ts(99,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/help.ts(159,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/launch.ts(38,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/onboarding.ts(26,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/onboarding.ts(62,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/onboarding.ts(105,17): error TS2339: Property 'tenantId' does not exist on type 'AuthPayload'.
+src/routes/security.ts(66,30): error TS2353: Object literal may only specify known properties, and 'tenantId' does not exist in type 'UserWhereInput'.
