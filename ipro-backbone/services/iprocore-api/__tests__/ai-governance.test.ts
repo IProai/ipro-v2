@@ -62,7 +62,7 @@ const TEST_SECRET = 'test-access-secret-minimum-32-characters-long-for-tests';
 
 function makeToken(tenantId: string, userId: string): string {
     return jwt.sign(
-        { tenantId, userId, email: `${userId}@test.com` },
+        { activeTenantId: tenantId, userId, email: `${userId}@test.com` },
         TEST_SECRET,
         { expiresIn: '1h' },
     );
