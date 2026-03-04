@@ -112,11 +112,16 @@ router.post(
 
             // Verify targetUser exists and has membership
             const targetUser = await prisma.user.findFirst({
-                where: { email: targetUserId },
+                where: {
+                    email: targetUserId,
+                    memberships: {
+                        some: { tenantId }
+                    }
+                },
                 select: { id: true, email: true },
             });
             if (!targetUser) {
-                next(createError(404, 'Target user not found globally'));
+                next(createError(404, 'Target user not found in this tenant'));
                 return;
             }
 

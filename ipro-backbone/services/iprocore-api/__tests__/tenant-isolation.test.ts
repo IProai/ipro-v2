@@ -35,6 +35,9 @@ jest.mock('../src/lib/db', () => ({
         membership: {
             findMany: jest.fn(),
         },
+        userRole: {
+            findMany: jest.fn(),
+        },
         auditLog: {
             create: jest.fn(),
         },
@@ -48,7 +51,7 @@ const TEST_SECRET = 'test-access-secret-minimum-32-characters-long-for-tests';
 
 function makeToken(tenantId: string, userId: string): string {
     return jwt.sign(
-        { tenantId, userId, email: `${userId}@test.com` },
+        { activeTenantId: tenantId, userId, email: `${userId}@test.com` },
         TEST_SECRET,
         { expiresIn: '1h' },
     );
@@ -75,6 +78,7 @@ function mockTenantLookup(tenantId: string, tenantName: string) {
     (prisma.onboardingStep.count as jest.Mock).mockResolvedValue(0);
     (prisma.refreshToken.count as jest.Mock).mockResolvedValue(1);
     (prisma.membership.findMany as jest.Mock).mockResolvedValue([]);
+    (prisma.userRole.findMany as jest.Mock).mockResolvedValue([]);
 }
 
 describe('IProCore Tenant Isolation — Control Plane (Blueprint §Tenant isolation)', () => {

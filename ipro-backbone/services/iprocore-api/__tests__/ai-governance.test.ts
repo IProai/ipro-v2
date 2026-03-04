@@ -43,6 +43,12 @@ jest.mock('../src/lib/db', () => ({
         auditLog: {
             create: jest.fn(),
         },
+        membership: {
+            findFirst: jest.fn(),
+        },
+        userRole: {
+            findFirst: jest.fn(),
+        },
     },
 }));
 
@@ -62,13 +68,13 @@ const TEST_SECRET = 'test-access-secret-minimum-32-characters-long-for-tests';
 
 function makeToken(tenantId: string, userId: string): string {
     return jwt.sign(
-        { tenantId, userId, email: `${userId}@test.com` },
+        { activeTenantId: tenantId, userId, email: `${userId}@test.com` },
         TEST_SECRET,
         { expiresIn: '1h' },
     );
 }
 
-function mockTenantLookup(tenantId: string) {
+function mockTenantLookup(tenantId: string, userId?: string) {
     (prisma.tenant.findUnique as jest.Mock).mockResolvedValue({
         id: tenantId,
         slug: tenantId,
@@ -76,6 +82,21 @@ function mockTenantLookup(tenantId: string) {
         plan: 'starter',
         isActive: true,
     });
+
+    if (userId) {
+        (prisma.membership.findFirst as jest.Mock).mockResolvedValue({
+            id: 'mem-1',
+            userId: userId,
+            tenantId: tenantId,
+        });
+
+        (prisma.userRole.findFirst as jest.Mock).mockResolvedValue({
+            id: 'ur-1',
+            userId: userId,
+            tenantId: tenantId,
+            role: { name: 'owner' }
+        });
+    }
 }
 
 const tenantA = { tenantId: 'tenant-alpha', userId: 'user-alpha' };
@@ -149,7 +170,7 @@ describe('Phase 05 — AI Governance (Blueprint §9)', () => {
     // Server-side gate must block confirm on non-existent/expired suggestion
 
     it('F: Confirmation gate rejects confirm on non-existent suggestion with 404', async () => {
-        mockTenantLookup(tenantA.tenantId);
+        mockTenantLookup(tenantA.tenantId, tenantA.userId);
 
         // findFirst returns null — suggestion not found (or expired / already actioned)
         (prisma.aiSuggestion.findFirst as jest.Mock).mockResolvedValue(null);
@@ -169,7 +190,7 @@ describe('Phase 05 — AI Governance (Blueprint §9)', () => {
     // Confirmed execution: AiConfirmation record + AuditLog with governance fields
 
     it('G: Confirmation creates gate record + emits AuditLog with all governance fields', async () => {
-        mockTenantLookup(tenantA.tenantId);
+        mockTenantLookup(tenantA.tenantId, tenantA.userId);
 
         const pendingSuggestion = {
             id: 'sugg-gov-1',
@@ -222,7 +243,7 @@ describe('Phase 05 — AI Governance (Blueprint §9)', () => {
     // Cross-tenant isolation: Tenant B cannot confirm Tenant A's suggestion
 
     it('H: Cross-tenant — Tenant B CANNOT confirm Tenant A suggestion (tenantId gate)', async () => {
-        mockTenantLookup(tenantB.tenantId);
+        mockTenantLookup(tenantB.tenantId, tenantB.userId);
 
         // findFirst returns null because WHERE { tenantId: 'tenant-beta' } won't match tenant-alpha row
         (prisma.aiSuggestion.findFirst as jest.Mock).mockResolvedValue(null);
