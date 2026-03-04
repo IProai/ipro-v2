@@ -78,12 +78,39 @@ if (require.main === module) {
     const { prisma } = require('./lib/db');
 
     // Run bootstrap before binding port — idempotent, non-fatal
-    bootstrapAdmin(prisma).catch(() => {
-        // Silent catch for bootstrap
+    bootstrapAdmin(prisma).catch((err) => {
+        console.error('[BOOTSTRAP] Error during initial setup:', err);
     }).finally(() => {
-        app.listen(env.PORT, () => {
-            // Server started
+        const server = app.listen(env.PORT, () => {
+            console.log(`[SERVER] Listening on port ${env.PORT}`);
         });
+
+        // ─── Graceful Shutdown ────────────────────────────────────────────────
+        const shutdown = () => {
+            console.log('\n[SERVER] SIGTERM/SIGINT received. Shutting down gracefully...');
+
+            // Force exit after 10 seconds if connections hang
+            const fallbackTimeout = setTimeout(() => {
+                console.error('[SERVER] Forcefully terminating due to timeout.');
+                process.exit(1);
+            }, 10000);
+
+            server.close(async () => {
+                console.log('[SERVER] HTTP server closed.');
+                try {
+                    await prisma.$disconnect();
+                    console.log('[SERVER] Prisma disconnected.');
+                } catch (err) {
+                    console.error('[SERVER] Prisma disconnect error:', err);
+                } finally {
+                    clearTimeout(fallbackTimeout);
+                    process.exit(0);
+                }
+            });
+        };
+
+        process.on('SIGTERM', shutdown);
+        process.on('SIGINT', shutdown);
     });
 }
 

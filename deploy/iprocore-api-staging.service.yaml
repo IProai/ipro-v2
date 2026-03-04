@@ -26,8 +26,8 @@ spec:
         # Cloud SQL Auth Proxy — connects via Unix socket (no TCP, no VPC connector)
         run.googleapis.com/cloudsql-instances: iprocore:me-central1:iprocore-pg
 
-        # Scaling — 1 warm instance to avoid cold-start on health probes
-        autoscaling.knative.dev/minScale: "1"
+        # Scaling — Cost-friendly defaults for staging
+        autoscaling.knative.dev/minScale: "0"
         autoscaling.knative.dev/maxScale: "5"
 
         # Startup probe gives the app time to complete bootstrap before traffic
