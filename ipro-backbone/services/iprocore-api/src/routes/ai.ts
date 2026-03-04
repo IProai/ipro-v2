@@ -26,6 +26,7 @@ import { prisma } from '../lib/db';
 import { writeAudit } from '../lib/audit';
 import { requireAuth } from '../middleware/requireAuth';
 import { tenantResolver } from '../middleware/tenantResolver';
+import { requireRole } from '../middleware/requireRole';
 import { env } from '../lib/env';
 
 const router = Router();
@@ -237,7 +238,7 @@ router.get('/suggestions', async (req, res, next) => {
  * - Emits AuditLog and AiActivityLog
  * - AI DOES NOT have access to credentialRef — JAD dispatch contains NO secrets
  */
-router.post('/suggestions/:id/confirm', async (req, res, next) => {
+router.post('/suggestions/:id/confirm', requireRole('owner'), async (req, res, next) => {
     try {
         const { activeTenantId: tenantId, userId } = req.auth!;
         const requestId = res.locals.requestId as string;

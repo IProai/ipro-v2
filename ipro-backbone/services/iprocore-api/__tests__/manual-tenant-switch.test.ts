@@ -15,7 +15,18 @@ jest.mock('../src/lib/db', () => ({
         },
         membership: {
             findUnique: jest.fn(),
-        }
+            findMany: jest.fn(),
+            findFirst: jest.fn(),
+        },
+        user: {
+            findUnique: jest.fn(),
+        },
+        onboardingStep: {
+            count: jest.fn(),
+        },
+        refreshToken: {
+            count: jest.fn(),
+        },
     },
 }));
 
@@ -36,16 +47,19 @@ describe('Explicit Tenant Switch Isolation (Functional Flow)', () => {
         jest.clearAllMocks();
 
         // Mock tenant resolution successfully
-        (prisma.tenant.findUnique as jest.Mock).mockResolvedValue({
-            id: 'mocked-tenant',
-            slug: 'mocked',
-            name: 'Mocked Tenant',
-            plan: 'starter',
-            isActive: true,
+        (prisma.tenant.findUnique as jest.Mock).mockImplementation(({ where }) => {
+            return Promise.resolve({
+                id: where.id,
+                slug: where.id,
+                name: `Mocked ${where.id}`,
+                plan: 'starter',
+                isActive: true,
+            });
         });
 
         // Mock membership exists
         (prisma.membership.findUnique as jest.Mock).mockResolvedValue({ memberRole: 'owner' });
+        (prisma.membership.findFirst as jest.Mock).mockResolvedValue({ memberRole: 'owner' });
 
         // Mock user roles so requirePerm('portfolio:manage') passes natively
         (prisma.userRole.findMany as jest.Mock).mockResolvedValue([{
