@@ -2,10 +2,10 @@
 # IProCore API — Cloud Run Service
 #
 # Deploy:   gcloud run services replace deploy/iprocore-api-staging.service.yaml \
-#               --region=me-central1 --project=iprocore
+#               --region=me-central1 --project=intellect-489021
 #
 # All secrets come from Secret Manager — no hardcoded values anywhere.
-# Cloud SQL socket: iprocore:me-central1:iprocore-pg
+# Cloud SQL socket: intellect-489021:me-central1:intellect-sql-staging
 # ═══════════════════════════════════════════════════════════════════════════════
 
 apiVersion: serving.knative.dev/v1
@@ -24,24 +24,25 @@ spec:
     metadata:
       annotations:
         # Cloud SQL Auth Proxy — connects via Unix socket (no TCP, no VPC connector)
-        run.googleapis.com/cloudsql-instances: iprocore:me-central1:iprocore-pg
+        run.googleapis.com/cloudsql-instances: intellect-489021:me-central1:intellect-sql-staging
 
         # Scaling — 1 warm instance to avoid cold-start on health probes
-        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/minScale: "0"
         autoscaling.knative.dev/maxScale: "5"
+        codex.dev/redeploy-ts: "20260305-0215"
 
         # Startup probe gives the app time to complete bootstrap before traffic
         run.googleapis.com/startup-cpu-boost: "true"
 
     spec:
       # Dedicated service account — least privilege
-      serviceAccountName: iprocore-api-sa@iprocore.iam.gserviceaccount.com
+      serviceAccountName: iprocore-api-sa@intellect-489021.iam.gserviceaccount.com
 
       # Cloud Run max request timeout
       timeoutSeconds: 30
 
       containers:
-        - image: me-central1-docker.pkg.dev/iprocore/ipro-registry/iprocore-api:latest
+        - image: me-central1-docker.pkg.dev/intellect-489021/ipro-registry/iprocore-api:latest
           name: iprocore-api-staging
 
           ports:
@@ -51,9 +52,7 @@ spec:
           # ─── Plain env vars (not secrets) ─────────────────────────────────
           env:
             - name: NODE_ENV
-              value: production
-            - name: PORT
-              value: "8080"
+              value: development
             # TTL defaults — override here if needed
             - name: ACCESS_TOKEN_TTL_SECONDS
               value: "900"
@@ -79,31 +78,31 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: ALLOWED_ORIGINS
-                  key: latest
+                  key: "1"
 
             - name: SESSION_SECRET
               valueFrom:
                 secretKeyRef:
                   name: SESSION_SECRET
-                  key: latest
+                  key: "1"
 
             - name: ACCESS_TOKEN_SECRET
               valueFrom:
                 secretKeyRef:
                   name: ACCESS_TOKEN_SECRET
-                  key: latest
+                  key: "1"
 
             - name: REFRESH_TOKEN_SECRET
               valueFrom:
                 secretKeyRef:
                   name: REFRESH_TOKEN_SECRET
-                  key: latest
+                  key: "1"
 
             - name: SSO_TOKEN_SECRET
               valueFrom:
                 secretKeyRef:
                   name: SSO_TOKEN_SECRET
-                  key: latest
+                  key: "1"
 
             # ─── Bootstrap (optional — only needed first deploy) ──────────
             - name: BOOTSTRAP_ADMIN_EMAIL
@@ -116,7 +115,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: BOOTSTRAP_ADMIN_PASSWORD
-                  key: latest
+                  key: "1"
 
           # ─── Resource limits ─────────────────────────────────────────────
           resources:
@@ -146,3 +145,5 @@ spec:
   traffic:
     - percent: 100
       latestRevision: true
+
+

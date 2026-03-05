@@ -10,6 +10,9 @@ FROM node:20-slim AS builder
 
 WORKDIR /app
 
+# Prisma engine selection depends on OpenSSL availability.
+RUN apt-get update -y && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+
 # Copy manifests first — leverages Docker layer cache
 COPY package*.json ./
 
@@ -37,6 +40,9 @@ RUN npm run build
 FROM node:20-slim AS runtime
 
 WORKDIR /app
+
+# Runtime needs OpenSSL for Prisma query engine.
+RUN apt-get update -y && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Build-time arg for traceability — injected by Cloud Build
 ARG GIT_SHA=unknown

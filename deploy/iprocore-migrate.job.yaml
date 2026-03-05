@@ -8,11 +8,11 @@
 #
 #   # Apply / update job definition:
 #   gcloud run jobs replace deploy/iprocore-migrate.job.yaml \
-#       --region=me-central1 --project=iprocore
+#       --region=me-central1 --project=intellect-489021
 #
 #   # Execute and wait for completion:
 #   gcloud run jobs execute iprocore-migrate \
-#       --region=me-central1 --project=iprocore --wait
+#       --region=me-central1 --project=intellect-489021 --wait
 #
 # Success: "Execution ... completed successfully"
 # Failure: job exits non-zero → investigate logs before deploying API
@@ -29,29 +29,26 @@ metadata:
 
 spec:
   template:
+    metadata:
+      annotations:
+        # Same Cloud SQL instance as the API service
+        run.googleapis.com/cloudsql-instances: intellect-489021:me-central1:intellect-sql-staging
     spec:
       # One attempt only — if migration fails, stop immediately, log, investigate
       # Do NOT retry migrations blindly (partial migration state is dangerous)
       taskCount: 1
 
       template:
-        metadata:
-          annotations:
-            # Same Cloud SQL instance as the API service
-            run.googleapis.com/cloudsql-instances: iprocore:me-central1:iprocore-pg
-
         spec:
           # Dedicated service account — same as API (needs Cloud SQL Client + Secret Accessor)
-          serviceAccountName: iprocore-api-sa@iprocore.iam.gserviceaccount.com
-
-          # Never retry — migration must be deterministic
-          restartPolicy: Never
+          serviceAccountName: iprocore-api-sa@intellect-489021.iam.gserviceaccount.com
 
           # Job timeout — migrations should complete well within 5 minutes
           timeoutSeconds: 300
+          maxRetries: 0
 
           containers:
-            - image: me-central1-docker.pkg.dev/iprocore/ipro-registry/iprocore-api:latest
+            - image: me-central1-docker.pkg.dev/intellect-489021/ipro-registry/iprocore-api:latest
               name: migrate
               # Use the canonical migration entrypoint defined in package.json
               command: ["npm", "run", "db:migrate:prod"]
@@ -75,3 +72,4 @@ spec:
                 limits:
                   cpu: "1"
                   memory: 512Mi
+
