@@ -6,12 +6,12 @@
 
 # ─── Stage 1: Builder ────────────────────────────────────
 # Full deps (including devDependencies for tsc + prisma CLI)
-FROM node:20-slim AS builder
+FROM node:20-bullseye-slim AS builder
 
 WORKDIR /app
 
 # Prisma engine selection depends on OpenSSL availability.
-RUN apt-get update -y && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y && apt-get install -y --no-install-recommends openssl libssl1.1 ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Copy manifests first — leverages Docker layer cache
 COPY package*.json ./
@@ -37,12 +37,12 @@ RUN npm run build
 
 # ─── Stage 2: Runtime ────────────────────────────────────
 # Lean final image — only what the process needs to run
-FROM node:20-slim AS runtime
+FROM node:20-bullseye-slim AS runtime
 
 WORKDIR /app
 
 # Runtime needs OpenSSL for Prisma query engine.
-RUN apt-get update -y && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y && apt-get install -y --no-install-recommends openssl libssl1.1 ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Build-time arg for traceability — injected by Cloud Build
 ARG GIT_SHA=unknown
